@@ -1,17 +1,5 @@
 <?php
 
-// function connection()
-// {
-//     try {
-//         $conn = new PDO("mysql:host=localhost; dbname=xshop; charset=utf8", "root", "");
-//         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//         return $conn;
-//     } catch (PDOException $e) {
-//         throw $e;
-//     }
-// }
-
-
 // kết nối với database
 function connection()
 {
@@ -29,13 +17,6 @@ function connection()
     }
 }
 
-function get_data_all($sql)
-{
-    $conn = connection();
-    $stmt = $conn->prepare($sql);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
 
 // thực thi câu lệnh sql
 function pdo_execute($sql)

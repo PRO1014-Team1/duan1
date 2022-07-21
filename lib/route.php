@@ -34,7 +34,6 @@ function run()
         }
         $found = true;
         $callback();
-
     }
 
     if ($found == false) {
@@ -42,5 +41,3 @@ function run()
         return $fileNotFound();
     }
 }
-
-

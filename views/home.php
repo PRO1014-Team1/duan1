@@ -67,7 +67,7 @@ if (strcmp($category_filter, "all")) {
                 <!-- top 4 products -->
                 <?php foreach ($popular_products_top_4 as $top_4_product) { ?>
                     <div class="top-4-prod">
-                        <a href="?page=detail&id=<?= $top_4_product["product_id"] ?>&category=<?= $top_4_product["category_id"] ?>" class="hover-mask" data-content="<?= $top_4_product["name"] ?>">
+                        <a href="detail?id=<?= $top_4_product["product_id"] ?>&category=<?= $top_4_product["category_id"] ?>" class="hover-mask" data-content="<?= $top_4_product["name"] ?>">
                             <img class="img-fluid top-4-prod__img" src="<?= $top_4_product["image"] ?>" alt="<?= $top_4_product["name"] ?>" />
                         </a>
                     </div>
@@ -122,7 +122,7 @@ if (strcmp($category_filter, "all")) {
                     <div class="top-10-prod__list col-2-2 grid ">
                         <?php foreach ($popular_products_top_10 as $top_10_product) { ?>
                             <div class="top-10-prod__item">
-                                <a href="?page=detail&id=<?= $top_10_product["product_id"] ?>&category=<?= $top_10_product["category_id"] ?>" class="hover-mask" data-content="<?= $top_10_product["name"] ?>">
+                                <a href="detail?id=<?= $top_10_product["product_id"] ?>&category=<?= $top_10_product["category_id"] ?>" class="hover-mask" data-content="<?= $top_10_product["name"] ?>">
                                     <img class="img-fluid top-10-prod__img" src="<?= $top_10_product["image"] ?>" alt="<?= $top_10_product["name"] ?>" />
                                 </a>
                             </div>
@@ -146,7 +146,7 @@ if (strcmp($category_filter, "all")) {
                         $itemAmount = 1;
                         ?>
                         <div class="prod-item">
-                            <a href="?page=detail&id=<?= $prod["product_id"] ?>&category=<?= $prod["category_id"] ?>" class="prod-link">
+                            <a href="detail?id=<?= $prod["product_id"] ?>&category=<?= $prod["category_id"] ?>" class="prod-link">
                                 <div class="text-wrapper theme--dark">
                                     <h3 class="prod-item__name truncate"><?= $prod["name"] ?></h3>
                                 </div>

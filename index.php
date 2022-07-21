@@ -19,18 +19,38 @@ route("/about-us", function () {
 });
 
 route("/404", function () {
-    echo "404 FILE NOT FOUND!";
-});
-
-route("/hang_hoa", function () {
-    hang_hoa_index();
+    path_not_found();
 });
 
 route("/home", function(){
     home();
 });
 
+route("/login", function(){
+    login();
+});
+
+route("/logout", function(){
+    logout();
+});
+
+route("/cart", function(){
+    cart();
+});
+
+route("/detail", function(){
+    detail();
+});
+
+route("/profile", function(){
+    profile();
+});
+
+route("/register", function(){
+    register();
+});
+
 set_meta();
-set_header($_SESSION['role']);
+set_header(get_role());
 run();
 set_footer();

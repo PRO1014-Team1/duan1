@@ -49,7 +49,7 @@
                                 <img src="<?= $_SESSION['avatar'] ?? './content/img/default-' . rand(1, 4) . '.webp' ?>" class="img-fluid user-avatar" alt="User Avatar" />
                             </div>
                             <div class="nav__menu__user__name">
-                                <p><?= $_SESSION['username'] ?></p>
+                                <p><?= get_username() ?></p>
                             </div>
                             <li class="nav__item">
                                 <a href="?page=profile" class="nav__link nav__link--main block">Cập nhật tài khoản</a>

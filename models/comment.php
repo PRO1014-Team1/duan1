@@ -1,20 +1,4 @@
 <?php
-// function get_comment($limit = null, $order = null, $cond = null)
-// {
-//     $sql = "SELECT * FROM `comment`";
-//     if ($order) {
-//         $sql .= " ORDER BY `$order` DESC";
-//     }
-//     if ($cond) {
-//         $sql .= " WHERE $cond";
-//     }
-//     if ($limit) {
-//         $sql .= " LIMIT $limit";
-//     }
-//     $data = pdo_query($sql);
-
-//     return $data;
-// }
 
 function get_comment()
 {
@@ -23,21 +7,6 @@ function get_comment()
     return $data;
 }
 
-function sort_comment($comments, $sortBy, $order = 0)
-{
-    if (!$sortBy) return $comments;
-    $col = array_column($comments, $sortBy);
-    array_multisort($col, ($order ? SORT_DESC : SORT_ASC), $comments);
-    return $comments;
-}
-
-function filter_comment($comments, $filterBy, $value)
-{
-    $result = array_filter($comments, function ($item) use ($filterBy, $value) {
-        return ($item[$filterBy] == $value);
-    });
-    return $result;
-}
 
 function get_comment_count($cond = null)
 {
@@ -62,7 +31,7 @@ function get_comment_time($id, $order)
 
 function delete_comment($comment_id)
 {
-    //if id is an array, use recursion
+    //if $comment_id is an array, use recursion
     if (is_array($comment_id)) {
         foreach ($comment_id as $id) {
             delete_comment($id);

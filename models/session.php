@@ -7,15 +7,19 @@ function set_session()
     }
     $_SESSION['identity'] = $_SERVER['REMOTE_ADDR']; // IP address
     $_SESSION['errors'] = false;
-    $_SESSION['role'] = 2; //khách xem
 }
 
 function get_role()
 {
-    return $_SESSION['role'] ?? 2;
+    return $_SESSION['role'] ?? 2; //khách xem
 }
 
 function get_identity()
 {
     return $_SESSION['identity'] ?? false;
+}
+
+function get_username()
+{
+    return $_SESSION['username'] ?? false;
 }

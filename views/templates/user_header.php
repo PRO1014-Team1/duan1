@@ -2,7 +2,7 @@
 <header id="header">
     <nav class="nav">
         <div class="mx-auto grid nav__container pos-r my-2">
-            <a href="?page=home" class="nav__logo block">
+            <a href="home" class="nav__logo block">
                 <img src="./public/img/logo.png" class="img-fluid" alt="Xshop Logo" />
             </a>
             <div class="nav__menu flex">
@@ -18,13 +18,13 @@
                                     <img src="<?= $_SESSION['avatar'] ?>" class="img-fluid user-avatar" alt="User Avatar" />
                                 </div>
                                 <div class="nav__menu__user__name">
-                                    <p><?= $_SESSION['username'] ?></p>
+                                    <p><?= get_username() ?></p>
                                 </div>
                                 <li class="nav__item">
-                                    <a href="?page=profile" class="nav__link nav__link--main block">Cập nhật tài khoản</a>
+                                    <a href="profile" class="nav__link nav__link--main block">Cập nhật tài khoản</a>
                                 </li>
                                 <li class="nav__item t-center">
-                                    <a href="?page=logout" class="nav__link nav__link--main block theme--dark">Đăng xuất</a>
+                                    <a href="logout" class="nav__link nav__link--main block theme--dark">Đăng xuất</a>
                                 </li>
                             </ul>
                         </div>
@@ -36,16 +36,16 @@
                                     <img src="<?= $_SESSION['avatar'] ?? './public/img/default-' . rand(1, 4) . '.webp' ?>" class="img-fluid user-avatar" alt="User Avatar" />
                                 </div>
                                 <div class="nav__menu__user__name">
-                                    <p><?= $_SESSION['username'] ?></p>
+                                    <p><?= get_username() ?></p>
                                 </div>
                                 <li class="nav__item">
-                                    <a href="?page=profile" class="nav__link nav__link--main block">Cập nhật tài khoản</a>
+                                    <a href="profile" class="nav__link nav__link--main block">Cập nhật tài khoản</a>
                                 </li>
                                 <li class="nav__item">
-                                    <a href="?page=product" class="nav__link nav__link--main block">Quản trị website</a>
+                                    <a href="product" class="nav__link nav__link--main block">Quản trị website</a>
                                 </li>
                                 <li class="nav__item t-center">
-                                    <a href="?page=logout" class="nav__link nav__link--main block theme--dark">Đăng xuất</a>
+                                    <a href="logout" class="nav__link nav__link--main block theme--dark">Đăng xuất</a>
                                 </li>
                             </ul>
                         </div>
@@ -57,10 +57,10 @@
                                     <a href="#" class="nav__link nav__link--main block">Quên mật khẩu</a>
                                 </li>
                                 <li class="nav__item">
-                                    <a href="?page=register" class="nav__link nav__link--main block">Đăng ký tài khoản</a>
+                                    <a href="register" class="nav__link nav__link--main block">Đăng ký tài khoản</a>
                                 </li>
                                 <li class="nav__item t-center">
-                                    <a href="?page=login" class="nav__link nav__link--main block theme--dark">Đăng nhập</a>
+                                    <a href="login" class="nav__link nav__link--main block theme--dark">Đăng nhập</a>
                                 </li>
                             </ul>
                         </div>
@@ -93,7 +93,7 @@
                                     </li>
                                 <?php endforeach; ?>
                             <?php endif; ?>
-                            <a href=" ?page=cart">
+                            <a href="cart">
                                     <li class="nav__link nav__link--main btn btn--primary cart-detail">
                                         Xem chi tiết giỏ hàng &nbsp<i class="fas fa-chevron-right"></i>
                                     </li>
@@ -108,7 +108,7 @@
                     <div class="nav__dropdown fadeIn ts-2 hidden" id="dd-3">
                         <ul class="nav__list">
                             <li class="nav__item">
-                                <a href="?page=home" class="nav__link nav__link--main block">Trang Chủ</a>
+                                <a href="home" class="nav__link nav__link--main block">Trang Chủ</a>
                             </li>
                             <li class="nav__item">
                                 <a href="#" class="nav__link nav__link--main block">Hỏi Đáp</a>
