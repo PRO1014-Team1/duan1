@@ -1,0 +1,111 @@
+.nav {
+  padding-top: 1rem;
+}
+
+.nav__logo {
+  width: clamp(100px, calc(min(100vw, 100vh) * 0.3), 15vw);
+  justify-self: start;
+}
+.nav__menu {
+  justify-self: end;
+  gap: 1rem;
+}
+.nav__container {
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  max-width: 85vw;
+}
+
+.nav__dropdown {
+  --width: 13rem;
+  /* di chuyển menu sang bên trái nav */
+  grid-column: 2;
+
+  /* căn menu ra giữa icon */
+  position: absolute;
+  top: 4rem;
+  transform: translateX(calc(-50% + 1.5rem));
+
+  box-shadow: 0 0.5rem 1rem var(--line);
+
+  width: var(--width);
+  font-family: var(--font-main);
+  font-weight: 600;
+  background: white;
+  z-index: 10;
+}
+
+.nav__link {
+  padding: 0.75rem;
+}
+
+.nav__item:not(:last-child) .nav__link {
+  border-bottom: 0.5px solid var(--line);
+}
+
+.nav__link--main:hover {
+  color: white;
+  background: var(--primary-500);
+}
+
+.fadeIn {
+  animation: fadeIn 0.35s ease-in;
+}
+
+.nav__btn__icon {
+  font-size: 1.5rem;
+  color: var(--primary);
+  /* sửa lỗi bug event.nextElementSibling trả về null */
+  pointer-events: none;
+}
+
+.nav__menu__user__avatar {
+  width: clamp(2rem, calc(min(100vw, 100vh) * 0.3), 5vw);
+  margin: 1rem auto;
+}
+.user-avatar {
+  border-radius: 10px;
+}
+.nav__menu__user__name {
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--primary);
+  margin-bottom: 2.5rem;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    top: 2rem;
+  }
+  100% {
+    opacity: 1;
+    top: 4rem;
+  }
+}
+
+.fa-shopping-cart {
+  position: relative;
+}
+
+.amount {
+  color: var(--primary-100);
+  font-weight: light;
+  font-family: var(--font-main);
+  font-size: 0.75rem;
+  position: absolute;
+  top: -0.5rem;
+  left: calc(100% + 0.25rem);
+}
+
+.thumbnail {
+  --size: 50px;
+  object-fit: cover;
+  width: var(--size);
+  height: var(--size);
+}
+
+.cart-detail {
+  font-size: .75rem;
+}

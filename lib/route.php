@@ -7,6 +7,7 @@ $routes = [];
 --$path là đường dẫn
 --$callback hành động ứng với đường dẫn
 */
+
 function route($path, $callback)
 {
     global $routes;
@@ -33,6 +34,7 @@ function run()
         }
         $found = true;
         $callback();
+
     }
 
     if ($found == false) {
@@ -40,3 +42,5 @@ function run()
         return $fileNotFound();
     }
 }
+
+

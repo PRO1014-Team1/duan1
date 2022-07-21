@@ -1,0 +1,66 @@
+footer {
+  height: 25vh;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+
+.footer__media,
+.footer__nav {
+  padding-top: 1.5rem;
+  justify-content: center;
+}
+
+.footer__media {
+  gap: 1.5rem;
+}
+
+.footer__nav {
+  margin-top: .5rem;
+}
+
+.footer__nav__item span {
+  font-family: var(--font-secondary);
+  margin-left: 0.5rem;
+  margin-right: 2rem;
+}
+
+.footer__nav__item img {
+    display: inline;
+}
+
+.footer__divider {
+  height: 1px;
+  background-color: var(--line);
+  margin: 2rem auto 1rem auto;
+  max-width: 95%;
+}
+
+.footer__copyright {
+  font-weight: 600;
+  font-family: var(--font-main);
+  letter-spacing: 0.1em;
+}
+
+.back-to-top {
+  position: absolute;
+  top: .25rem;
+  left: .25rem;
+  z-index: 1;
+  font-size: 2rem;
+  color: rgb(20, 20, 20);
+  cursor: pointer;
+  transition: color .2s ease-in-out;
+}
+
+.back-to-top:hover {
+  color: var(--primary-500);
+}
+
+.btt-corner {
+  position: absolute;
+  top: 0;
+  left: 0;
+}

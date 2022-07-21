@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -14,4 +14,4 @@
     <?php endforeach ?>
 </body>
 
-</html>
+</html> -->

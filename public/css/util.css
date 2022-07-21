@@ -1,0 +1,123 @@
+/* display classes  */
+
+.flex {
+  display: flex;
+}
+
+.grid {
+  display: grid;
+}
+
+.block {
+  display: block;
+}
+
+.inline-flex {
+  display: inline-flex;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.px {
+  padding: 0.25rem;
+}
+
+.px-2 {
+  padding: 0.5rem;
+}
+
+
+
+/* components classes */
+
+.img-fluid {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.btn {
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.05rem;
+  text-transform: uppercase;
+  transition: all 0.05s ease-in-out;
+  border: 1px solid transparent;
+}
+
+.divider {
+  width: 100%;
+  height: 0.5px;
+  background: var(--line-500);
+  margin: 1rem 0;
+}
+
+.m-1 {
+  margin: 0.25rem;
+}
+
+.m-2 {
+  margin: 0.5rem;
+}
+
+
+.p-1 {
+  padding: 0.25rem;
+}
+
+.p-2 {
+  padding: 0.5rem;
+}
+
+.p-3 {
+  padding: 1rem;
+}
+
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.pos-r {
+  position: relative;
+}
+
+.border {
+  border: 0.5px solid var(--line-500);
+}
+
+.ts-1 {
+  font-size: 0.5rem;
+}
+.ts-1\.5 {
+  font-size: 0.625rem;
+}
+.ts-2 {
+  font-size: 0.75rem;
+}
+.ts-3 {
+  font-size: 1rem;
+}
+
+.t-center {
+  text-align: center;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

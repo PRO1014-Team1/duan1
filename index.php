@@ -1,9 +1,13 @@
 <?php
 
 require_once "lib/route.php";
+require_once "lib/global.php";
+require_once "lib/template.php";
 require_once "controllers/controller.php";
+
+
 route("/", function () {
-    echo "HOME PAGE";
+    redirect("/home");
 });
 
 route("/contact", function () {
@@ -21,4 +25,12 @@ route("/404", function () {
 route("/hang_hoa", function () {
     hang_hoa_index();
 });
+
+route("/home", function(){
+    home();
+});
+
+set_meta();
+set_header($_SESSION['role']);
 run();
+set_footer();

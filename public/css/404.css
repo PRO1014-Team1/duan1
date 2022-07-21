@@ -1,0 +1,29 @@
+.title {
+  color: #fff;
+  font-size: 20vw;
+  font-weight: bold;
+  text-align: center;
+}
+
+.col-12 {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+}
+
+.btn-404 {
+    width: 100%;
+    padding: 0.75em;
+    color: var(--primary-300);
+    font: 1.25rem var(--font-main);
+    background: white;
+    font-weight: bold;
+    text-align: center;
+    margin: 2rem 0;
+}

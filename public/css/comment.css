@@ -1,0 +1,163 @@
+.admin-nav__container {
+    border-top: 1px solid var(--line-500);
+    justify-content: space-around;
+    text-align: center;
+  }
+  .admin-nav__item {
+    width: 100%;
+  }
+  
+  .table {
+    width: 70vw;
+    border-collapse: collapse;
+    border-spacing: 0;
+    text-align: left;
+    font-family: var(--font-secondary);
+  }
+  
+  /* create table with stripes */
+  .table-striped tbody tr:nth-child(odd) {
+    background-color: var(--line);
+  }
+  
+  /* add border radius to thead */
+  .table thead th:first-child {
+    border-top-left-radius: 0.5rem;
+  }
+  
+  .table thead th:last-child {
+    border-top-right-radius: 0.5rem;
+  }
+  
+  .table thead th {
+    color: white;
+    background-color: var(--primary);
+  
+    font-size: 0.8rem;
+    font-family: var(--font-main);
+    font-weight: bold;
+  }
+  
+  .table tbody {
+    border: 1px solid var(--primary-500);
+  }
+  
+  .table th,
+  .table td {
+    padding: 1.25em;
+  }
+  
+  .ta-center {
+    text-align: center;
+  }
+  
+  .fa-search {
+    color: var(--primary-500);
+  
+    position: relative;
+    left: 1.75rem;
+    /* color: var(--primary); */
+  }
+  
+  .search-bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    padding: 0.5rem 0 0.5rem 2rem;
+    color: var(--primary-100);
+  }
+  
+  .selected:hover {
+    cursor: pointer;
+  }
+  
+  .selected {
+    -webkit-appearance: none;
+    appearance: none;
+  
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid var(--primary);
+    border-radius: 0.15em;
+    place-content: center;
+    transform: translateY(0.125em);
+    display: inline-grid;
+  }
+  
+  .selected::before {
+    content: "";
+    width: inherit;
+    height: inherit;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    background-color: var(--primary);
+  }
+  
+  .selected:checked::before {
+    transform: scale(1);
+  }
+
+  .pagination {
+    width: 70vw;
+    margin: 1.5rem auto;
+    text-align: left;
+  }
+  
+  .pagination__link {
+    margin: 0 0.5rem;
+  }
+  
+  .pagination__link--active {
+    color: var(--primary-500);
+    background: var(--primary-100);
+  }
+  
+  .table-tools__container {
+    bottom: 0;
+  }
+  
+  .table-tools__container > * {
+    margin: 0 1rem;
+  }
+  
+  .row {
+      margin-top: 10rem;
+      margin-bottom: 1.5rem;
+      width: 60vw;
+  }
+  .row,
+  .table-tools__container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .table-form {
+    margin: 5rem 0;
+  }
+  
+  .delete-one {
+    color: var(--primary-500);
+    cursor: pointer;
+    display: inline;  
+  }
+
+  .btn {
+    font-size: 0.8rem;
+  }
+
+  .btn--primary {
+    background-color: var(--primary-100);
+  }
+  
+  .btn--outline {
+    border: 1.5px solid var(--primary-100);
+    color: var(--primary-100);
+  }
+  
+  .btn--success {
+    background-color: var(--primary-100);
+  }
