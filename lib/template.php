@@ -30,16 +30,6 @@ function set_admin_header()
     }
 }
 
-function set_header($role)
-{
-    // if ($role == 1) {
-    //     set_admin_header();
-    // } else {
-    //     set_user_header();
-    // }
-    set_user_header();
-}
-
 
 function set_footer()
 {

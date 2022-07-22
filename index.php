@@ -2,7 +2,7 @@
 
 require_once "lib/route.php";
 require_once "lib/global.php";
-require_once "lib/template.php";
+
 require_once "controllers/controller.php";
 
 
@@ -50,7 +50,56 @@ route("/register", function(){
     register();
 });
 
+// Các route cho admin
+
+route("/product", function(){
+    product();
+});
+
+route("/category", function(){
+    category();
+});
+
+route("/add-category", function(){
+    add_category();
+});
+
+route("/add-product", function(){
+    add_product();
+});
+
+route("/edit-product", function(){
+    edit_product();
+});
+
+route("/edit-category", function(){
+    edit_category();
+});
+
+route("edit-customer", function(){
+    edit_customer();
+});
+
+route("/customer", function(){
+    customer();
+});
+
+// route("/order", function(){
+//     order();
+// });
+
+route("/comment", function(){
+    comment();
+});
+
+route("/graph", function(){
+    graph();
+});
+
+route("/statistic", function(){
+    statistic();
+});
+
 set_meta();
-set_header(get_role());
 run();
 set_footer();
