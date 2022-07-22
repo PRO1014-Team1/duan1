@@ -1,27 +1,31 @@
+<?php 
+    $_SESSION['admin-page'] = $_GET[0];
+?>
+<link rel="stylesheet" type="text/css" href="./content/css/admin_header.css" />
 <input type="checkbox" id="nav-toggle">
 <header id="header">
     <div class="admin-sidebar">
         <div class="sidebar-logo">
-            <a href="home">
-                <img src="./public/img/logo.png" alt="Xshop Logo" />
+            <a href="?page=home">
+                <img src="./content/img/logo.png" alt="Xshop Logo" />
             </a>
         </div>
         <div class="sidebar-menu">
             <ul>
                 <li class="sidebar__item">
-                    <a href="product" class="sidebar__card" id="product" data-active='true'>Hàng Hóa</a>
+                    <a href="?page=product" class="sidebar__card" id="product" data-active='true'>Hàng Hóa</a>
                 </li>
                 <li class="sidebar__item">
-                    <a href="category" class="sidebar__card" id="category" data-active='false'>Loại Hàng</a>
+                    <a href="?page=category" class="sidebar__card" id="category" data-active='false'>Loại Hàng</a>
                 </li>
                 <li class="sidebar__item">
-                    <a href="customer" class="sidebar__card" id="customer" data-active='false'>Khách Hàng</a>
+                    <a href="?page=customer" class="sidebar__card" id="customer" data-active='false'>Khách Hàng</a>
                 </li>
                 <li class="sidebar__item">
-                    <a href="comment" class="sidebar__card" id="comment" data-active='false'>Bình Luận</a>
+                    <a href="?page=comment" class="sidebar__card" id="comment" data-active='false'>Bình Luận</a>
                 </li>
                 <li class="sidebar__item">
-                    <a href="statistic" class="sidebar__card" id="statistic" data-active='false'>Thống Kê</a>
+                    <a href="?page=statistic" class="sidebar__card" id="statistic" data-active='false'>Thống Kê</a>
                 </li>
             </ul>
         </div>
@@ -48,13 +52,13 @@
                                 <p><?= get_username() ?></p>
                             </div>
                             <li class="nav__item">
-                                <a href="profile" class="nav__link nav__link--main block">Cập nhật tài khoản</a>
+                                <a href="?page=profile" class="nav__link nav__link--main block">Cập nhật tài khoản</a>
                             </li>
                             <li class="nav__item">
-                                <a href="product" class="nav__link nav__link--main block">Quản trị website</a>
+                                <a href="?page=product" class="nav__link nav__link--main block">Quản trị website</a>
                             </li>
                             <li class="nav__item t-center">
-                                <a href="logout" class="nav__link nav__link--main block theme--dark">Đăng xuất</a>
+                                <a href="?page=logout" class="nav__link nav__link--main block theme--dark">Đăng xuất</a>
                             </li>
                         </ul>
                     </div>                 
