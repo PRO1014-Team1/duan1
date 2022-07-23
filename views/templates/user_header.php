@@ -111,7 +111,7 @@
                                 <a href="home" class="nav__link nav__link--main block">Trang Chủ</a>
                             </li>
                             <li class="nav__item">
-                                <a href="#" class="nav__link nav__link--main block">Hỏi Đáp</a>
+                                <a href="news" class="nav__link nav__link--main block">Tin Tức</a>
                             </li>
                             <li class="nav__item">
                                 <a href="#" class="nav__link nav__link--main block">Giới Thiệu</a>
