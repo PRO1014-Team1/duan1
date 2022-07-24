@@ -40,17 +40,18 @@ if (strcmp($category_filter, "all")) {
                 <!-- banner -->
                 <div class="slider">
                     <div class="slide">
-                        <img class="img-fluid slide__img" src="https://source.unsplash.com/random?landscape,mountain" alt="" />
+                        <img class="img-fluid slide__img" src="public/img/bna.jpg" alt="" />
                     </div>
                     <div class="slide">
-                        <img class="img-fluid slide__img" src="https://source.unsplash.com/random?landscape,cars" alt="" />
+                        <img class="img-fluid slide__img" src="public/img/bne.jpg" alt="" />
                     </div>
                     <div class="slide">
-                        <img class="img-fluid slide__img" src="https://source.unsplash.com/random?landscape,night" alt="" />
+                        <img class="img-fluid slide__img" src="public/img/bnc.jpg" alt="" />
                     </div>
                     <div class="slide">
-                        <img class="img-fluid slide__img" src="https://source.unsplash.com/random?landscape,city" alt="" />
+                        <img class="img-fluid slide__img" src="public/img/bnd.jpg" alt="" />
                     </div>
+
 
                     <div class="slide__indicator">
                         <ul class="flex indicator-list">
