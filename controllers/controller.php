@@ -127,18 +127,10 @@ function product()
     require_once 'models/comment.php';
     require_once 'models/category.php';
 
-    $edit_id = $_GET['id'] ?? false;
-    $edit_product = item_filter(get_product(), "product_id", $edit_id);
-    $category = get_all_category();
-
     assets('admin_header');
     assets('product');
     set_admin_header();
-    view('/admin/product', [
-        'edit_id' => $edit_id,
-        'edit_product' => $edit_product,
-        'category' => $category
-    ]);
+    view('/admin/product');
 }
 
 
@@ -154,12 +146,27 @@ function add_product()
 
 function edit_product()
 {
+<<<<<<< Updated upstream
+=======
+
+    if (deny_access($_SESSION['role'])) {
+        return;
+    }
+>>>>>>> Stashed changes
     require_once 'models/product.php';
+
+    $edit_id = $_GET['id'] ?? false;
+    $edit_product = item_filter(get_product(), "product_id", $edit_id);
+    $category = get_all_category();
 
     assets('admin_header');
     assets('edit-product');
     set_admin_header();
-    view('/admin/edit-product');
+    view('/admin/edit-product', [
+        'edit_id' => $edit_id,
+        'edit_product' => $edit_product,
+        'category' => $category
+    ]);
 }
 
 
