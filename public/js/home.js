@@ -47,9 +47,6 @@ window.onload = function () {
   let carts = document.querySelectorAll(".cart-action");
 
   carts.forEach((cart) => {
-    cart.addEventListener("click", cartAction);
-  });
-  carts.forEach((cart) => {
     cart.addEventListener("mouseover", cartHoverHandler);
   });
 
@@ -69,44 +66,12 @@ window.onload = function () {
     e.target.classList.add("fa-shopping-cart");
   }
 
-  function cartAction(e) {
-    // let cartBtn = e.target;
-    // giấu các icon không khải giỏ hàng
-    // widgets.childNodes.forEach((item) => {
-    //   if (item.className != "cart-action") {
-    //     if (item.style) {
-    //       item.classList.toggle("cart-action__hidden");
-    //     }
-    //   }
-    // });
-    //bad code but too bothersome to fix.
-    // thêm nút điểu khiển số lượng muốn thêm vào giỏ hàng
-    // let cartForm, cartIndicator;
-    // widgets.childNodes.forEach((child) => {
-    //   if (child.classList) {
-    //     cartForm = child.classList.contains("cart-submit") ? child : cartForm;
-    //     cartForm.childNodes.forEach((c) => {
-    //       if (c.classList) {
-    //         cartIndicator = c.classList.contains("cart-popup")
-    //           ? c
-    //           : cartIndicator;
-    //       }
-    //     });
-    //   }
-    // });
-    // cartIndicator.classList.toggle("hidden");
-    // let [decrease, amount, increase, amountData] = cartIndicator.children;
-    // decrease.addEventListener("click", function (e) {
-    //   e.preventDefault();
-    //   amount.innerHTML = --amount.innerHTML || 1; //Min = 1
-    //   amountData.setAttribute("value", amount.innerHTML);
-    // });
-    // increase.addEventListener("click", function (e) {
-    //   e.preventDefault();
-    //   ++amount.innerHTML;
-    //   amountData.setAttribute("value", amount.innerHTML);
-    // });
-    // Thêm nút xác nhận đặt hàng
-    // cartConfirmBtn.classList.toggle("hidden");
+  function noCacheOnReload() {
+    var e = document.getElementById("refreshed");
+    if (e.value == "no") e.value = "yes";
+    else {
+      e.value = "no";
+      location.reload();
+    }
   }
 };

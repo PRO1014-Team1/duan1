@@ -255,6 +255,19 @@
     top: -1rem;
 }
 
+.prod-item__discount{
+    font-size: 1.25rem;
+    font-family: var(--font-secondary);
+    font-weight: bold;
+    position: absolute;
+    right: 5%;
+    top: 20%;
+    text-align: center;
+    transform: translateY(-50%);
+    transition: all 0.35s cubic-bezier(0.46, -0.35, 0.44, 1.15);
+    z-index: 10;
+}
+
 .prod-item__price {
     z-index: 2;
     position: absolute;

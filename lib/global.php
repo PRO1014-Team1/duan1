@@ -219,3 +219,9 @@ function clamp($value, $min, $max)
 }
 
 // tạo mã SKU cho sản phẩm
+
+
+function or_zero($value)
+{
+    return $value ? $value : 0;
+}

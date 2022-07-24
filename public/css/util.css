@@ -28,8 +28,6 @@
   padding: 0.5rem;
 }
 
-
-
 /* components classes */
 
 .img-fluid {
@@ -63,7 +61,6 @@
 .m-2 {
   margin: 0.5rem;
 }
-
 
 .p-1 {
   padding: 0.25rem;
@@ -120,4 +117,9 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.scratched {
+  color: white;
+  text-decoration: line-through;
 }

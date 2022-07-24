@@ -18,6 +18,7 @@ function home()
 {
     require_once "models/product.php";
     require_once "models/comment.php";
+    require_once "models/type.php";
 
     $popular_products = item_sort(get_product(), 'view', 1);
     $products = get_product();
@@ -29,7 +30,7 @@ function home()
     $search = $_GET['search'] ?? false;
     $sort = $_GET['sort'] ?? false;
     $cart = $_POST['cart-id'] ?? false;
-
+    
     set_user_header();
     assets('home');
     view('/user/home', [

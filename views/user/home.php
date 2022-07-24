@@ -1,5 +1,6 @@
 <?php
 
+
 if ($cart) {
     if (!isset($_SESSION['username'])) {
         alert("Bạn cần phải đăng nhập để sử dụng chức năng này!");
@@ -29,7 +30,6 @@ if ($sort) {
 }
 if (strcmp($category_filter, "all")) {
     $products = item_filter($products, "category_id", $category_filter);
-    echo $category_filter;
 }
 [$pageno, $total_pages, $display_items] = pagination($_POST['pageno'] ?? 1, $search, $products);
 ?>
@@ -97,6 +97,7 @@ if (strcmp($category_filter, "all")) {
                         <?php } ?>
                         <div class="divider divider-50"></div>
                         <div class="form-filter grid">
+                            <input type="hidden" id="refreshed" value="no">
                             <button>
                                 <i class="fas fa-search"></i>
                             </button>
@@ -142,17 +143,21 @@ if (strcmp($category_filter, "all")) {
                     <?php foreach ($display_items as $prod) { ?>
                         <?php
                         $view = get_view($prod["product_id"]);
+                        $type_data = get_type_data($prod['type_id'], $prod["product_id"]);
                         $comment = get_comment_count("`product_id` = {$prod['product_id']}");
                         $itemAmount = 1;
+
+
                         ?>
                         <div class="prod-item">
-                            <a href="detail?id=<?= $prod["product_id"] ?>&category=<?= $prod["category_id"] ?>" class="prod-link">
+                            <a href="detail?id=<?= $prod['product_id'] ?>&category=<?= $prod['category_id'] ?>" class="prod-link">
                                 <div class="text-wrapper theme--dark">
                                     <h3 class="prod-item__name truncate"><?= $prod["name"] ?></h3>
                                 </div>
                                 <div class="prod-item__img-wrapper">
                                     <img class="img-fluid prod-item__img" src="<?= $prod["image"] ?>" alt="" />
-                                    <span class="prod-item__price"><?= asvnd($prod['price']) ?></span>
+                                    <span class="prod-item__price <?= $type_data[0]['sale'] ? 'scratched' : '' ?> "><?= asvnd($type_data[0]["price"] ?? $prod['price']) ?></span>
+                                    <span class="prod-item__discount"><?= asvnd(discount($type_data[0]["price"] ?? 0, $type_data[0]['sale'] ?? 0)) ?> </span>
                                     <div class="widget">
                                         <form method="POST" class="cart-submit">
                                             <input type="hidden" name="cart-amount" value="<?= $itemAmount ?>">
