@@ -2,12 +2,10 @@
 
 require_once "lib/route.php";
 require_once "lib/global.php";
-
 require_once "controllers/controller.php";
 
-
 route("/", function () {
-    redirect("/home");
+    home(); 
 });
 
 route("/contact", function () {
@@ -48,6 +46,10 @@ route("/profile", function(){
 
 route("/register", function(){
     register();
+});
+
+route("/news", function(){
+    news();
 });
 
 // Các route cho admin
@@ -99,6 +101,7 @@ route("/graph", function(){
 route("/statistic", function(){
     statistic();
 });
+
 
 set_meta();
 run();

@@ -1,10 +1,10 @@
 <?php
 
-function deny_access($role){
-    if($role == 1){
+function deny_access($role = 1){
+    if($role != 2){
         alert("Bạn không có quyền truy cập trang này");
-        path_not_found();
+        redirect("/");
+        return true;
     }
+    return false;
 }
-
-?>

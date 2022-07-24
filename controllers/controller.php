@@ -123,6 +123,9 @@ function register()
 
 function product()
 {
+    if (deny_access($_SESSION['role'])) {
+        return;
+    }
     require_once 'models/product.php';
     require_once 'models/comment.php';
     require_once 'models/category.php';
@@ -136,6 +139,9 @@ function product()
 
 function add_product()
 {
+    if (deny_access($_SESSION['role'])) {
+        return;
+    }
     require_once 'models/category.php';
 
     assets('admin_header');
@@ -146,13 +152,9 @@ function add_product()
 
 function edit_product()
 {
-<<<<<<< Updated upstream
-=======
-
     if (deny_access($_SESSION['role'])) {
         return;
     }
->>>>>>> Stashed changes
     require_once 'models/product.php';
 
     $edit_id = $_GET['id'] ?? false;
@@ -172,9 +174,11 @@ function edit_product()
 
 function category()
 {
+    if (deny_access($_SESSION['role'])) {
+        return;
+    }
     require_once 'models/category.php';
     require_once 'models/product.php';
-
 
     assets('admin_header');
     assets('category');
@@ -190,6 +194,9 @@ function category()
 
 function add_category()
 {
+    if (deny_access($_SESSION['role'])) {
+        return;
+    }
     require_once 'models/category.php';
     require_once 'models/database.php';
 
@@ -200,6 +207,9 @@ function add_category()
 
 function edit_category()
 {
+    if (deny_access($_SESSION['role'])) {
+        return;
+    }
     require_once 'models/category.php';
     require_once 'models/database.php';
 
@@ -213,6 +223,9 @@ function edit_category()
 
 function comment()
 {
+    if (deny_access($_SESSION['role'])) {
+        return;
+    }
     require_once 'models/comment.php';
     require_once 'models/product.php';
 
@@ -232,6 +245,9 @@ function comment()
 
 function comment_detail()
 {
+    if (deny_access($_SESSION['role'])) {
+        return;
+    }
     require_once 'models/comment.php';
 
     $id = $_GET['id'] ?? 0;
@@ -252,6 +268,9 @@ function comment_detail()
 
 function customer()
 {
+    if (deny_access($_SESSION['role'])) {
+        return;
+    }
     require_once 'models/database.php';
     require_once 'models/customer.php';
 
@@ -271,6 +290,9 @@ function customer()
 
 function edit_customer()
 {
+    if (deny_access($_SESSION['role'])) {
+        return;
+    }
     require_once 'models/ustomer.php';
     require_once 'models/database.php';
 
@@ -286,6 +308,9 @@ function edit_customer()
 
 function statistic()
 {
+    if (deny_access($_SESSION['role'])) {
+        return;
+    }
     require_once 'models/statistic.php';
     require_once 'models/product.php';
     require_once 'models/comment.php';
@@ -311,13 +336,16 @@ function statistic()
 
 function graph()
 {
+    if (deny_access($_SESSION['role'])) {
+        return;
+    }
     require_once 'models/database.php';
     require_once 'models/product.php';
 
     $categories = pdo_query('SELECT `category`.`name`, `category`.`id`, COUNT(`category_id`) AS count FROM `product` JOIN `category` ON `product`.`category_id` = `category`.`id` GROUP BY `category`.`name`, `category`.`id`'); // lấy danh sách loại hàng và số lượng
     $categoryView =  pdo_query('SELECT `category`.`name`,  SUM( `view`) as view FROM `product` JOIN `category` ON `product`.`category_id` = `category`.`id` GROUP BY `category`.`name`'); // lấy danh sách loại hàng và số lượng
     $comment = pdo_query('SELECT `category`.`name`,  COUNT(DISTINCT `content`) as comment_count FROM `product` JOIN `comment` ON `product`.`product_id` = `comment`.`product_id` JOIN `category` ON `product`.`category_id` = `category`.`id` GROUP BY `category`.`name`');
-    $product = get_product("", "", "view DESC");
+    $product = get_product();
 
     assets('admin_header');
     assets('graph');
@@ -328,4 +356,14 @@ function graph()
         'comment' => $comment,
         'product' => $product
     ]);
+}
+
+function news()
+{
+    require_once 'models/database.php';
+
+    assets('user_header');
+    assets('news');
+    set_user_header();
+    view('/user/news', ["article_id" => $_GET['id'] ?? 0]);
 }
