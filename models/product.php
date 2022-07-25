@@ -2,9 +2,13 @@
 require_once "database.php";
 
 
-function get_product()
+function get_product($product_id = null)
 {
     $sql = "SELECT `product`.*, COUNT(`view`.`username`) AS `view` FROM `product` LEFT JOIN `view` ON `product`.`product_id` = `view`.`product_id` GROUP BY `product`.`name`";
+    if($product_id != null)
+    {
+        $sql .= " WHERE `product`.`product_id` = $product_id";
+    }
     $data = pdo_query($sql);
     return $data;
 }

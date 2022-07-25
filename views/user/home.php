@@ -1,7 +1,7 @@
 <?php
 
 
-if ($cart) {
+if ($cart = $_POST['cart-id'] ?? false) {
     if (!isset($_SESSION['username'])) {
         alert("Bạn cần phải đăng nhập để sử dụng chức năng này!");
     } else {
@@ -14,9 +14,6 @@ if ($cart) {
             $_SESSION['cart'][$cart] = [
                 "id" => $_POST['cart-id'],
                 "user" => $_SESSION['username'],
-                "amount" => intval($_POST['cart-amount']),
-                "product_name" => $_POST['cart-name'],
-                "product_image" => $_POST['cart-image'],
                 "status" => "pending",
             ];
         }
@@ -144,9 +141,15 @@ if (strcmp($category_filter, "all")) {
                     <?php foreach ($display_items as $prod) { ?>
                         <?php
                         $view = get_view($prod["product_id"]);
-                        $type_data = get_type_data($prod['type_id'], $prod["product_id"]);
+                        $type_arr = get_type_data($prod["product_id"]);
                         $comment = get_comment_count("`product_id` = {$prod['product_id']}");
-                        $itemAmount = 1;
+
+                        if ($type_arr) {
+                            $type_data = $type_arr[0];
+                            $price = $type_data["price"];
+                            $discount = discount($type_data["price"], $type_data['sale']);
+                            $quantity = $type_data["quantity"];
+                        }
 
 
                         ?>
@@ -157,11 +160,14 @@ if (strcmp($category_filter, "all")) {
                                 </div>
                                 <div class="prod-item__img-wrapper">
                                     <img class="img-fluid prod-item__img" src="<?= $prod["image"] ?>" alt="" />
-                                    <span class="prod-item__price <?= $type_data[0]['sale'] ? 'scratched' : '' ?> "><?= asvnd($type_data[0]["price"] ?? $prod['price']) ?></span>
-                                    <span class="prod-item__discount"><?= asvnd(discount($type_data[0]["price"] ?? 0, $type_data[0]['sale'] ?? 0)) ?> </span>
+                                    <?php if (isset($type_data)) : ?>
+                                        <span class="prod-item__price <?= $discount ? 'scratched' : '' ?> "><?= asvnd($price) ?></span>
+                                        <?php if ($discount) : ?>
+                                            <span class="prod-item__discount"><?= asvnd($discount) ?></span>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
                                     <div class="widget">
                                         <form method="POST" class="cart-submit">
-                                            <input type="hidden" name="cart-amount" value="<?= $itemAmount ?>">
                                             <input type="hidden" name="cart-id" value="<?= $prod['product_id'] ?>">
                                             <button class="cart-action"><i class="fas fa-shopping-cart prod-item__cart prod-item__icon"></i></button>
                                             <button class="cart-action__confirm hidden"></button>

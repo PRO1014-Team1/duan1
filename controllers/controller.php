@@ -29,8 +29,8 @@ function home()
     $categories = pdo_query('SELECT `category`.`name`, `category`.`id`, COUNT(`category_id`) AS count FROM `product` JOIN `category` ON `product`.`category_id` = `category`.`id` GROUP BY `category`.`name`, `category`.`id`'); // lấy danh sách loại hàng và số lượng
     $search = $_GET['search'] ?? false;
     $sort = $_GET['sort'] ?? false;
-    $cart = $_POST['cart-id'] ?? false;
-    
+
+
     set_user_header();
     assets('home');
     view('/user/home', [
@@ -43,7 +43,6 @@ function home()
         'category_filter' => $category_filter,
         'search' => $search,
         'sort' => $sort,
-        'cart' => $cart
     ]);
 }
 
