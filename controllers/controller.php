@@ -96,6 +96,8 @@ function detail()
 
 function cart()
 {
+    require_once "models/product.php";
+    require_once "models/type.php";
     set_user_header();
     assets('cart');
     view('/user/cart');

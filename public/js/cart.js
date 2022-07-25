@@ -1,7 +1,7 @@
 window.onload = function () {
   let quantities = document.querySelectorAll(".quantity");
   let total = document.querySelector(".summary__display__total");
-  
+
   //tính tổng các sản phẩm
   get_total = () => {
     let summary_subtotal = document.querySelectorAll("#item_subtotal");
@@ -17,26 +17,25 @@ window.onload = function () {
   }
 
   quantities.innerHTML += quantities.forEach((element) => {
-    var spinner = element;
+    let spinner = element;
     spinner.innerHTML += `<div class="quantity-nav">
         <span class="quantity-button quantity-up">&#xf106;</span>
         <span class="quantity-button quantity-down">&#xf107;</span>
       </div>`;
 
-    var price_each =
+    let price_each =
       element.parentElement.parentElement.querySelector("#item_price");
-    var subtotal =
+    let subtotal =
       element.parentElement.parentElement.querySelector("#item_subtotal");
-    var input = spinner.querySelector("input");
-    var btnUp = spinner.querySelector(".quantity-up");
-    var btnDown = spinner.querySelector(".quantity-down");
+    let input = spinner.querySelector("input");
+    let btnUp = spinner.querySelector(".quantity-up");
+    let btnDown = spinner.querySelector(".quantity-down");
 
-    min = parseInt(input.getAttribute("min"));
-    max = parseInt(input.getAttribute("max"));
-
+    let min = parseInt(input.getAttribute("min"));
+    let max = parseInt(input.getAttribute("max"));
     btnUp.addEventListener("click", function () {
-      var oldValue = parseFloat(input.value);
-      var newVal = clamp(++oldValue, min, max);
+      let oldValue = parseFloat(input.value);
+      let newVal = clamp(++oldValue, min, max);
 
       input.value = newVal;
       input.setAttribute("value", newVal);
@@ -45,8 +44,8 @@ window.onload = function () {
     });
 
     btnDown.addEventListener("click", function () {
-      var oldValue = parseFloat(input.value);
-      var newVal = clamp(--oldValue, min, max);
+      let oldValue = parseFloat(input.value);
+      let newVal = clamp(--oldValue, min, max);
 
       input.value = newVal;
       input.setAttribute("value", newVal);
@@ -55,7 +54,7 @@ window.onload = function () {
     });
 
     input.addEventListener("change", function (e) {
-      var newVal = clamp(parseInt(e.target.value), min, max);
+      let newVal = clamp(parseInt(e.target.value), min, max);
       input.setAttribute("value", (e.target.value = newVal));
       subtotal.innerHTML = "Tổng: " + newVal * price_each.value;
       total.innerHTML = get_total() + "đ";

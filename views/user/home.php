@@ -9,12 +9,13 @@ if ($cart = $_POST['cart-id'] ?? false) {
         $added_product = $_SESSION['cart'][$cart] ?? false;
         //nếu đã có trong giỏ hàng thì + thêm số lượng
         if ($added_product) {
-            $_SESSION['cart'][$cart]['amount']++;
+            $_SESSION['cart'][$cart]['quantity']++;
         } else {
             $_SESSION['cart'][$cart] = [
                 "id" => $_POST['cart-id'],
                 "user" => $_SESSION['username'],
                 "status" => "pending",
+                "quantity" => 1,
             ];
         }
         redirect("home");

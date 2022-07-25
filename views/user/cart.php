@@ -1,8 +1,7 @@
 <?php
 $cart = $_SESSION['cart'] ?? null;
-$min = 1;
-$max = 20;
-get_product();
+
+
 if (isset($_POST['submit'])) {
     $_SESSION['checkout'] = $_POST;
     redirect('checkout');
@@ -33,27 +32,33 @@ if (isset($_POST['submit'])) {
                             <tbody>
                                 <?php if ($cart) : ?>
                                     <?php foreach ($cart as $item) : ?>
+                                        <?php
+                                        $product = get_product($item['id'])[0];
+                                        $type = get_type_data($product['product_id'])[0];
+                                        $min = 1;
+                                        $max = $type['quantity'];
+                                        ?>
                                         <tr>
                                             <td>
-                                                <div class="grid cart-display__form__detail">
+                                                <div class="cart-display__form__detail">
                                                     <div class="cart-display__form__detail__image">
-                                                        <img src="<?= $item['product_image'] ?>" class="img-fluid">
+                                                        <img src="<?= $product['image'] ?>" class="img-fluid">
                                                     </div>
                                                     <div class="cart-display__form__detail__name">
-                                                        <?= $item['product_name'] ?>
+                                                        <?= $product['name'] ?>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td>
-                                                <input type="number" id="item_price" value="<?= $item['price'] ?>" readonly disabled>
-                                                <span class="block" id="item_subtotal">Tổng: <?= $item['price'] * $item['amount'] ?> </span>
+                                                <input type="number" id="item_price" value="<?= $type['price'] ?>" readonly disabled>
+                                                <span class="block" id="item_subtotal">Tổng: <?= $type['price'] * $item['quantity'] ?> </span>
                                             </td>
                                             <td>
                                                 <div class="quantity">
-                                                    <input class="quantity__idicator" type="number" name="quantity[]" min="<?= $min ?>" max="<?= $max ?>" step="1" value="<?= $item['amount'] ?>">
+                                                    <input class="quantity__idicator" type="number" name="quantity[]" min="<?= $min ?>" max="<?= $max ?>" step="1" value="<?= $item['quantity'] ?>">
                                                 </div>
                                             </td>
-                                            <input type="number" name="price[]" value="<?= $item['price'] ?>">
+                                            <input type="number" name="price[]" value="<?= $product['price'] ?>">
                                         </tr>
                                     <?php endforeach; ?>
                                 <?php endif; ?>

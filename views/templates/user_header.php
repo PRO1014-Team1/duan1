@@ -82,22 +82,26 @@
                             <?php if ($cart_total) : ?>
                                 <?php foreach ($_SESSION['cart'] as $cart_item) : ?>
                                     <?php
-                                    $cart_item['product_image"'] = $cart_item['product_image'] ?? './public/img/default-' . rand(1, 4) . '.webp';
+                                    $product = get_product($cart_item['id'])[0];
+                                    $type = get_type_data($product['product_id']);
                                     ?>
                                     <li class="nav__item">
                                         <div class="nav__link nav__link--main flex">
-                                            <img class="thumbnail" src="<?= $cart_item["product_image"] ?>" ">
-                                                <p><?= $cart_item["product_name"] ?></p>
-                                                <span>x <?= $cart_item["amount"] ?></span>
+                                            <img class="thumbnail" src="<?= $product['image'] ?>">
+                                            <div class="nav__link__wrapper">
+                                                <span>x <?= $cart_item['quantity'] ?></span>
+                                                <p><?= $product['name'] ?></p>
                                             </div>
+
+                                        </div>
                                     </li>
                                 <?php endforeach; ?>
                             <?php endif; ?>
                             <a href="cart">
-                                    <li class="nav__link nav__link--main btn btn--primary cart-detail">
-                                        Xem chi tiết giỏ hàng &nbsp<i class="fas fa-chevron-right"></i>
-                                    </li>
-                                    </a>
+                                <li class="nav__link nav__link--main btn btn--primary cart-detail">
+                                    Xem chi tiết giỏ hàng &nbsp<i class="fas fa-chevron-right"></i>
+                                </li>
+                            </a>
                         </ul>
                     </div>
                 </div>
