@@ -1,9 +1,10 @@
 .container {
   margin-left: 10rem;
+  margin-top: 10rem;
 }
 
 #nav-toggle:checked ~ .container {
-  margin-left: 0rem;
+  margin-left: 1rem;
 }
 
 .table {

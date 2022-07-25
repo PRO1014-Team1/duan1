@@ -3,13 +3,13 @@
     <div class="admin-sidebar">
         <div class="sidebar-logo">
             <a href="home">
-                <img src="./public/img/logo.png" alt="Xshop Logo" />
+                <img  src="public/img/logo.png" alt="Xshop Logo" />
             </a>
         </div>
         <div class="sidebar-menu">
             <ul>
                 <li class="sidebar__item">
-                    <a href="product" class="sidebar__card" id="product" data-active='true'>Hàng Hóa</a>
+                    <a href="product" class="sidebar__card" id="product" data-active='false'>Hàng Hóa</a>
                 </li>
                 <li class="sidebar__item">
                     <a href="category" class="sidebar__card" id="category" data-active='false'>Loại Hàng</a>
@@ -30,15 +30,19 @@
         <div class="mx-auto grid nav__container pos-r my-2">
             <div class="page-title-container flex">
                 <label for="nav-toggle">
-                    <i class="fas fa-bars nav__btn__icon"></i>
-                </label>              
-                <span class="page-title">Hàng Hóa</span>
+                    <!-- <i class="fas fa-bars nav__btn__icon"></i> -->
+                    <div class="con">
+                        <div class="bar arrow-top-r"></div>
+                        <div class="bar arrow-middle-r"></div>
+                        <div class="bar arrow-bottom-r"></div>
+                    </div>
+                </label>
             </div>
             <div class="nav__menu flex">
                 <div class="wrapper">
                     <button data-collapse-toggle="mobile-menu" type="button" class="nav__btn btn btn--primary-a" aria-controls="mobile-menu" aria-expanded="false">
                         <i class="fas fa-user nav__btn__icon"></i>
-                    </button>                    
+                    </button>
                     <div class="nav__dropdown fadeIn ts-2 hidden" id="dd-2">
                         <ul class="nav__list">
                             <div class="nav__menu__user__avatar">
@@ -57,11 +61,10 @@
                                 <a href="logout" class="nav__link nav__link--main block theme--dark">Đăng xuất</a>
                             </li>
                         </ul>
-                    </div>                 
+                    </div>
                 </div>
             </div>
         </div>
     </nav>
 
 </header>
-
