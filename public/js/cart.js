@@ -10,10 +10,14 @@ window.onload = function () {
     );
     return _.sum(subtotal);
   };
-  total.innerHTML = get_total() + "đ";
+  total.innerHTML = asvnd(get_total());
 
   function clamp(num, min, max) {
     return Math.min(Math.max(num, min), max);
+  }
+  
+  function asvnd(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "đ";
   }
 
   quantities.innerHTML += quantities.forEach((element) => {
@@ -40,7 +44,7 @@ window.onload = function () {
       input.value = newVal;
       input.setAttribute("value", newVal);
       subtotal.innerHTML = "Tổng: " + newVal * price_each.value;
-      total.innerHTML = get_total() + "đ";
+      total.innerHTML = asvnd(get_total());
     });
 
     btnDown.addEventListener("click", function () {
@@ -50,14 +54,14 @@ window.onload = function () {
       input.value = newVal;
       input.setAttribute("value", newVal);
       subtotal.innerHTML = "Tổng: " + newVal * price_each.value;
-      total.innerHTML = get_total() + "đ";
+      total.innerHTML = asvnd(get_total());
     });
 
     input.addEventListener("change", function (e) {
       let newVal = clamp(parseInt(e.target.value), min, max);
       input.setAttribute("value", (e.target.value = newVal));
       subtotal.innerHTML = "Tổng: " + newVal * price_each.value;
-      total.innerHTML = get_total() + "đ";
+      total.innerHTML = asvnd(get_total());
     });
   });
 };

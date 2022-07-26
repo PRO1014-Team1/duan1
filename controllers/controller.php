@@ -97,21 +97,31 @@ function cart()
 {
     require_once "models/product.php";
     require_once "models/type.php";
+
+    $cart = $_SESSION['cart'] ?? null;
     set_user_header();
     assets('cart');
-    view('/user/cart');
+    view('/user/cart', ['cart' => $cart]);
 }
 
 function checkout()
 {
     require_once "models/product.php";
     require_once "models/type.php";
-    
-    require_once('models/database.php');    
-    require_once('./models/helpers.php');  
+    require_once('models/database.php');
+
     set_user_header();
+    assets("<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css' integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO' crossorigin='anonymous'>");
     assets('checkout');
-    view('/user/checkout');
+
+    $item = $_SESSION['cart'];
+    $cartItemCount = count($item);
+    $total = 0;
+    view('/user/checkout', [
+        'item' => $item,
+        'cartItemCount' => $cartItemCount,
+        'total' => $total
+    ]);
 }
 
 function profile()
@@ -385,7 +395,8 @@ function graph()
 }
 
 
-function dashboard(){
+function dashboard()
+{
     assets('admin_header');
     assets('dashboard');
     set_admin_header();

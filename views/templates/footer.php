@@ -19,23 +19,23 @@
                     </div>
                     <div class="footer__nav flex ts-2">
                         <div class="footer__nav__item">
-                            <a href="#">
+                            <a href="#" class="link-light">
                                 <img src="./public/img/sa_home.svg" alt="">
-                                <span>trang chủ</span>
+                                <span class="text-light">trang chủ</span>
                             </a>
 
                         </div>
                         <div class="footer__nav__item">
-                            <a href="#">
+                            <a href="#" class="link-light">
                                 <img src="./public/img/sa_email.svg" alt="">
-                                <span>liên hệ</span>
+                                <span class="text-light">liên hệ</span>
                             </a>
 
                         </div>
                         <div class="footer__nav__item">
-                            <a href="#">
+                            <a href="#" class="link-light">
                                 <img src="./public/img/sa_support.svg" alt="">
-                                <span>hỗ trợ</span>
+                                <span class="text-light">hỗ trợ</span>
                             </a>
 
                         </div>
@@ -49,8 +49,8 @@
                         <img src="./public/img/triangle.svg" alt="">
                     </div>
                     <div class="back-to-top">
-                        <a href="#">
-                            <i class="fas fa-chevron-circle-up"></i>
+                        <a href="#" class="link-light">
+                            <i class="fas fa-chevron-circle-up text-dark"></i>
                         </a>
                     </div>
                 </div>

@@ -16,5 +16,5 @@ function get_type_name($type_id)
 
 function discount($price, $discount)
 {
-  return $discount == 0 ? 0 : $price - ($price * $discount);
+  return $discount == 0 ? $price : $price - ($price * $discount);
 }

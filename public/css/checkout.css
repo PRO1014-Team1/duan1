@@ -1,0 +1,11 @@
+.badge-outline {
+  color: black;
+  border: 2px solid black;
+  background-color: transparent;
+}
+
+
+.badge-outline:hover {
+    background: #000;
+    color: white;
+}

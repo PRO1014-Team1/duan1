@@ -13,7 +13,6 @@ if ($cart = $_POST['cart-id'] ?? false) {
         } else {
             $_SESSION['cart'][$cart] = [
                 "id" => $_POST['cart-id'],
-                "user" => $_SESSION['username'],
                 "status" => "pending",
                 "quantity" => 1,
             ];
@@ -149,6 +148,7 @@ if (strcmp($category_filter, "all")) {
                             $type_data = $type_arr[0];
                             $price = $type_data["price"];
                             $discount = discount($type_data["price"], $type_data['sale']);
+                            $discount = $discount === $price ? 0 : $discount;
                             $quantity = $type_data["quantity"];
                         }
 

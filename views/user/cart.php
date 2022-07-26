@@ -1,9 +1,10 @@
 <?php
 $cart = $_SESSION['cart'] ?? null;
 
-
 if (isset($_POST['submit'])) {
-    $_SESSION['checkout'] = $_POST;
+    for ($i = 0, $quantity = $_POST['quantity'], $ids = $_POST['id']; $i < count($ids); $i++) {
+        $_SESSION['cart'][$ids[$i]]['quantity'] = $quantity[$i];
+    }
     redirect('checkout');
 }
 
@@ -50,15 +51,16 @@ if (isset($_POST['submit'])) {
                                                 </div>
                                             </td>
                                             <td>
-                                                <input type="number" id="item_price" value="<?= $type['price'] ?>" readonly disabled>
-                                                <span class="block" id="item_subtotal">Tổng: <?= $type['price'] * $item['quantity'] ?> </span>
+                                                <input type="number" id="item_price" value="<?=discount($type['price'], $type['sale']) ?>" readonly disabled>
+                                                <input type="hidden" name="id[]" value="<?= $item['id'] ?>">
+                                                <span class="block" id="item_subtotal">Tổng: <?= discount($type['price'], $type['sale'])  * $item['quantity'] ?> </span>
                                             </td>
                                             <td>
                                                 <div class="quantity">
                                                     <input class="quantity__idicator" type="number" name="quantity[]" min="<?= $min ?>" max="<?= $max ?>" step="1" value="<?= $item['quantity'] ?>">
                                                 </div>
                                             </td>
-                                         
+
                                         </tr>
                                     <?php endforeach; ?>
                                 <?php endif; ?>
