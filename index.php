@@ -107,6 +107,10 @@ route("/statistic", function(){
     statistic();
 });
 
+route("/dashboard", function(){
+    dashboard();
+});
+
 
 set_meta();
 run();

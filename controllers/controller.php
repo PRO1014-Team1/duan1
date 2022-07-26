@@ -276,6 +276,19 @@ function comment_detail()
     ]);
 }
 
+function news()
+{
+    require_once 'models/database.php';
+
+    assets('user_header');
+    assets('news');
+    set_user_header();
+    view('/user/news', ["article_id" => $_GET['id'] ?? 0]);
+}
+
+
+// controller cho admin end
+
 function customer()
 {
     if (deny_access($_SESSION['role'])) {
@@ -368,12 +381,10 @@ function graph()
     ]);
 }
 
-function news()
-{
-    require_once 'models/database.php';
 
-    assets('user_header');
-    assets('news');
-    set_user_header();
-    view('/user/news', ["article_id" => $_GET['id'] ?? 0]);
+function dashboard(){
+    assets('admin_header');
+    assets('dashboard');
+    set_admin_header();
+    view('/admin/dashboard');
 }

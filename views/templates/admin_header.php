@@ -10,24 +10,32 @@
             <ul>
                 <li class="sidebar__item">
                     <a href="dashboard" class="sidebar__card" id="dashboard" data-active='false'>
-                        <i class="fa fa-home"></i>
+                        <i class="fas fa-clipboard">&nbsp;</i>
                         <span>Dashboard</span>
                     </a>
                 <li class="sidebar__item">
                     <a href="product" class="sidebar__card" id="product" data-active='false'>
-                        <i class="fa fa-shopping-bag"></i>
-                        <span>Sản phẩm</span>
+                        <i class="fa fa-shopping-bag">&nbsp;</i>
+                        <span>Hàng Hóa</span>
                     </a>
-                    <a>Hàng Hóa</a>
                 </li>
                 <li class="sidebar__item">
-                    <a href="category" class="sidebar__card" id="category" data-active='false'>Loại Hàng</a>
+                    <a href="category" class="sidebar__card" id="category" data-active='false'>
+                        <i class="fas fa-boxes">&nbsp;</i>
+                        <span>Loại Hàng</span>
+                    </a>
                 </li>
                 <li class="sidebar__item">
-                    <a href="customer" class="sidebar__card" id="customer" data-active='false'>Khách Hàng</a>
+                    <a href="customer" class="sidebar__card" id="customer" data-active='false'>
+                        <i class="fa fa-users">&nbsp;</i>
+                        <span>Khách Hàng</span>
+                    </a>
                 </li>
                 <li class="sidebar__item">
-                    <a href="comment" class="sidebar__card" id="comment" data-active='false'>Bình Luận</a>
+                    <a href="comment" class="sidebar__card" id="comment" data-active='false'>
+                        <i class="fa fa-comments">&nbsp;</i>
+                        <span>Bình Luận</span>
+                    </a>
                 </li>
                 <li class="sidebar__item">
                     <a href="statistic" class="sidebar__card" id="statistic" data-active='false'>Thống Kê</a>
