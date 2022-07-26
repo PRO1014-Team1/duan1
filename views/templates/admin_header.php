@@ -3,13 +3,22 @@
     <div class="admin-sidebar">
         <div class="sidebar-logo">
             <a href="home">
-                <img  src="public/img/logo.png" alt="Xshop Logo" />
+                <img src="public/img/logo.png" alt="Xshop Logo" />
             </a>
         </div>
         <div class="sidebar-menu">
             <ul>
                 <li class="sidebar__item">
-                    <a href="product" class="sidebar__card" id="product" data-active='false'>Hàng Hóa</a>
+                    <a href="dashboard" class="sidebar__card" id="dashboard" data-active='false'>
+                        <i class="fa fa-home"></i>
+                        <span>Dashboard</span>
+                    </a>
+                <li class="sidebar__item">
+                    <a href="product" class="sidebar__card" id="product" data-active='false'>
+                        <i class="fa fa-shopping-bag"></i>
+                        <span>Sản phẩm</span>
+                    </a>
+                    <a>Hàng Hóa</a>
                 </li>
                 <li class="sidebar__item">
                     <a href="category" class="sidebar__card" id="category" data-active='false'>Loại Hàng</a>

@@ -57,8 +57,7 @@ function login()
 
 function logout()
 {
-    set_user_header();
-    view('/user/logout');
+    $_SESSION = array();
 }
 
 function path_not_found()
@@ -101,6 +100,15 @@ function cart()
     set_user_header();
     assets('cart');
     view('/user/cart');
+}
+
+function checkout()
+{
+    require_once "models/product.php";
+    require_once "models/type.php";
+    set_user_header();
+    assets('checkout');
+    view('/user/checkout');
 }
 
 function profile()
