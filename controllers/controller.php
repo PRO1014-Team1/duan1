@@ -109,18 +109,17 @@ function checkout()
     require_once "models/product.php";
     require_once "models/type.php";
     require_once('models/database.php');
+    require_once('models/order.php');
 
     set_user_header();
     assets("<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css' integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO' crossorigin='anonymous'>");
-    assets('checkout');
 
-    $item = $_SESSION['cart'];
-    $cartItemCount = count($item);
+    $cart = $_SESSION['cart'];
+    $cartItemCount = count($cart);
     $total = 0;
     view('/user/checkout', [
-        'item' => $item,
+        'cart' => $cart,
         'cartItemCount' => $cartItemCount,
-        'total' => $total
     ]);
 }
 

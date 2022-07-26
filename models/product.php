@@ -8,15 +8,18 @@ function get_product($product_id = null)
     if($product_id != null)
     {
         $sql .= " HAVING `product`.`product_id` = $product_id";
+        $data = pdo_query_once($sql);
     }
-    $data = pdo_query($sql);
+    else {
+        $data = pdo_query($sql);
+    }
     return $data;
 }
 
 function get_product_count()
 {
     $sql = "SELECT COUNT(*) AS count FROM `product`";
-    $data = pdo_execute($sql);
+    $data = pdo_query_once($sql);
     return $data['count'];
 }
 

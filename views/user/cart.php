@@ -34,7 +34,7 @@ if (isset($_POST['submit'])) {
                                 <?php if ($cart) : ?>
                                     <?php foreach ($cart as $item) : ?>
                                         <?php
-                                        $product = get_product($item['id'])[0];
+                                        $product = get_product($item['id']);
                                         $type = get_type_data($product['product_id'])[0];
                                         $min = 1;
                                         $max = $type['quantity'];

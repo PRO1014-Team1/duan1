@@ -82,7 +82,7 @@
                             <?php if ($cart_total) : ?>
                                 <?php foreach ($_SESSION['cart'] as $cart_item) : ?>
                                     <?php
-                                    $product = get_product($cart_item['id'])[0];
+                                    $product = get_product($cart_item['id']);
                                     $type = get_type_data($product['product_id']);
                                     ?>
                                     <li class="nav__item">

@@ -6,6 +6,9 @@ if ($cart = $_POST['cart-id'] ?? false) {
         alert("Bạn cần phải đăng nhập để sử dụng chức năng này!");
     } else {
         alert("Thêm vào giỏ hàng thành công!");
+        if(!isset($_SESSION['cart'])) {
+            $_SESSION['cart'] = [];
+        }
         $added_product = $_SESSION['cart'][$cart] ?? false;
         //nếu đã có trong giỏ hàng thì + thêm số lượng
         if ($added_product) {
