@@ -1,5 +1,9 @@
 /* bad practice */
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans&family=Montserrat&display=swap');
+@font-face {
+  font-family: "IBM Plex";
+  src: url('./font/IBMPlexSerif-Regular.ttf') format('ttf');
+}
 
 :root {
   --primary-h: 203;
@@ -45,6 +49,7 @@
   --line-500: #c4c4c4;
   --font-main: "Montserrat", sans-serif;
   --font-secondary: "Fira Sans", sans-serif;
+  --font-supplementary: "IBM Plex", serif;
 }
 
 .btn--primary-o,
