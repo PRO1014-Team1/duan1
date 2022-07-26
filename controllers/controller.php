@@ -106,6 +106,9 @@ function checkout()
 {
     require_once "models/product.php";
     require_once "models/type.php";
+    
+    require_once('models/database.php');    
+    require_once('./models/helpers.php');  
     set_user_header();
     assets('checkout');
     view('/user/checkout');

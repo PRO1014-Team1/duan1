@@ -58,7 +58,7 @@ if (isset($_POST['submit'])) {
                                                     <input class="quantity__idicator" type="number" name="quantity[]" min="<?= $min ?>" max="<?= $max ?>" step="1" value="<?= $item['quantity'] ?>">
                                                 </div>
                                             </td>
-                                            <input type="number" name="price[]" value="<?= $product['price'] ?>">
+                                         
                                         </tr>
                                     <?php endforeach; ?>
                                 <?php endif; ?>
