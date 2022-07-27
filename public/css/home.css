@@ -238,7 +238,6 @@
     font-weight: 700;
     text-align: center;
     transform: translateY(-50%);
-    transition: all 0.35s cubic-bezier(0.46, -0.35, 0.44, 1.15);
     z-index: 10;
     color: white;
     background-color: var(--primary-300);
@@ -250,13 +249,15 @@
 .prod-item__price:focus,
 .prod-item__discount:hover,
 .prod-item__discount:focus {
+    transition: all 0.35s cubic-bezier(0.46, -0.35, 0.44, 1.15);
     background-color: white;
     color: var(--primary);
 }
 
 .prod-item__price.scratched {
-    background-color: var(--primary-500);
-    color: var(--primary-300);
+    background-color: transparent;
+    border: 1px solid var(--primary-500);
+    color: var(--primary-500);
 }
 
 .prod-item__price.scratched:hover {

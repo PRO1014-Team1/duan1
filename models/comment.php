@@ -7,16 +7,11 @@ function get_comment()
     return $data;
 }
 
-
-function get_comment_count($cond = null)
+function add_comment($name, $product, $content)
 {
-    $sql = "SELECT COUNT(*) AS count FROM `comment`";
-    if ($cond) {
-        $sql .= " WHERE $cond";
-    }
-    $data = pdo_query($sql);
-
-    return $data[0]['count'];
+    $sql = "INSERT INTO `comment`(`content`, `username`, `product_id`, `date`) VALUES (?, ?, ?, ?)";
+    $data = pdo_execute($sql, $content, $name, $product, date('Y-m-d H:i:s'));
+    return $data;
 }
 
 function get_comment_time($id, $order)

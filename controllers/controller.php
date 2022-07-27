@@ -64,21 +64,31 @@ function detail()
     require_once 'models/comment.php';
     require_once 'models/type.php';
 
-    $id = $_GET['id'] ?? 0;
-    $category = $_GET['category'] ?? false;
-    $product = get_product($id);
-    $comments = item_sort(item_filter(get_comment(), "product_id", $_GET["id"] ?? 0), 'date', 1);
-    $type = get_type_data($product['product_id']);
-    $comment_count = get_comment_count("product_id", $id);
-    $view = get_view($id);
+
+    $product_id = $_GET['id'] ?? 0;
+    $category_id = $_GET['category'] ?? false;
+    $cart_id = $_POST['cart-id'] ?? false;
+    $type_id = $_GET['type_id'] ?? false;
+    $user = get_username();
+    $types = get_type_data($product_id);
+    $focus_product = false;
+    $product = get_product($product_id);
+    $comments = item_filter(get_comment(), "product_id", $product_id);
+    $comment_count = count($comments);
+    $view = get_view($product_id);
     $top_9_prod = item_sort(item_truncate(get_product(), 9), "view", 1);
 
     set_user_header();
     assets('detail');
     view('/user/detail', [
-        'id' => $id,
-        'category' => $category,
+        'product_id' => $product_id,
+        'category_id' => $category_id,
+        'cart_id' => $cart_id,
+        'type_id' => $type_id,
+        'user' => $user,
         'product' => $product,
+        'focus_product' => $focus_product,
+        'types' => $types,
         'comments' => $comments,
         'comment_count' => $comment_count,
         'view' => $view,

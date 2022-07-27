@@ -1,12 +1,10 @@
 <?php
-
-
 if ($cart = $_POST['cart-id'] ?? false) {
     if (!isset($_SESSION['username'])) {
         alert("Bạn cần phải đăng nhập để sử dụng chức năng này!");
     } else {
         alert("Thêm vào giỏ hàng thành công!");
-        if(!isset($_SESSION['cart'])) {
+        if (!isset($_SESSION['cart'])) {
             $_SESSION['cart'] = [];
         }
         $added_product = $_SESSION['cart'][$cart] ?? false;
@@ -147,7 +145,6 @@ if (strcmp($category_filter, "all")) {
                         <?php
                         $view = get_view($prod["product_id"]);
                         $type_arr = get_type_data($prod["product_id"]);
-                        $comment = get_comment_count("`product_id` = {$prod['product_id']}");
 
                         if ($type_arr) {
                             $type_data = $type_arr[0];
@@ -163,7 +160,7 @@ if (strcmp($category_filter, "all")) {
                             <a href="detail?id=<?= $prod['product_id'] ?>&category=<?= $prod['category_id'] ?>" class="prod-link">
                                 <div class="prod-item__img-wrapper">
                                     <img class="img-fluid prod-item__img" src="<?= $prod["image"] ?>" alt="" />
-                                    
+
                                     <div class="widget">
                                         <form method="POST" class="cart-submit">
                                             <input type="hidden" name="cart-id" value="<?= $prod['product_id'] ?>">
@@ -173,8 +170,8 @@ if (strcmp($category_filter, "all")) {
                                         <i class="fas fa-eye prod-item__view prod-item__icon">
                                             <span><?= $view; ?></span>
                                         </i>
-                                        <i class="fas fa-comment prod-item__comment prod-item__icon">
-                                            <span><?= $comment; ?></span>
+                                        <i class="fas fa-headphones prod-item__comment prod-item__icon">
+                                            <span>1</span>
                                         </i>
                                         <i class="fas fa-star prod-item__rating prod-item__icon">
                                             <span>1</span>
@@ -205,13 +202,13 @@ if (strcmp($category_filter, "all")) {
                                         <?php endif; ?>
                                         <?php if (isset($type_data)) : ?>
                                             <?php if ($discount) : ?>
-                                                <span class="prod-item__discount-percentage">x%</span>
+                                                <span class="prod-item__discount-percentage">-<?= $type_data['sale'] * 100 ?>%</span>
                                             <?php endif; ?>
                                         <?php endif; ?>
                                     </div>
                                 </div>
                             </a>
-                            
+
                         </div>
                     <?php } ?>
                 </div>

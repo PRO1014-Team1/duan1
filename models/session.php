@@ -6,6 +6,7 @@ function set_session()
         session_start();
     }
     $_SESSION['identity'] = $_SERVER['REMOTE_ADDR']; // IP address
+    $_SESSION['errors'] = [];
 }
 
 function get_role()

@@ -22,6 +22,9 @@ function pdo_connect()
 function pdo_execute($sql)
 {
     $sql_vals = array_slice(func_get_args(), 1);
+    if(!is_array($sql_vals)){
+        $sql_vals = array($sql_vals);
+    }
     try {
         $conn = pdo_connect();
         $stmt = $conn->prepare($sql);

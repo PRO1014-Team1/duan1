@@ -1,8 +1,11 @@
 <?php
 
-function get_type_data($product_id)
+function get_type_data($product_id, $type_id = null)
 {
    $sql = "SELECT * FROM type_detail WHERE `product_id` = ?";
+   if($type_id) {
+      $sql .= " AND `type_id` = ?";
+   }
    $data = pdo_query($sql, [$product_id]);
    return $data;
 }

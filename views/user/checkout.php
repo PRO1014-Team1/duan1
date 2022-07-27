@@ -116,7 +116,7 @@ if (isset($_POST['submit'])) {
     <div class="col-md-8 order-md-1">
       <h4 class="mb-3">Thông tin khách hàng</h4>
       <?php
-      if (isset($_SESSION['errors'])) {
+      if (count($_SESSION['errors']) > 0) {
         foreach ($_SESSION['errors'] as $error) {
           echo '<div class="alert alert-danger">' . $error . '</div>';
         }
