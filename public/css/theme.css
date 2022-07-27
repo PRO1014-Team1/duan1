@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans&family=Montserrat&display=swap');
 
 :root {
-  --primary-h: 203;
+  /* --primary-h: 203;
   --primary-s: 40%;
   --primary-l: 67%;
   --light: 15%;
@@ -27,7 +27,15 @@
     var(--primary-h),
     var(--primary-s),
     calc(var(--primary-l) + var(--light) * 2)
-  );
+  ); */
+
+  --primary: hsl(0, 0%, 0%);
+  --primary-100: hsl(0, 0%, 10%);
+  --primary-300: hsl(0, 0%, 20%);
+  --primary-500: hsl(0, 0%, 45%);
+  --primary-700: hsl(0, 0%, 60%);
+
+  --accent: hsl(194, 73%, 38%);
 
   --error: hsl(
     0,
@@ -50,13 +58,13 @@
 .btn--primary-o,
 .btn--primary-a:hover {
   color: var(--primary-100);
-  border: 1px solid var(--primary);
+  border: 1px solid var(--primary-100);
 }
 
 .btn--primary-o:hover,
 .btn--primary-a:active,
 .btn--primary {
-  background: var(--primary);
+  background: var(--primary-100);
   color: #fff;
 }
 

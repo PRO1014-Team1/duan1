@@ -33,7 +33,10 @@ if (strcmp($category_filter, "all")) {
 <div class="container">
     <div class="banner-container">
         <div class="row grid mx-auto">
-            <div class="col col-10-6 grid m-2">
+            <div class="col grid row-span-2 m-2">
+                <img class="img-fluid" src="/db/product/cd8dc2a6fd2da18eb47890548a917d0c.jpg" alt="" />
+            </div>
+            <div class="col grid m-2">
                 <!-- banner -->
                 <div class="slider">
                     <div class="slide">
@@ -61,7 +64,7 @@ if (strcmp($category_filter, "all")) {
                 </div>
                 <!-- end banner -->
             </div>
-            <div class="col col-2-2 grid">
+            <div class="col grid col-4 m-2">
                 <!-- top 4 products -->
                 <?php foreach ($popular_products_top_4 as $top_4_product) { ?>
                     <div class="top-4-prod">
@@ -80,7 +83,6 @@ if (strcmp($category_filter, "all")) {
                 <!-- category list -->
                 <div class="category">
                     <h2 class="title">Danh mục</h2>
-
                     <!-- dùng form radio làm danh sách danh mục -->
                     <form action="" method="GET" class="category-list">
                         <div class="form-check">
@@ -118,10 +120,10 @@ if (strcmp($category_filter, "all")) {
                 <!-- top 10 product list -->
                 <div class="top-10-prod">
                     <h2 class="title">Top 10 ưa chuộng</h2>
-                    <div class="top-10-prod__list col-2-2 grid ">
+                    <div class="top-10-prod__list col-2-2 grid">
                         <?php foreach ($popular_products_top_10 as $top_10_product) { ?>
                             <div class="top-10-prod__item">
-                                <a href="detail?id=<?= $top_10_product["product_id"] ?>&category=<?= $top_10_product["category_id"] ?>" class="hover-mask" data-content="<?= $top_10_product["name"] ?>">
+                                <a class="hover-mask" href="detail?id=<?= $top_10_product["product_id"] ?>&category=<?= $top_10_product["category_id"] ?>" data-content="<?= $top_10_product["name"] ?>">
                                     <img class="img-fluid top-10-prod__img" src="<?= $top_10_product["image"] ?>" alt="<?= $top_10_product["name"] ?>" />
                                 </a>
                             </div>
@@ -155,17 +157,9 @@ if (strcmp($category_filter, "all")) {
                         ?>
                         <div class="prod-item">
                             <a href="detail?id=<?= $prod['product_id'] ?>&category=<?= $prod['category_id'] ?>" class="prod-link">
-                                <div class="text-wrapper theme--dark">
-                                    <h3 class="prod-item__name truncate"><?= $prod["name"] ?></h3>
-                                </div>
                                 <div class="prod-item__img-wrapper">
                                     <img class="img-fluid prod-item__img" src="<?= $prod["image"] ?>" alt="" />
-                                    <?php if (isset($type_data)) : ?>
-                                        <span class="prod-item__price <?= $discount ? 'scratched' : '' ?> "><?= asvnd($price) ?></span>
-                                        <?php if ($discount) : ?>
-                                            <span class="prod-item__discount"><?= asvnd($discount) ?></span>
-                                        <?php endif; ?>
-                                    <?php endif; ?>
+                                    
                                     <div class="widget">
                                         <form method="POST" class="cart-submit">
                                             <input type="hidden" name="cart-id" value="<?= $prod['product_id'] ?>">
@@ -183,7 +177,37 @@ if (strcmp($category_filter, "all")) {
                                         </i>
                                     </div>
                                 </div>
+                                <!-- <ul class="prod-item__tag-list">
+                                    <?php if (isset($type_data)) : ?>
+                                        <?php if ($discount) : ?>
+                                            <li class="prod-item__tag prod-item__discount-percentage">x%</li>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+
+                                    <li class="prod-item__tag prod-item__discount-percentage">
+                                        <i class="fas fa-eye"></i>
+                                    </li>
+                                </ul> -->
+                                <div class="prod-item__desc">
+                                    <div class="text-wrapper">
+                                        <h3 class="prod-item__name truncate"><?= $prod["name"] ?></h3>
+                                    </div>
+                                    <div class="prod-item__price-wrapper">
+                                        <span class="prod-item__price <?= $discount ? 'scratched' : '' ?> "><?= asvnd($price) ?></span>
+                                        <?php if (isset($type_data)) : ?>
+                                            <?php if ($discount) : ?>
+                                                <span class="prod-item__discount"><?= asvnd($discount) ?></span>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                        <?php if (isset($type_data)) : ?>
+                                            <?php if ($discount) : ?>
+                                                <span class="prod-item__discount-percentage">x%</span>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
                             </a>
+                            
                         </div>
                     <?php } ?>
                 </div>
