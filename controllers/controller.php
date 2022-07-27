@@ -301,6 +301,39 @@ function news()
     view('/user/news', ["article_id" => $_GET['id'] ?? 0]);
 }
 
+function library()
+{
+    require_once 'models/database.php';
+    require_once 'models/order.php';
+    require_once 'models/product.php';
+    require_once 'models/type.php';
+
+    assets('user_header');
+    assets('library');
+    assets('<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">');
+    assets('<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">');
+    assets('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">');
+
+    set_user_header();
+    view('/user/library');
+}
+
+function readbook()
+{
+    require_once 'models/database.php';
+    require_once 'models/order.php';
+    require_once 'models/product.php';
+    require_once 'models/type.php';
+
+    assets('user_header');
+    assets('readbook');
+    // assets('<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">');
+    // assets('<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">');
+    assets('<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.14.305/build/pdf.min.js"></script>');
+
+    set_user_header();
+    view('/user/readbook');
+}
 
 // controller cho admin end
 

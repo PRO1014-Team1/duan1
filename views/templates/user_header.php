@@ -21,6 +21,9 @@
                                     <p class="text-dark"><?= get_username() ?></p>
                                 </div>
                                 <li class="nav__item">
+                                    <a href="library" class="nav__link nav__link--main block link-dark text-dark">Thư viện cá nhân</a>
+                                </li>
+                                <li class="nav__item">
                                     <a href="profile" class="nav__link nav__link--main block link-dark text-dark">Cập nhật tài khoản</a>
                                 </li>
                                 <li class="nav__item t-center">
@@ -33,7 +36,7 @@
                         <div class="nav__dropdown fadeIn ts-2 hidden" id="dd-2">
                             <ul class="nav__list">
                                 <div class="nav__menu__user__avatar">
-                                    <img src="<?= $_SESSION['avatar'] ?? './public/img/default-' . rand(1, 4) . '.webp' ?>" class="img-fluid user-avatar" alt="User Avatar" />
+                                    <img src="<?= $_SESSION['avatar']?>" class="img-fluid user-avatar" alt="User Avatar" />
                                 </div>
                                 <div class="nav__menu__user__name">
                                     <p><?= get_username() ?></p>

@@ -167,13 +167,13 @@ if (strcmp($category_filter, "all")) {
                                             <button class="cart-action"><i class="fas fa-shopping-cart prod-item__cart prod-item__icon"></i></button>
                                             <button class="cart-action__confirm hidden"></button>
                                         </form>
-                                        <i class="fas fa-eye prod-item__view prod-item__icon">
+                                        <i class="far fa-eye prod-item__view prod-item__icon">
                                             <span><?= $view; ?></span>
                                         </i>
-                                        <i class="fas fa-headphones prod-item__comment prod-item__icon">
-                                            <span>1</span>
+                                        <i class="far fa-heart prod-item__comment prod-item__icon">
+                                        <span>&nbsp;</span>
                                         </i>
-                                        <i class="fas fa-star prod-item__rating prod-item__icon">
+                                        <i class="far fa-star prod-item__rating prod-item__icon">
                                             <span>1</span>
                                         </i>
                                     </div>

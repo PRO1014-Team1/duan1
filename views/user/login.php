@@ -8,7 +8,7 @@ if (isset($_POST['login'])) {
     if ($user = validate_login($username, $password)) {
         $_SESSION['username'] = $user['username'];
         $_SESSION['role'] = $user['role'];
-        $_SESSION['avatar'] = $user['avatar'] != "" ? $user['avatar'] : './content/img/default-' . rand(1, 4) . '.webp';
+        $_SESSION['avatar'] = $user['avatar'] != "" ? $user['avatar'] : './public/img/default-' . rand(1, 4) . '.webp';
         $_SESSION['identity'] = $user['identity'];
 
         redirect('home');

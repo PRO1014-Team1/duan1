@@ -6,7 +6,7 @@ if ($type_id) {
 }
 
 if ($cart_id) {
-    if (get_username()) {
+    if (!get_username()) {
         alert("Bạn cần phải đăng nhập để sử dụng chức năng này!");
     } else {
         alert("Thêm vào giỏ hàng thành công!");
@@ -26,7 +26,7 @@ if ($cart_id) {
                 "type_id" => $_GET['type_id'],
             ];
         }
-        if ($_POST['checkout']) {
+        if ($_POST['checkout'] ?? false) {
             redirect("cart");
         }
     }

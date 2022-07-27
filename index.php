@@ -111,6 +111,14 @@ route("/dashboard", function(){
     dashboard();
 });
 
+route("/library", function(){
+    library();
+});
+
+route("/readbook", function(){
+    readbook();
+});
+
 
 set_meta();
 run();

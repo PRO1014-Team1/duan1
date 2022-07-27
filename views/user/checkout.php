@@ -11,6 +11,7 @@ if (isset($_POST['submit'])) {
     'address' => $_POST['address'],
     'note' => $_POST['note'],
   ]);
+  
   if ($order_info) {
     $sql = "INSERT INTO order_info (order_id, username, first_name, last_name, email, phone, address, note, created_date, updated_date, total_price, order_status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 
@@ -33,6 +34,7 @@ if (isset($_POST['submit'])) {
 
       $product = get_product($item['id']);
       $type = get_type_data($product['product_id'])[0];
+      $type_id = $item['type_id'] ?? null;
       $price = discount($type['price'], $type['sale']); // đã bao gồm phần giảm giá
       $subtotal = $price * $item['quantity'];
       $total += $subtotal;
@@ -47,13 +49,14 @@ if (isset($_POST['submit'])) {
       $order_detail = [
         'order_id' => $order_info['order_id'],
         'product_id' => $item['id'],
+        'type_id' => $type_id,
         'quantity' => $item['quantity'],
         'price' =>  $price,
         'status' => $product_status,
         'total' =>  $subtotal
       ];
 
-      $sql = "INSERT INTO order_detail (order_id, product_id, quantity, price, status, total) VALUES (?,?,?,?,?,?)";
+      $sql = "INSERT INTO order_detail (order_id, product_id, type_id, quantity, price, status, total) VALUES (?,?,?,?,?,?,?)";
       $result = pdo_execute($sql, ...array_values($order_detail));
     }
 

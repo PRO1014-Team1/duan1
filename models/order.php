@@ -76,3 +76,15 @@ function generate_order_id()
     $code = 'ORD' . date('YmdHis');
     return $code;
 }
+
+function get_user_order($user_id){
+    $sql = "SELECT * FROM order_info WHERE `username` = ?";
+    $result = pdo_query($sql, [$user_id]);
+    return $result;
+}
+
+function get_order_detail($order_id){
+    $sql = "SELECT * FROM order_detail WHERE `order_id` = ?";
+    $result = pdo_query($sql, [$order_id]);
+    return $result;
+}
