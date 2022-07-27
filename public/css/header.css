@@ -43,6 +43,22 @@
   border-bottom: 0.5px solid var(--line);
 }
 
+.nav__link--main{
+  gap: 0.5rem;
+}
+
+.nav__link__wrapper span {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+  background: black;
+  padding: 0 0.75rem;
+}
+
+.nav__link__wrapper p {
+  font-size: .9rem;
+}
+
 .nav__link--main:hover {
   color: white;
   background: var(--primary-500);
@@ -100,8 +116,8 @@
 }
 
 .thumbnail {
-  --size: 50px;
-  object-fit: cover;
+  --size: 80px;
+  object-fit: fit;
   width: var(--size);
   height: var(--size);
 }

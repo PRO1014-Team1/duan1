@@ -5,7 +5,7 @@ function validate_login($username, $password)
 {
     $username = input_clean($username);
     $password = input_clean($password);
-    $user = pdo_execute('SELECT * FROM users WHERE username = ?', [$username]);
+    $user = pdo_query_once('SELECT * FROM users WHERE username = ?', [$username]);
 
     if (!$user) {
         return false;
@@ -29,7 +29,7 @@ function validate_register($data)
     }
     if (empty($data['username'])) {
         $errors['username'] = 'Tên đăng nhập không được để trống';
-    } else if (pdo_execute('SELECT * FROM users WHERE username = ?', [$data['username']])) {
+    } else if (pdo_query_once('SELECT * FROM users WHERE username = ?', [$data['username']])) {
         $errors['username'] = 'Tên đăng nhập đã tồn tại';
     } else if (!preg_match('/^[a-zA-Z0-9_]+$/', $data['username'])) {
         $errors['username'] = 'Tên đăng nhập không hợp lệ';
@@ -38,7 +38,7 @@ function validate_register($data)
     if ($data['email']) {
         if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
             $errors['email'] = 'Email không hợp lệ';
-        } else if (pdo_execute('SELECT * FROM users WHERE email = ?', [$data['email']])) {
+        } else if (pdo_query_once('SELECT * FROM users WHERE email = ?', [$data['email']])) {
             $errors['email'] = 'Email đã tồn tại';
         }
     }

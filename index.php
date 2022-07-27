@@ -30,10 +30,15 @@ route("/login", function(){
 
 route("/logout", function(){
     logout();
+    home();
 });
 
 route("/cart", function(){
     cart();
+});
+
+route("/checkout", function(){
+    checkout();
 });
 
 route("/detail", function(){
@@ -100,6 +105,10 @@ route("/graph", function(){
 
 route("/statistic", function(){
     statistic();
+});
+
+route("/dashboard", function(){
+    dashboard();
 });
 
 

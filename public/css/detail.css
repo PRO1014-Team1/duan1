@@ -1,22 +1,64 @@
+.return {
+  margin: 4rem 5rem;
+  padding: 0.5rem 1rem;
+  display: inline-block;
+}
+
+.return:hover {
+  cursor: pointer;
+  transform: translateX(-20px);
+  transition: all 0.4s cubic-bezier(0.41, 1.62, 0.76, 1.21);
+}
+
 .product-hero {
   width: 85vw;
-  height: 55vh;
   position: relative;
-  overflow: hidden;
-  grid-template-columns: 1fr 1fr;
-  margin-top: 10rem;
+  grid-template-columns: 0.3fr 0.7fr;
+  gap: 2rem;
+  align-items: center;
+  margin-top: 5rem;
   border-radius: 10px;
 }
 
 .product-hero__info {
-  padding: 1rem;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  color: white;
+}
+
+.product-hero__image img {
+  width: 100%;
+  height: auto;
+}
+
+.product-hero__info::before {
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 100%;
+  /* boostrap dark color */
+  background: #292b2c;
+
+  transform-origin: right center;
+  transform: scale(1.4, 1.35);
+  z-index: -1;
+}
+
+.product-hero__author {
+  color: var(--line-500);
+  text-align: center;
+  font-size: 1rem;
+  font-weight: light;
+  font-family: var(--font-secondary);
 }
 
 .product-hero__info h1 {
   font-size: 2.5rem;
   font-weight: bold;
   width: 80%;
-  font-family: var(--font-main);
+  font-family: "IBM Plex";
+  margin: 1rem 0;
 }
 
 .product-hero__id {
@@ -30,6 +72,9 @@
   font-weight: 400;
 }
 
+.product-hero__image img {
+  z-index: 10;
+}
 .product-hero__view-item {
   position: relative;
   border-radius: 50%;
@@ -39,36 +84,55 @@
   cursor: pointer;
 }
 
+.product-hero__info__badges {
+  gap: 2.5rem;
+  text-align: center;
+  flex-direction: row;
+}
+
+.product__badges {
+  font-size: 0.825rem;
+  color: #fff;
+}
+.product__badges span {
+  font-weight: bold;
+  font-family: var(--font-main);
+}
+
+.variant-btn {
+  font-size: 1rem;
+  font-family: var(--font-main);
+  text-transform: capitalize;
+  font-weight: bold;
+  color: white;
+  margin: 2rem 2rem 2rem 0;
+}
+
+.variant-price {
+  color: #292b2c;
+  background: white;
+  display: inline-block;
+}
+
+.variant-price,
+.variant-name {
+  cursor: pointer;
+  border: 1px solid white;
+  height: 100%;
+  font-family: var(--font-main);
+  font-weight: bold;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+
+
 .product-hero__desc {
   font-size: 1rem;
   font-weight: 400;
   line-height: 150%;
   font-family: var(--font-secondary);
   margin: 1rem 0;
-}
-
-.tooltip::after {
-  opacity: 0;
-  z-index: -1;
-  content: attr(data-tooltip);
-  transition: opacity 275ms ease-in-out;
-  position: absolute;
-  top: -1rem;
-  transform: translate(-50%, -50%);
-  font-size: 0.8125rem;
-  font-family: var(--font-main);
-  background: rgba(0, 0, 0, 0.8);
-  text-align: center;
-  padding: 0.25rem 1rem;
-}
-
-.tooltip:hover::after {
-  opacity: 1;
-  z-index: 1;
-}
-
-.btn-back {
-  text-align: right;
 }
 
 .other-section {
@@ -232,7 +296,7 @@
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   grid-auto-rows: 1fr;
-  gap: .5rem;
+  gap: 0.5rem;
 }
 
 .top-9-prod__item {

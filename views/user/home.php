@@ -6,15 +6,18 @@ if ($cart = $_POST['cart-id'] ?? false) {
         alert("Bạn cần phải đăng nhập để sử dụng chức năng này!");
     } else {
         alert("Thêm vào giỏ hàng thành công!");
+        if(!isset($_SESSION['cart'])) {
+            $_SESSION['cart'] = [];
+        }
         $added_product = $_SESSION['cart'][$cart] ?? false;
         //nếu đã có trong giỏ hàng thì + thêm số lượng
         if ($added_product) {
-            $_SESSION['cart'][$cart]['amount']++;
+            $_SESSION['cart'][$cart]['quantity']++;
         } else {
             $_SESSION['cart'][$cart] = [
                 "id" => $_POST['cart-id'],
-                "user" => $_SESSION['username'],
                 "status" => "pending",
+                "quantity" => 1,
             ];
         }
         redirect("home");
@@ -150,6 +153,7 @@ if (strcmp($category_filter, "all")) {
                             $type_data = $type_arr[0];
                             $price = $type_data["price"];
                             $discount = discount($type_data["price"], $type_data['sale']);
+                            $discount = $discount === $price ? 0 : $discount;
                             $quantity = $type_data["quantity"];
                         }
 

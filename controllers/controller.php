@@ -5,15 +5,6 @@ require_once "lib/session.php";
 require_once "lib/template.php";
 require_once "role.php";
 
-// function hang_hoa_index()
-// {
-//     require_once "models/product.php";
-
-//     set_user_header();
-//     $hang_hoa = hang_hoa_all();
-//     view('/user/hang_hoa_index', ['hang_hoa' => $hang_hoa]);
-// }
-
 function home()
 {
     require_once "models/product.php";
@@ -57,8 +48,7 @@ function login()
 
 function logout()
 {
-    set_user_header();
-    view('/user/logout');
+    $_SESSION = array();
 }
 
 function path_not_found()
@@ -70,13 +60,15 @@ function path_not_found()
 
 function detail()
 {
-    require_once './models/product.php';
-    require_once './models/comment.php';
+    require_once 'models/product.php';
+    require_once 'models/comment.php';
+    require_once 'models/type.php';
 
     $id = $_GET['id'] ?? 0;
     $category = $_GET['category'] ?? false;
-    $product = pdo_query('SELECT * FROM `product` WHERE `id` = ?', [$id]);
+    $product = get_product($id);
     $comments = item_sort(item_filter(get_comment(), "product_id", $_GET["id"] ?? 0), 'date', 1);
+    $type = get_type_data($product['product_id']);
     $comment_count = get_comment_count("product_id", $id);
     $view = get_view($id);
     $top_9_prod = item_sort(item_truncate(get_product(), 9), "view", 1);
@@ -96,9 +88,32 @@ function detail()
 
 function cart()
 {
+    require_once "models/product.php";
+    require_once "models/type.php";
+
+    $cart = $_SESSION['cart'] ?? null;
     set_user_header();
     assets('cart');
-    view('/user/cart');
+    view('/user/cart', ['cart' => $cart]);
+}
+
+function checkout()
+{
+    require_once "models/product.php";
+    require_once "models/type.php";
+    require_once('models/database.php');
+    require_once('models/order.php');
+
+    set_user_header();
+    assets("<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css' integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO' crossorigin='anonymous'>");
+
+    $cart = $_SESSION['cart'];
+    $cartItemCount = count($cart);
+    $total = 0;
+    view('/user/checkout', [
+        'cart' => $cart,
+        'cartItemCount' => $cartItemCount,
+    ]);
 }
 
 function profile()
@@ -266,6 +281,19 @@ function comment_detail()
     ]);
 }
 
+function news()
+{
+    require_once 'models/database.php';
+
+    assets('user_header');
+    assets('news');
+    set_user_header();
+    view('/user/news', ["article_id" => $_GET['id'] ?? 0]);
+}
+
+
+// controller cho admin end
+
 function customer()
 {
     if (deny_access($_SESSION['role'])) {
@@ -358,12 +386,11 @@ function graph()
     ]);
 }
 
-function news()
-{
-    require_once 'models/database.php';
 
-    assets('user_header');
-    assets('news');
-    set_user_header();
-    view('/user/news', ["article_id" => $_GET['id'] ?? 0]);
+function dashboard()
+{
+    assets('admin_header');
+    assets('dashboard');
+    set_admin_header();
+    view('/admin/dashboard');
 }

@@ -25,9 +25,8 @@ function pdo_execute($sql)
     try {
         $conn = pdo_connect();
         $stmt = $conn->prepare($sql);
-        $stmt->execute(...$sql_vals);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $result;
+        $stmt->execute($sql_vals);
+        return true;
     } catch (PDOException $e) {
         echo "<br>" . "Execution failed: " . $e->getMessage();
     } finally {
@@ -45,7 +44,7 @@ function pdo_query($sql, $params = null)
     try {
         $stmt = $conn->prepare($sql);
         $stmt->execute($params);
-        $rows = $stmt->fetchAll(    );
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         return $rows;
     } catch (PDOException $e) {
