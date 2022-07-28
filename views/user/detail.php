@@ -57,7 +57,10 @@ if (isset($_POST['comment'])) {
     <main class="product-hero grid mx-auto">
         <div class="product-hero__wrapper">
             <div class="product-hero__image">
-                <img src="<?= $product['image'] ?>" alt="">
+                
+                <a href="#">
+                <img src="<?= $product['image'] ?>">
+                </a>
             </div>
         </div>
         <div class="product-hero__info">
