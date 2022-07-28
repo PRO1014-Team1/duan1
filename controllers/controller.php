@@ -298,8 +298,7 @@ function news()
 
     assets('user_header');
     assets('news');
-    set_user_header();
-    view('/user/news', ["article_id" => $_GET['id'] ?? 0]);
+    view('/user/news');
 }
 
 function library()

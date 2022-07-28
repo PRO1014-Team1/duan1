@@ -1,7 +1,7 @@
 window.addEventListener("load", function () {
   pdfjsLib.GlobalWorkerOptions.workerSrc =
     "https://cdn.jsdelivr.net/npm/pdfjs-dist@2.14.305/build/pdf.worker.js";
-  var loadingTask = pdfjsLib.getDocument("/db/book/ .pdf");
+  var loadingTask = pdfjsLib.getDocument("/db/book/test.pdf");
   let doc = "/db/book/test.pdf";
   let currentPageIndex = 1;
   let pageMode = 1;

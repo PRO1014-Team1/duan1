@@ -29,7 +29,7 @@ function translate_status($status)
                     <div class="col-auto">
                         <h6 class="color-1 mb-0 change-color">Biên nhận</h6>
                     </div>
-                    <div class="col-auto  "> <small>Số đơn hàng</small> </div>
+                    <div class="col-auto"> </div>
                 </div>
                 <div class="row">
                     <div class="col">
@@ -48,6 +48,7 @@ function translate_status($status)
                                     $type = get_type_data($product['product_id'])[0];
                                 }
                                 ?>
+                                <small>Số đơn hàng <?= $order_id ?></small>
                                 <div class="card card-2">
                                     <div class="card-body">
                                         <div class="media">

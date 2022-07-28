@@ -133,3 +133,8 @@ h2 {
 .border-line {
     border-right: 1px solid rgb(226, 206, 226)
 }
+
+
+.card-2 {
+    margin-bottom: 2.5rem;
+}

@@ -1,5 +1,5 @@
 <?php
-
+$article_id = $_GET['id'] ?? null;
 function get_article($article_id)
 {
     $path = "./views/articles/{$article_id}.html";
