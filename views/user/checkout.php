@@ -11,7 +11,7 @@ if (isset($_POST['submit'])) {
     'address' => $_POST['address'],
     'note' => $_POST['note'],
   ]);
-  
+
   if ($order_info) {
     $sql = "INSERT INTO order_info (order_id, username, first_name, last_name, email, phone, address, note, created_date, updated_date, total_price, order_status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 
@@ -91,14 +91,16 @@ if (isset($_POST['submit'])) {
         foreach ($_SESSION['cart'] as $item) {
           $product = get_product($item['id']);
           $type = get_type_data($product['product_id'])[0];
-          $display_total += $type['price'] * $item['quantity'];
+          $display_total += discount($type['price'] * $item['quantity'], $type['sale']);
         ?>
           <li class="list-group-item d-flex justify-content-between lh-condensed">
             <div>
               <h6 class="my-0"><?php echo $product['name'] ?></h6>
-              <small class="text-muted">Số lượng: <?php echo $item['quantity'] ?> Giá: <?= asvnd($type['price']) ?></small>
+              <small class="text-muted">Số lượng: <?php echo $item['quantity'] ?> Giá: <?= asvnd(discount($type['price'], $type['sale'])) ?></small>
+              <small class="text-muted">Giảm: <?= ($type['sale']) * 100 ?>%</small>
+
             </div>
-            <span class="text-muted"><?= asvnd($type['price'] * $item['quantity']) ?></span>
+            <span class="text-muted"><?= asvnd(discount($type['price'], $type['sale'])) ?></span>
           </li>
         <?php
         }

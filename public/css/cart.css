@@ -175,11 +175,11 @@
   margin-top: 2rem;
 }
 
-/* .cart-display__form__detail__image {
-  width: 80%;
-  height: 80%;
+.cart-display__form__detail__image {
+  width: 50%;
 }
 
+/* 
 tr.grid {
   grid-template-columns: 3fr 1fr 1fr;
   align-items: center;

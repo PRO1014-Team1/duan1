@@ -154,6 +154,7 @@ function product()
     require_once 'models/product.php';
     require_once 'models/comment.php';
     require_once 'models/category.php';
+    require_once "database.php";
 
     assets('admin_header');
     assets('product');
@@ -327,8 +328,6 @@ function readbook()
 
     assets('user_header');
     assets('readbook');
-    // assets('<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">');
-    // assets('<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">');
     assets('<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.14.305/build/pdf.min.js"></script>');
 
     set_user_header();
