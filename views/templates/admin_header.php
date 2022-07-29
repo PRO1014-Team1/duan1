@@ -3,7 +3,7 @@
     <div class="admin-sidebar">
         <div class="sidebar-logo">
             <a href="home">
-                <img src="public/img/logo.png" alt="Xshop Logo" />
+                <img src="public/img/logo.png" alt="Logo" class="img-fluid" />
             </a>
         </div>
         <div class="sidebar-menu">
@@ -13,6 +13,9 @@
                         <i class="fas fa-clipboard">&nbsp;</i>
                         <span>Dashboard</span>
                     </a>
+                <li class="sidebar__item">
+                    <div class="divider"></div>
+                </li>
                 <li class="sidebar__item">
                     <a href="product" class="sidebar__card" id="product" data-active='false'>
                         <i class="fa fa-shopping-bag">&nbsp;</i>

@@ -103,7 +103,7 @@ function cart()
 
     $cart = $_SESSION['cart'] ?? null;
     set_user_header();
-    assets('cart');
+    // assets('cart');
     view('/user/cart', ['cart' => $cart]);
 }
 
@@ -152,9 +152,9 @@ function product()
         return;
     }
     require_once 'models/product.php';
+    require_once 'models/type.php';
     require_once 'models/comment.php';
     require_once 'models/category.php';
-    require_once "database.php";
 
     assets('admin_header');
     assets('product');
@@ -430,7 +430,10 @@ function graph()
 
 function dashboard()
 {
+    require_once 'models/database.php';
+    require_once 'models/order.php';
     assets('admin_header');
+    assets('<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"></script>');
     assets('dashboard');
     set_admin_header();
     view('/admin/dashboard');

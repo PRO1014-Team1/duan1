@@ -1,24 +1,41 @@
 .container {
-  background: aliceblue;
+  background: rgb(249, 249, 249);
   min-height: 100vh;
+  width: 89vw;
+  margin-left: auto;
+  overflow: hidden;
 }
 
-#nav-toggle:checked ~ .container {
-  margin-left: 1rem;
+#nav-toggle:checked ~ .container,
+#nav-toggle:checked ~ .top-cards {
+  width: 100vw;
+}
+
+.title {
+  --fs: 1.5rem;
+  font-size: var(--fs);
+  font-weight: bold;
+  font-family: var(--font-main);
+  margin-left: 2rem;
+  margin-top: calc(5rem + var(--fs));
 }
 
 .top-cards {
-  padding-top: 10rem;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  padding-top: 5rem;
+  width: 80vw;
+  margin: 0 auto;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 5rem;
 }
 
 .card {
+  box-shadow: 0 0.25rem 0.5rem rgba(146, 222, 236, 0.3);
   background: #fff;
   border-radius: 0.25rem;
-  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
   margin-bottom: 1rem;
+  margin: 0 auto;
   padding: 1rem;
-  width: 75%;
+  width: 100%;
 }
 
 .card-body {
@@ -26,13 +43,64 @@
 }
 
 .card-title {
+  font-family: var(--font-main);
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
 
-.car-subtitle {
-  font-size: 0.875rem;
-  font-weight: 500;
+.card-subtitle {
+  font-size: 2.5rem;
   margin-bottom: 0.5rem;
+  color: rgb(146, 222, 236);
+}
+
+.text-success {
+  --success: #28a745;
+  font-weight: bold;
+  color: var(--success);
+}
+.text-danger {
+  --danger: #dc3545;
+  font-weight: bold;
+  color: var(--danger);
+}
+
+.card-body__wrapper {
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.form-control,
+.form-control:focus {
+  font-family: var(--font-main);
+  border: none;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -ms-appearance: none;
+}
+
+.orders-order-by .form-control:hover,
+.variant-order-by .form-control:hover {
+  transform: scale(1.1) translate(10px, -2px);
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  text-decoration: dashed underline;
+}
+
+.mid-cards {
+  width: 80vw;
+  margin: 4rem auto;
+}
+
+.mid-cards__wrapper {
+  grid-template-columns: 1fr 0.5fr;
+  gap: 5rem;
+}
+
+.variant-order-by .card-title {
+  gap: 0.2rem;
+  font-size: 1rem;
 }

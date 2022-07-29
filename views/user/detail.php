@@ -96,11 +96,9 @@ if (isset($_POST['comment'])) {
                 <form method="POST" class="product-hero__info__button">
                     <input type="hidden" name="cart-id" value="<?= $product['product_id'] ?>">
                     <button type="submit" name="add" value="true" class="btn btn--primary">
-                        <i class="fas fa-shopping-cart"></i>
                         <span>Thêm vào giỏ hàng</span>
                     </button>
                     <button type="submit" name="checkout" value="true" class="btn btn--primary">
-                        <i class="fas fa-shopping-cart"></i>
                         <span>Mua ngay</span>
                     </button>
                 </form>

@@ -1,6 +1,5 @@
 <?php
 
-
 [$pageno, $total_pages, $display_items] = pagination($_POST['pageno'] ?? 1, $_POST['search'] ?? "", get_product());
 $selected = $_POST['selected'] ?? null;
 
@@ -38,7 +37,7 @@ if ($delete_selected = $_POST['delete_selected'] ?? false) {
                         <td><?= $product['price'] ?></td>
                         <td><?= get_category($product['category_id'])[0]['name'] ?></td>
                         <td class="ta-center"><?= $product['view'] ?></td>
-                        <td class="ta-center"><?= get_comment_count("product_id = {$product['product_id']}") ?></td>
+                        <td class="ta-center"><?= count(get_comment($product['product_id'])) ?></td>
                         <td><?= $product['import_date'] ?></td>
                         <!-- add checkbox -->
                         <td class="extras">

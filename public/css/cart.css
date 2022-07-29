@@ -175,16 +175,23 @@
   margin-top: 2rem;
 }
 
-.cart-display__form__detail__image {
+.cart-display__form__image > img {
   width: 50%;
+}
+
+.cart-display td {
+  text-align: center;
+  vertical-align: center;
+  padding: 0.5rem;
 }
 
 /* 
 tr.grid {
-  grid-template-columns: 3fr 1fr 1fr;
+  grid-template-columns: auto auto auto auto;
+  width: 100%;
   align-items: center;
-}
-*/
+} */
+
 /* ignore first td */
 /* tr.grid td:not(:first-child) {
 } */

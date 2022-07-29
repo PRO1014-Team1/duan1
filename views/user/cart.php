@@ -1,18 +1,17 @@
 <?php
 $cart = $_SESSION['cart'] ?? null;
-
 if (isset($_POST['submit'])) {
     for ($i = 0, $quantity = $_POST['quantity'], $ids = $_POST['id']; $i < count($ids); $i++) {
         $_SESSION['cart'][$ids[$i]]['quantity'] = $quantity[$i];
     }
     redirect('checkout');
 }
-if (isset($_GET['action'])){
-    $id=$_GET['id'];
+if (isset($_GET['action'])) {
+    $id = $_GET['id'];
     switch ($_GET['action']) {
         case 'delete';
-        unset($_SESSION['cart'][$id]);
-        break;
+            unset($_SESSION['cart'][$id]);
+            break;
     }
     redirect('cart');
 }
@@ -36,6 +35,7 @@ if (isset($_GET['action'])){
                             <thead class="border--line">
                                 <tr>
                                     <th>Tên sản phẩm</th>
+                                    <th>Tên sản phẩm</th>
                                     <th>Giá</th>
                                     <th>Số lượng</th>
                                     <th></th>
@@ -46,36 +46,33 @@ if (isset($_GET['action'])){
                                     <?php foreach ($cart as $item) : ?>
                                         <?php
                                         $product = get_product($item['id']);
-                                        $type = get_type_data($product['product_id'])[0];
+                                        $type_id = $cart['type_id'] ?? false;
+                                        $type = $type_id ?
+                                            get_type_data($product['product_id'], $type_id)[0] :
+                                            get_type_data($product['product_id'])[0];
                                         $min = 1;
-                                        $max = $type['quantity'];
+                                        $max = $type['quantity'] ?? 1;
                                         ?>
-                                        <tr>
-                                            <td>
-                                                <div class="cart-display__form__detail">
-                                                    <div class="cart-display__form__detail__image">
-                                                        <img src="<?= $product['image'] ?>" class="img-fluid">
-                                                    </div>
-                                                    <div class="cart-display__form__detail__name">
-                                                        <?= $product['name'] ?>
-                                                    </div>
-                                                </div>
+                                        <tr class="cart-display">
+                                            <td class="cart-display__form__image">
+                                                <img src="<?= $product['image'] ?>" class="img-fluid">
                                             </td>
-                                            <td>
-                                                <input type="number" id="item_price" value="<?=discount($type['price'], $type['sale']) ?>" readonly disabled>
+                                            <td class="cart-display__form__name">
+                                                <?= $product['name'] ?>
+                                            </td>
+                                            <td class="cart-display__form__total">
+                                                <input type="number" id="item_price" value="<?= discount($type['price'], $type['sale']) ?>" readonly disabled>
                                                 <input type="hidden" name="id[]" value="<?= $item['id'] ?>">
                                                 <span class="block" id="item_subtotal">Tổng: <?= discount($type['price'], $type['sale'])  * $item['quantity'] ?> </span>
                                             </td>
-                                            <td>
-                                                <div class="quantity">
-                                                    <input class="quantity__idicator" type="number" name="quantity[]" min="<?= $min ?>" max="<?= $max ?>" step="1" value="<?= $item['quantity'] ?>">
-                                                </div>
+                                            <td class="quantity">
+                                                <input class="quantity__idicator" type="number" name="quantity[]" min="<?= $min ?>" max="<?= $max ?>" step="1" value="<?= $item['quantity'] ?>">
                                             </td>
-                                            <td> 
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-  <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"onclick="location='?option=cart&action=delete&id=<?=$item['id']?>';">
-</svg>
-                                    </td>
+                                            <td class="cart-disaply__form__delete">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" onclick="location='?option=cart&action=delete&id=<?= $item['id'] ?>';">
+                                                </svg>
+                                            </td>
                                         </tr>
                                     <?php endforeach; ?>
                                 <?php endif; ?>

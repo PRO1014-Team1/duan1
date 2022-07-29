@@ -47,7 +47,7 @@ function validate_user_info($user_info)
         $errors['address'] = 'Vui lòng nhập địa chỉ';
     }
 
-    if(!empty($errors)) {
+    if (!empty($errors)) {
         return $errors;
     }
     // return false if there are special character or number in the name 
@@ -77,14 +77,42 @@ function generate_order_id()
     return $code;
 }
 
-function get_user_order($user_id){
-    $sql = "SELECT * FROM order_info WHERE `username` = ?";
+function get_user_order($user_id = null)
+{
+
+    $sql = "SELECT * FROM order_info";
+    if ($user_id) {
+        $sql .= " WHERE `username` = ?";
+    }
     $result = pdo_query($sql, [$user_id]);
     return $result;
 }
 
-function get_order_detail($order_id){
-    $sql = "SELECT * FROM order_detail WHERE `order_id` = ?";
+function get_order_detail($order_id = null)
+{
+    $sql = "SELECT * FROM order_detail";
+    if ($order_id) {
+        $sql .= " WHERE order_id = ?";
+    }
     $result = pdo_query($sql, [$order_id]);
+    return $result;
+}
+
+
+// get all order with specified date range
+function get_order_by_date($start_date = false, $end_date = false)
+{
+    if (!$end_date) {
+        $end_date = date('Y-m-t');
+    }
+    // if start_date = null return all
+    if (!$start_date) {
+        $sql = "SELECT * FROM order_info";
+        $result = pdo_query($sql);
+    } else {
+        $sql = "SELECT * FROM order_info WHERE created_date BETWEEN ? AND ?";
+        $result = pdo_query($sql, [$start_date, $end_date]);
+    }
+
     return $result;
 }

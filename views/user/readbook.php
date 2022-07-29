@@ -2,7 +2,6 @@
     <div role="toolbar" id="toolbar">
         <div id="pager">
             <button data-pager="prev"><i class="fa fa-chevron-left"></i> Trang trước
-
             </button>
             <button data-pager="next">Trang sau <i class="fa fa-chevron-right"></i></button>
         </div>

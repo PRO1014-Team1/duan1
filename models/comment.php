@@ -1,11 +1,15 @@
 <?php
 
-function get_comment()
+function get_comment($id = null)
 {
-    $sql = "SELECT * FROM `comment`";
+    $sql = "SELECT * FROM comment";
+    if ($id) {
+        $sql .= " WHERE comment_id = {$id}";
+    }
     $data = pdo_query($sql);
     return $data;
 }
+
 
 function add_comment($name, $product, $content)
 {

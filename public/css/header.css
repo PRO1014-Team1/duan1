@@ -3,9 +3,34 @@
 }
 
 .nav__logo {
-  width: clamp(100px, calc(min(100vw, 100vh) * 0.3), 15vw);
+  position: relative;
+  width: 20%;
   justify-self: start;
+  filter: brightness(1.2);
 }
+
+.slogan-top,
+.slogan-bottom {
+  white-space: nowrap;
+  color: black;
+  font-family: var(--font-main);
+  font-weight: bold;
+  position: absolute;
+  left: calc(100% - 0.8rem);
+}
+
+.slogan-top {
+  bottom: 40%;
+  font-size: 1.5rem;  
+}
+.slogan-bottom {
+  font-size: 0.8rem;
+  position: absolute;
+  bottom: 25%;
+  left: calc(100% - 0.8rem);
+  border-top: 2px solid black;
+}
+
 .nav__menu {
   justify-self: end;
   gap: 1rem;
@@ -23,7 +48,7 @@
 
   /* căn menu ra giữa icon */
   position: absolute;
-  top: 4rem;
+  top: 8rem;
   transform: translateX(calc(-50% + 1.5rem));
 
   box-shadow: 0 0.5rem 1rem var(--line);
@@ -43,7 +68,7 @@
   border-bottom: 0.5px solid var(--line);
 }
 
-.nav__link--main{
+.nav__link--main {
   gap: 0.5rem;
 }
 
@@ -56,7 +81,7 @@
 }
 
 .nav__link__wrapper p {
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
 
 .nav__link--main:hover {
@@ -93,11 +118,11 @@
 @keyframes fadeIn {
   0% {
     opacity: 0;
-    top: 2rem;
+    top: 4 rem;
   }
   100% {
     opacity: 1;
-    top: 4rem;
+    top: 8rem;
   }
 }
 
@@ -123,5 +148,5 @@
 }
 
 .cart-detail {
-  font-size: .75rem;
+  font-size: 0.75rem;
 }
