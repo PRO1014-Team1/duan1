@@ -103,8 +103,9 @@ function cart()
 
     $cart = $_SESSION['cart'] ?? null;
     set_user_header();
-    // assets('cart');
-    view('/user/cart', ['cart' => $cart]);
+    assets('cart');
+    // asset(' <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">');
+      view('/user/cart', ['cart' => $cart]);
 }
 
 function checkout()
