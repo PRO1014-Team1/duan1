@@ -436,3 +436,17 @@ function dashboard()
     set_admin_header();
     view('/admin/dashboard');
 }
+function feedback()
+{
+    require_once 'models/database.php';
+    require_once 'models/order.php';
+    require_once 'models/product.php';
+    require_once 'models/type.php';
+
+    assets('user_header');
+    assets('feedback');
+
+
+    set_user_header();
+    view('user/feedback');
+}

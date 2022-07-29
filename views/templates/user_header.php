@@ -123,7 +123,7 @@
                                 <a href="#" class="nav__link nav__link--main block text-dark">Giới Thiệu</a>
                             </li>
                             <li class="nav__item">
-                                <a href="#" class="nav__link nav__link--main block text-dark">Liên Hệ</a>
+                                <a href="feedback.php" class="nav__link nav__link--main block text-dark">Liên Hệ</a>
                             </li>
                         </ul>
                     </div>
