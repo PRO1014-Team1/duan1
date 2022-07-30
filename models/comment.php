@@ -4,9 +4,9 @@ function get_comment($id = null)
 {
     $sql = "SELECT * FROM comment";
     if ($id) {
-        $sql .= " WHERE comment_id = {$id}";
+        $sql .= " WHERE `product_id` = ?";
     }
-    $data = pdo_query($sql);
+    $data = pdo_query($sql, [$id]);
     return $data;
 }
 

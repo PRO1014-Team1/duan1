@@ -2,7 +2,7 @@
 // get this month's orders
 $prev_order = [];
 $cur_order = [];
-$order_by = $_POST['order_by'] ?? 'month';
+$order_by = $_POST['order_by'] ?? 'week';
 
 switch ($order_by) {
     case 'week':
@@ -28,7 +28,6 @@ switch ($order_by) {
         break;
 }
 
-
 ?>
 <div class="container">
     <h1 class="title">
@@ -50,7 +49,6 @@ switch ($order_by) {
                             <i class="fas fa-caret-down"></i>
                             &nbsp;<?= round($percent, 2) ?>%
                         </p>
-                        ?>
                     <?php endif; ?>
                     <form method="POST" class="orders-order-by">
                         <input type="hidden" name="order_percent" class="order-percent" value="<?= $percent ?>">
@@ -82,26 +80,23 @@ switch ($order_by) {
                             <i class="fas fa-caret-down"></i>
                             &nbsp;<?= round($percent, 2) ?>%
                         </p>
-                        ?>
                     <?php endif; ?>
                     <form method="POST" class="orders-order-by">
                         <input type="hidden" name="order_percent" class="order-percent" value="<?= $percent ?>">
                         <!-- switch case order_by -->
-                        <div class="form-group">
-                            <select class="form-control" id="order_by" name="order_by" onchange="submit()">
-                                <option value="week" <?= isset($_POST['order_by']) && $_POST['order_by'] == 'week' ? 'selected' : '' ?>>trong tuần này</option>
-                                <option value="month" <?= isset($_POST['order_by']) && $_POST['order_by'] == 'month' ? 'selected' : '' ?>>trong tháng này</option>
-                                <option value="year" <?= isset($_POST['order_by']) && $_POST['order_by'] == 'year' ? 'selected' : '' ?>>trong năm nay</option>
-                                <option value="all" <?= isset($_POST['order_by']) && $_POST['order_by'] == 'all' ? 'selected' : '' ?>>tổng</option>
-                            </select>
-                        </div>
+                        <select class="form-control" id="order_by" name="order_by" onchange="submit()">
+                            <option value="week" <?= isset($_POST['order_by']) && $_POST['order_by'] == 'week' ? 'selected' : '' ?>>trong tuần này</option>
+                            <option value="month" <?= isset($_POST['order_by']) && $_POST['order_by'] == 'month' ? 'selected' : '' ?>>trong tháng này</option>
+                            <option value="year" <?= isset($_POST['order_by']) && $_POST['order_by'] == 'year' ? 'selected' : '' ?>>trong năm nay</option>
+                            <option value="all" <?= isset($_POST['order_by']) && $_POST['order_by'] == 'all' ? 'selected' : '' ?>>tổng</option>
+                        </select>
                     </form>
                 </div>
             </div>
         </div>
         <div class="card product-card">
             <div class="card-body">
-                <h5 class="card-title">Người dùng mới</h5>
+                <h5 class="card-title">Sản phẩm mới</h5>
                 <h6 class="card-subtitle mb-2 text-muted"><?= count($cur_order) ?>&nbsp;<i class="fas fa-boxes"></i></i></span></h6>
                 <div class="card-body__wrapper flex">
                     <?php if (($percent = (count($cur_order) ?? 1 / count($prev_order) ?? 1) * 100) > 0) : ?>
@@ -114,19 +109,16 @@ switch ($order_by) {
                             <i class="fas fa-caret-down"></i>
                             &nbsp;<?= round($percent, 2) ?>%
                         </p>
-                        ?>
                     <?php endif; ?>
                     <form method="POST" class="orders-order-by">
                         <input type="hidden" name="order_percent" class="order-percent" value="<?= $percent ?>">
                         <!-- switch case order_by -->
-                        <div class="form-group">
-                            <select class="form-control" id="order_by" name="order_by" onchange="submit()">
-                                <option value="week" <?= isset($_POST['order_by']) && $_POST['order_by'] == 'week' ? 'selected' : '' ?>>trong tuần này</option>
-                                <option value="month" <?= isset($_POST['order_by']) && $_POST['order_by'] == 'month' ? 'selected' : '' ?>>trong tháng này</option>
-                                <option value="year" <?= isset($_POST['order_by']) && $_POST['order_by'] == 'year' ? 'selected' : '' ?>>trong năm nay</option>
-                                <option value="all" <?= isset($_POST['order_by']) && $_POST['order_by'] == 'all' ? 'selected' : '' ?>>tổng</option>
-                            </select>
-                        </div>
+                        <select class="form-control" id="order_by" name="order_by" onchange="submit()">
+                            <option value="week" <?= isset($_POST['order_by']) && $_POST['order_by'] == 'week' ? 'selected' : '' ?>>trong tuần này</option>
+                            <option value="month" <?= isset($_POST['order_by']) && $_POST['order_by'] == 'month' ? 'selected' : '' ?>>trong tháng này</option>
+                            <option value="year" <?= isset($_POST['order_by']) && $_POST['order_by'] == 'year' ? 'selected' : '' ?>>trong năm nay</option>
+                            <option value="all" <?= isset($_POST['order_by']) && $_POST['order_by'] == 'all' ? 'selected' : '' ?>>tổng</option>
+                        </select>
                     </form>
                 </div>
             </div>
@@ -135,7 +127,16 @@ switch ($order_by) {
     <div class="mid-cards">
         <div class="mid-cards__wrapper grid">
             <div class="card">
-                <h5 class="card-title">Thông kê lợi nhuận</h5>
+                <form method="POST" class="sale-order-by flex">
+                    <h5 class="card-title">Thống kê doanh thu
+                        <select class="form-control" id="order_by" name="order_by" onchange="submit()">
+                            <option value="week" <?= isset($_POST['order_by']) && $_POST['order_by'] == 'week' ? 'selected' : '' ?>>trong tuần này</option>
+                            <option value="month" <?= isset($_POST['order_by']) && $_POST['order_by'] == 'month' ? 'selected' : '' ?>>trong tháng này</option>
+                            <option value="year" <?= isset($_POST['order_by']) && $_POST['order_by'] == 'year' ? 'selected' : '' ?>>trong năm nay</option>
+                            <option value="all" <?= isset($_POST['order_by']) && $_POST['order_by'] == 'all' ? 'selected' : '' ?>>tổng</option>
+                        </select>
+                    </h5>
+                </form>
                 <div class="chart">
                     <canvas id="sale-chart"></canvas>
                 </div>
@@ -155,6 +156,27 @@ switch ($order_by) {
                 <div class="chart">
                     <canvas id="variant-chart"></canvas>
                 </div>
+                <div class="card-info theme--dark">
+                    <div class="card-info__wrapper flex">
+                        <!-- top selling category -->
+                        <div class="card-info__item">
+                            <h6 class="card-info__title">Danh mục ưa chuộng:</h6>
+                        </div>
+                        <p class="card-text">
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    <div class="bottom-cards">
+        <div class="bottom-cards__wrapper grid">
+            <div class="card">
+                <h5 class="card-title">Sản phẩm bán chạy</h5>
+                <div class="chart">
+                    <canvas id="product-chart" height="80"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

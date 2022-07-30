@@ -2,7 +2,7 @@
 <html lang="vn">
 
 <head>
-    <title>X-shop</title>
+    <title>Nitwitty - The world's best mediocre bookstore</title>
 
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta name="description" content="X-shop E-commerce">

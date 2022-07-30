@@ -19,6 +19,8 @@ window.addEventListener("load", function () {
     datasets: [
       {
         label: "Sales",
+        backgroundColor: "rgb(255, 99, 132)",
+        fill: true,
         data: [
           { x: 0, y: 0 },
           { x: 1, y: 1 },
@@ -33,16 +35,22 @@ window.addEventListener("load", function () {
           { x: 10, y: 1000 },
           { x: 11, y: 1000 },
         ],
-        backgroundColor: _.map(Array(12), rand_hsl),
-        fill: false,
+        backgroundColor: "rgba(255, 99, 132, 0.2)",
+        barThickness: "flex",
+        barPercentage: 0.5,
       },
     ],
   };
   const sale_config = {
-    type: "bar",
+    type: "line",
     data: sale_data,
     options: {
       responsive: true,
+      elements: {
+        line: {
+          tension: 0.5,
+        },
+      },
       plugins: {
         tooltip: {
           callbacks: {
@@ -103,7 +111,6 @@ window.addEventListener("load", function () {
 
   const variant = document.getElementById("variant-chart");
   const ctx2 = variant.getContext("2d");
-
   const variant_data = {
     labels: ["Bìa mềm", "Bìa cứng", "Ebook", "Audiobook"],
     datasets: [
@@ -131,8 +138,74 @@ window.addEventListener("load", function () {
         },
       },
     },
+    plugins: [
+      {
+        beforeDraw: function (chart) {
+          const datasetMeta = chart.getDatasetMeta(0);
+          const innerRadius = datasetMeta.controller.innerRadius;
+          const outerRadius = datasetMeta.controller.outerRadius;
+          const heightOfItem = outerRadius - innerRadius;
+          const countOfData = chart.getDatasetMeta(0).data.length;
+          const additionalRadius = Math.floor(heightOfItem / countOfData);
+          const weightsMap = datasetMeta.data
+            .map((v) => v.circumference)
+            .sort((a, b) => a - b)
+            .reduce((a, c, ci) => {
+              a.set(c, ci + 1);
+              return a;
+            }, new Map());
+
+          datasetMeta.data.forEach((dataItem) => {
+            const weight = weightsMap.get(dataItem.circumference);
+            dataItem.outerRadius = innerRadius + additionalRadius * weight;
+          });
+        },
+      },
+    ],
   };
   const variant_chart = new Chart(ctx2, variant_config);
+
+  const product = document.getElementById("product-chart");
+  const ctx3 = product.getContext("2d");
+
+  const product_data = {
+    labels: ["Sách A", "Sách B", "Sách C", "Sách D"],
+    datasets: [
+      {
+        label: "Số sản phẩm đã bán",
+        data: [20, 50, 100, 550],
+        backgroundColor: _.map(Array(4), soft_rand_hsl),
+        fill: false,
+      },
+    ],
+  };
+  const product_config = {
+    type: "bar",
+    data: product_data,
+    options: {
+      responsive: true,
+      indexAxis: "y",
+      // Elements options apply to all of the options unless overridden in a dataset
+      // In this case, we are setting the border of each horizontal bar to be 2px wide
+      elements: {
+        bar: {
+          borderWidth: 2,
+        },
+      },
+      plugins: {
+        tooltips: {
+          mode: "index",
+          intersect: false,
+        },
+        hover: {
+          mode: "nearest",
+          intersect: true,
+        },
+      },
+    },
+  };
+  const product_chart = new Chart(ctx3, product_config);
+
 
   //helper functions
   function hsl_generator(h, s, l) {
@@ -144,6 +217,15 @@ window.addEventListener("load", function () {
       Math.ceil(_.random(360)),
       _.random(100),
       _.random(50, 100)
+    );
+  }
+
+  //function soft color rand_hsl
+  function soft_rand_hsl() {
+    return hsl_generator(
+      Math.ceil(_.random(360)),
+      _.random(50),
+      _.random(70, 100)
     );
   }
 });
