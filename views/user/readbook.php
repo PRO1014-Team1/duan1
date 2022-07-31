@@ -1,24 +1,27 @@
 <?php
+$current_page = 1;
+
 if (!isset($_SESSION['bookmark'])) {
     $_SESSION['bookmark'] = array();
-    $current_page = 1;
 }
 if (isset($_POST['remove-bookmark'])) {
-    var_dump($_SESSION['bookmark']);
     $remove_key = array_search($_POST['remove-bookmark'], $_SESSION['bookmark']);
+    var_dump($_SESSION['bookmark']);
     unset($_SESSION['bookmark'][$remove_key]);
+    echo "<br>";
+    var_dump($_SESSION['bookmark']);
 }
 
-array_push($_SESSION['bookmark'], $_POST['current-page'] ?? 1);
-$_SESSION['bookmark'] = array_unique($_SESSION['bookmark']);
-$bookmarks = $_SESSION['bookmark'];
 if (isset($_POST['add'])) {
+    $current_page = $_POST['current-page'];
+    array_push($_SESSION['bookmark'],  $current_page ?? 1);
+    $_SESSION['bookmark'] = array_unique($_SESSION['bookmark']);
+}
+if (isset($_POST['bookmark-list'])) {
     $current_page = $_POST['bookmark-list'];
-} else {
-    $current_page = end($bookmarks);
+    $bookmark_list = $_POST['bookmark-list'];
 }
 echo "<script>let currentPageIndex = {$current_page}; </script>";
-reset($bookmarks);
 
 ?>
 <div id="container">
@@ -34,7 +37,7 @@ reset($bookmarks);
                 <!-- bookmark list -->
                 <input type="hidden" name="current-page" id="current-page" value="<?= $_POST['current-page'] ?? 1 ?>">
                 <select id="bookmark-list-select" name="bookmark-list" onchange="submit()">
-                    <?php foreach ($bookmarks as $bookmark) : ?>
+                    <?php foreach ($_SESSION['bookmark'] as $bookmark) : ?>
                         <option value="<?= $bookmark; ?>" <?= $bookmark === ($current_page ?? $_SESSION['bookmark']) ? "selected" : "" ?>>Trang <?= $bookmark; ?>
                         </option>
                     <?php endforeach; ?>
