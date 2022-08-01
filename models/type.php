@@ -1,8 +1,8 @@
 <?php
 
-function get_type_data($product_id, $type_id = null)
+function get_type_data($product_id, $type_id = null, $target = "*")
 {
-   $sql = "SELECT * FROM type_detail WHERE `product_id` = ?";
+   $sql = "SELECT $target FROM type_detail WHERE `product_id` = ?";
    if($type_id) {
       $sql .= " AND `type_id` = ?";
    }

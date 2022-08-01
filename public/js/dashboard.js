@@ -1,40 +1,17 @@
 window.addEventListener("load", function () {
   const sale_canvas = document.getElementById("sale-chart");
   const ctx = sale_canvas.getContext("2d");
+  const sale_data_income = _.map(income_data_cur, "income");
+  if (sale_data_income.length == 1) {
+    sale_data_income.unshift(0);
+  }
   const sale_data = {
-    labels: [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ],
+    labels: get_labels(income_time),
     datasets: [
       {
-        label: "Sales",
         backgroundColor: "rgb(255, 99, 132)",
         fill: true,
-        data: [
-          { x: 0, y: 0 },
-          { x: 1, y: 1 },
-          { x: 2, y: 5 },
-          { x: 3, y: 10 },
-          { x: 4, y: 50 },
-          { x: 5, y: 100 },
-          { x: 6, y: 500 },
-          { x: 7, y: 1000 },
-          { x: 8, y: 1000 },
-          { x: 9, y: 5000 },
-          { x: 10, y: 1000 },
-          { x: 11, y: 1000 },
-        ],
+        data: get_odd(sale_data_income),
         backgroundColor: "rgba(255, 99, 132, 0.2)",
         barThickness: "flex",
         barPercentage: 0.5,
@@ -52,6 +29,9 @@ window.addEventListener("load", function () {
         },
       },
       plugins: {
+        legend: {
+          display: false,
+        },
         tooltip: {
           callbacks: {
             label: function (context) {
@@ -94,14 +74,11 @@ window.addEventListener("load", function () {
           },
           ticks: {
             callback: function (value, index, ticks) {
-              return value + "₫";
+              return value.toLocaleString('vi-VN', {
+                style: 'currency',
+                currency: 'VND',
+              });
             },
-          },
-        },
-        x: {
-          title: {
-            display: true,
-            text: "Tháng",
           },
         },
       },
@@ -206,7 +183,6 @@ window.addEventListener("load", function () {
   };
   const product_chart = new Chart(ctx3, product_config);
 
-
   //helper functions
   function hsl_generator(h, s, l) {
     return "hsl(" + h + "," + s + "%," + l + "%)";
@@ -227,5 +203,75 @@ window.addEventListener("load", function () {
       _.random(50),
       _.random(70, 100)
     );
+  }
+
+  // get only the odd element of the array
+  function get_odd(arr) {
+    return arr.filter((v, i) => i % 2 === 1);
+  }
+
+  function get_labels($time) {
+    switch ($time) {
+      case "week":
+        return [
+          "Thứ 2",
+          "Thứ 3",
+          "Thứ 4",
+          "Thứ 5",
+          "Thứ 6",
+          "Thứ 7",
+          "Chủ nhật",
+        ];
+      case "month":
+        return [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "18",
+          "19",
+          "20",
+          "21",
+          "22",
+          "23",
+          "24",
+          "25",
+          "26",
+          "27",
+          "28",
+          "29",
+          "30",
+          "31",
+        ];
+      case "year":
+      default:
+        return [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec",
+        ];
+    }
   }
 });

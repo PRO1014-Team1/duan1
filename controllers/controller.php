@@ -105,7 +105,7 @@ function cart()
     set_user_header();
     assets('cart');
     // asset(' <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">');
-      view('/user/cart', ['cart' => $cart]);
+    view('/user/cart', ['cart' => $cart]);
 }
 
 function checkout()
@@ -183,6 +183,7 @@ function edit_product()
         return;
     }
     require_once 'models/product.php';
+    require_once 'models/category.php';
 
     $edit_id = $_GET['id'] ?? false;
     $edit_product = item_filter(get_product(), "product_id", $edit_id);
@@ -299,6 +300,7 @@ function news()
 
     assets('user_header');
     assets('news');
+    set_user_header();
     view('/user/news');
 }
 
@@ -338,7 +340,7 @@ function readbook()
     set_user_header();
     view('/user/readbook');
 }
-    
+
 // controller cho admin end
 
 function customer()
@@ -438,9 +440,12 @@ function dashboard()
 {
     require_once 'models/database.php';
     require_once 'models/order.php';
+    require_once 'models/customer.php';
+    require_once 'models/product.php';
+    require_once 'models/type.php';
+
     assets('admin_header');
     assets('<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.2/chart.min.js"></script>');
-    assets('');
     assets('dashboard');
     set_admin_header();
     view('/admin/dashboard');

@@ -4,11 +4,12 @@
 $selected = $_POST['selected'] ?? null;
 
 if ($delete_one = $_POST['delete_one'] ?? false) {
-    delete_product($delete_one);
+    // delete_product($delete_one);
 }
 if ($delete_selected = $_POST['delete_selected'] ?? false) {
-    delete_product($selected);
+    // delete_product($selected);
 }
+
 
 ?>
 
@@ -19,6 +20,7 @@ if ($delete_selected = $_POST['delete_selected'] ?? false) {
             <thead>
                 <tr>
                     <th>Mã hàng</th>
+                    <th></th>
                     <th>Tên sản phẩm</th>
                     <th>Đơn giá</th>
                     <th>Loại hàng</th>
@@ -36,11 +38,14 @@ if ($delete_selected = $_POST['delete_selected'] ?? false) {
                     ?>
                     <tr>
                         <td><?= $product['product_id'] ?></td>
+                        <td><img src="<?= $product['image'] ?>" alt="<?= $product['name'] ?>" width="50" class="product-img"></td>
                         <td><?= $product['name'] ?></td>
-                        <td class="grid">
+                        <td>
                             <?php foreach ($type as $type_data) : ?>
-                                <span><?= $type_data['price'] ?></span>
-                            <?php endforeach;   ?>
+                                <p class="column-price"><?= get_type_name($type_data['type_id']) ?>:
+                                    <span><?= asvnd($type_data['price']) ?></span>
+                                </p>
+                            <?php endforeach; ?>
                         </td>
                         <td><?= get_category($product['category_id'])[0]['name'] ?></td>
                         <td class="ta-center"><?= $product['view'] ?></td>
@@ -48,7 +53,7 @@ if ($delete_selected = $_POST['delete_selected'] ?? false) {
                         <td><?= $product['import_date'] ?></td>
                         <!-- add checkbox -->
                         <td class="extras">
-                            <input <?= in_array($product['product_id'], $selected ?? []) ? 'checked' : '' ?> type="checkbox" name="selected[]" class="selected" value="<?= $product['product_id'] ?>" onClick=" javascript:return submit()">
+                            <input type="checkbox" name="selected[]" class="selected" value="<?= $product['product_id'] ?>">
                         </td>
                         <td class="ta-center extras">
                             <div class="wrapper">
@@ -58,16 +63,13 @@ if ($delete_selected = $_POST['delete_selected'] ?? false) {
                                 <div class="table__options_dropdown fadeIn ts-2 hidden">
                                     <ul class="flex">
                                         <li>
-                                            <a href="detail&id=<?= $product['product_id'] ?>" class="btn btn--primary">Xem</a>
+                                            <button type="submit" name="detail" value="<?= $product['product_id'] ?>" class="btn btn--primary">Xem</button>
                                         </li>
                                         <li>
-                                            <a href="edit-product&id=<?= $product['product_id'] ?>" class="btn btn--success">Sửa</a>
+                                            <button type="submit" name="edit" value="<?= $product['product_id'] ?>" class="btn btn--primary">Sửa</button>
                                         </li>
                                         <li>
-                                            <form action="" method="post" class="delete-one">
-                                                <input type="hidden" name="delete_one" value="<?= $product['product_id'] ?>">
-                                                <button type="submit" href="#" class="btn btn--danger select" onClick="javascript:return confirm('Bạn có muốn xóa sản phẩm này?')">Xóa</a>
-                                            </form>
+                                            <button type="submit" name="delete_one" value="<?= $product['product_id'] ?>" class="btn btn--danger select" onClick="javascript:return confirm('Bạn có muốn xóa sản phẩm này?')">Xóa</button>
                                         </li>
                                     </ul>
                                 </div>
@@ -76,11 +78,11 @@ if ($delete_selected = $_POST['delete_selected'] ?? false) {
                     </tr>
                 <?php } ?>
             </tbody>
-            <div class="row flex mx-auto">
+            <div class="row mx-auto">
                 <div class="col table-tools__container">
                     <div class="flex btn-tools">
-                        <button class="btn btn--primary select_all" name="select_all" value="true">Chọn tất cả</button>
-                        <button class="btn btn--outline deselect_all" name="select_all" value="false">Bỏ chọn tất cả</button>
+                        <button class="btn btn--primary select_all" name="select_all" value="true" onclick="return false;">Chọn tất cả</button>
+                        <button class="btn btn--outline deselect_all" name="select_all" value="false" onclick="return false;">Bỏ chọn tất cả</button>
                         <button name="delete_selected" value="true" class="btn btn--danger" onClick="javascript:return confirm('Bạn có muốn xóa các sản phẩm đã chọn?');">Xóa đã chọn</button>
                         <a href="add-product" class="btn btn--success">Thêm mới</a>
                     </div>

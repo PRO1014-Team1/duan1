@@ -119,7 +119,7 @@
                                 <a href="home" class="nav__link nav__link--main block text-dark">Trang Chủ</a>
                             </li>
                             <li class="nav__item">
-                                <a href="new    s" class="nav__link nav__link--main block text-dark">Tin Tức</a>
+                                <a href="news" class="nav__link nav__link--main block text-dark">Tin Tức</a>
                             </li>
                             <li class="nav__item">
                                 <a href="#" class="nav__link nav__link--main block text-dark">Giới Thiệu</a>
