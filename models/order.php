@@ -47,7 +47,7 @@ function validate_user_info($user_info)
         $errors['address'] = 'Vui lòng nhập địa chỉ';
     }
 
-    if(!empty($errors)) {
+    if (!empty($errors)) {
         return $errors;
     }
     // return false if there are special character or number in the name 
@@ -77,14 +77,125 @@ function generate_order_id()
     return $code;
 }
 
-function get_user_order($user_id){
-    $sql = "SELECT * FROM order_info WHERE `username` = ?";
+function get_user_order($user_id = null)
+{
+
+    $sql = "SELECT * FROM order_info";
+    if ($user_id) {
+        $sql .= " WHERE `username` = ?";
+    }
     $result = pdo_query($sql, [$user_id]);
     return $result;
 }
 
-function get_order_detail($order_id){
-    $sql = "SELECT * FROM order_detail WHERE `order_id` = ?";
+function get_order_detail($order_id = null, $target = "*")
+{
+    $sql = "SELECT $target FROM order_detail";
+    if ($order_id) {
+        $sql .= " WHERE order_id = ?";
+    }
+    $result = pdo_query($sql, [$order_id]);
+    return $result;
+}
+
+
+// get all order with specified date range
+function get_order_by_date($start = false, $end = false)
+{
+    if (!$end) {
+        $end = date('Y-m-t');
+    }
+    // if start_date = null return all
+    if (!$start) {
+        return get_user_order();
+    } else {
+        $sql = "SELECT * FROM order_info WHERE created_date BETWEEN ? AND ?";
+        $result = pdo_query($sql, [$start, $end]);
+    }
+    return $result;
+}
+
+function get_order_detail_by_date($start = false, $end = false)
+{
+    if (!$end) {
+        $end = date('Y-m-t');
+    }
+    // if start_date = null return all
+    if (!$start) {
+        $sql = "SELECT  order_detail.*, SUM(`order_detail`.total) AS `income` FROM order_detail INNER JOIN order_info ON `order_info`.order_id = `order_detail`.order_id GROUP BY `order_detail`.order_id";
+    } else {
+        $sql = "SELECT order_detail.*,SUM(`order_detail`.total) AS `income` FROM order_detail INNER JOIN order_info ON `order_info`.order_id = `order_detail`.order_id WHERE `order_info`.created_date BETWEEN ? AND ? GROUP BY `order_info`.order_id";
+    }
+    $result = pdo_query($sql, [$start, $end]);
+    return $result;
+}
+
+
+
+function get_order_range($order_by = 'week')
+{
+    $prev_order = null;
+    $cur_order = null;
+    switch ($order_by) {
+        case 'week':
+            $prev_order = get_order_by_date(date('Y-m-d', strtotime('-1 week')), date('Y-m-d', strtotime('-1 day')));
+            $cur_order = get_order_by_date(date('Y-m-d', strtotime('-1 day')), date('Y-m-d'));
+            break;
+        case 'month':
+            $cur_order = get_order_by_date(date('Y-m-01'));
+            $prev_order = get_order_by_date(date('Y-m-01', strtotime('-1 month')), date('Y-m-t', strtotime('-1 month')));
+            break;
+        case 'year':
+            $cur_order = get_order_by_date(date('Y-01-01'), date('Y-12-31'));
+            $prev_order = get_order_by_date(date('Y-01-01', strtotime('-1 year')), date('Y-12-31', strtotime('-1 year')));
+            break;
+        case 'all':
+            $cur_order = get_order_by_date();
+            $prev_order = get_order_by_date();
+            break;
+        default:
+            $cur_order = get_order_by_date(date('Y-m-01'), date('Y-m-t'));
+            $prev_order = get_order_by_date(date('Y-m-01', strtotime('-1 month')), date('Y-m-t', strtotime('-1 month')));
+            break;
+    }
+    return [$prev_order, $cur_order];
+}
+
+function get_order_detail_range($order_by = 'week')
+{
+    $prev_order = null;
+    $cur_order = null;
+    switch ($order_by) {
+        case 'week':
+            $prev_order = get_order_detail_by_date(date('Y-m-d', strtotime('-1 week')), date('Y-m-d', strtotime('-1 day')));
+            $cur_order = get_order_detail_by_date(date('Y-m-d', strtotime('-1 day')), date('Y-m-d'));
+            break;
+        case 'month':
+            $cur_order = get_order_detail_by_date(date('Y-m-01'));
+            $prev_order = get_order_detail_by_date(date('Y-m-01', strtotime('-1 month')), date('Y-m-t', strtotime('-1 month')));
+            break;
+        case 'year':
+            $cur_order = get_order_detail_by_date(date('Y-01-01'), date('Y-12-31'));
+            $prev_order = get_order_detail_by_date(date('Y-01-01', strtotime('-1 year')), date('Y-12-31', strtotime('-1 year')));
+            break;
+        case 'all':
+            $cur_order = get_order_detail_by_date();
+            $prev_order = get_order_detail_by_date();
+            break;
+        default:
+            $cur_order = get_order_detail_by_date(date('Y-m-01'), date('Y-m-t'));
+            $prev_order = get_order_detail_by_date(date('Y-m-01', strtotime('-1 month')), date('Y-m-t', strtotime('-1 month')));
+            break;
+    }
+    return [$prev_order, $cur_order];
+}
+
+function get_product_from_order($order_id = null)
+{
+    $sql = "SELECT `product_id` FROM order_detail";
+    if ($order_id) {
+        $sql .= " WHERE order_id = ?";
+    }
     $result = pdo_query($sql, [$order_id]);
     return $result;
 }

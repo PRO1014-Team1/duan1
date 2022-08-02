@@ -221,7 +221,30 @@ function clamp($value, $min, $max)
 // tạo mã SKU cho sản phẩm
 
 
-function or_zero($value)
+function array_flatten($array)
 {
-    return $value ? $value : 0;
+    $flat = [];
+    foreach ($array as $key => $val) {
+        if (is_array($val)) {
+            $flat[] = $key;
+            $flat = array_merge($flat, array_flatten($val));
+        } else {
+            $flat[] = $val;
+        }
+    }
+    return remove_empty($flat);
+}
+
+// remove empty array in 2d array
+function remove_empty($array)
+{
+    foreach ($array as $key => $value) {
+        if (is_array($value)) {
+            $array[$key] = remove_empty($value);
+        }
+        if (empty($array[$key])) {
+            unset($array[$key]);
+        }
+    }
+    return $array;
 }

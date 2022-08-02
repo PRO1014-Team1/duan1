@@ -105,7 +105,7 @@ function cart()
     set_user_header();
     assets('cart');
     // asset(' <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">');
-      view('/user/cart', ['cart' => $cart]);
+    view('/user/cart', ['cart' => $cart]);
 }
 
 function checkout()
@@ -153,9 +153,9 @@ function product()
         return;
     }
     require_once 'models/product.php';
+    require_once 'models/type.php';
     require_once 'models/comment.php';
     require_once 'models/category.php';
-    require_once "database.php";
 
     assets('admin_header');
     assets('product');
@@ -183,6 +183,7 @@ function edit_product()
         return;
     }
     require_once 'models/product.php';
+    require_once 'models/category.php';
 
     $edit_id = $_GET['id'] ?? false;
     $edit_product = item_filter(get_product(), "product_id", $edit_id);
@@ -299,6 +300,7 @@ function news()
 
     assets('user_header');
     assets('news');
+    set_user_header();
     view('/user/news');
 }
 
@@ -328,8 +330,13 @@ function readbook()
 
     assets('user_header');
     assets('readbook');
-    assets('<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.14.305/build/pdf.min.js"></script>');
-
+    // assets('<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.14.305/build/pdf.min.js"></script>');
+    assets('<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js" integrity="sha512-dw+7hmxlGiOvY3mCnzrPT5yoUwN/MRjVgYV7HGXqsiXnZeqsw1H9n9lsnnPu4kL2nx2bnrjFcuWK+P3lshekwQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>');
+    assets('<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.sandbox.min.js" integrity="sha512-3RD2dDO1yWFATw637hrRjYqNIeRnx8cWKI0EkFF8Ier8rdDeTJpJHCsl4/DSMdpKerU9LK5xJJgz/E7JtOi1Ow==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>');
+    assets('<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.worker.entry.min.js" integrity="sha512-NJEHr6hlBM4MkVxJu+7FBk+pn7r+KD8rh+50DPglV/8T8I9ETqHJH0bO7NRPHaPszzYTxBWQztDfL6iJV6CQTw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>');
+    assets('<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.worker.min.js" integrity="sha512-fahFaRPTP2xrdxAbzgG31V4Vr+Ga/hp4gQu3ZBq83bhKO10NoWfTJ20OWg9ufEyT1Y4ZyCuh9wLHY9CHi6l95Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>');
+    assets('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf_viewer.min.css" integrity="sha512-USGasHs0SUBcT/vnWD0C6wMIvMGRf4lvvSKNbKvShfGdgT2pxHWNvClLLZwPqygPOiQ4HEIM51R/8bguqWyNvQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />');
+    assets('<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf_viewer.min.js" integrity="sha512-x+RmXhJTdSyOC9nVUvKVwtTsfTFtsbWPNeTuI3OlA7kLvyxG39BiWaT5VU5xENbHq25k3KFPdGR5OcO2/LTxOg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>');
     set_user_header();
     view('/user/readbook');
 }
@@ -431,7 +438,14 @@ function graph()
 
 function dashboard()
 {
+    require_once 'models/database.php';
+    require_once 'models/order.php';
+    require_once 'models/customer.php';
+    require_once 'models/product.php';
+    require_once 'models/type.php';
+
     assets('admin_header');
+    assets('<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.2/chart.min.js"></script>');
     assets('dashboard');
     set_admin_header();
     view('/admin/dashboard');

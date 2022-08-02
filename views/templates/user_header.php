@@ -2,8 +2,10 @@
 <header id="header">
     <nav class="nav">
         <div class="mx-auto grid nav__container w-100">
-            <a href="home" class="nav__logo block">
-                <img src="./public/img/logo.png" class="img-fluid" alt="Xshop Logo" />
+            <a href="home" class="nav__logo">
+                <img src="./public/img/logo.png" class="img-fluid block" alt="Xshop Logo" />
+                <span class="slogan-top">The World's</span>
+                <span class="slogan-bottom">best mediocre bookstore.</span>
             </a>
             <div class="nav__menu flex">
                 <div class="wrapper">
@@ -36,7 +38,7 @@
                         <div class="nav__dropdown fadeIn ts-2 hidden" id="dd-2">
                             <ul class="nav__list">
                                 <div class="nav__menu__user__avatar">
-                                    <img src="<?= $_SESSION['avatar']?>" class="img-fluid user-avatar" alt="User Avatar" />
+                                    <img src="<?= $_SESSION['avatar'] ?>" class="img-fluid user-avatar" alt="User Avatar" />
                                 </div>
                                 <div class="nav__menu__user__name">
                                     <p><?= get_username() ?></p>
@@ -45,7 +47,7 @@
                                     <a href="profile" class="nav__link nav__link--main block">Cập nhật tài khoản</a>
                                 </li>
                                 <li class="nav__item">
-                                    <a href="product" class="nav__link nav__link--main block">Quản trị website</a>
+                                    <a href="dashboard" class="nav__link nav__link--main block">Quản trị website</a>
                                 </li>
                                 <li class="nav__item t-center">
                                     <a href="logout" class="nav__link nav__link--main block theme--dark">Đăng xuất</a>
@@ -117,7 +119,7 @@
                                 <a href="home" class="nav__link nav__link--main block text-dark">Trang Chủ</a>
                             </li>
                             <li class="nav__item">
-                                <a href="new    s" class="nav__link nav__link--main block text-dark">Tin Tức</a>
+                                <a href="news" class="nav__link nav__link--main block text-dark">Tin Tức</a>
                             </li>
                             <li class="nav__item">
                                 <a href="#" class="nav__link nav__link--main block text-dark">Giới Thiệu</a>

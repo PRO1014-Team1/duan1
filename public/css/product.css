@@ -141,7 +141,6 @@
 .delete-one {
   color: var(--primary-500);
   cursor: pointer;
-  display: inline;  
 }
 
 .table__options_btn {
@@ -171,14 +170,26 @@
 }
 
 .table__options_dropdown ul {
+  row-gap: .5rem;
   flex-direction: column;
 }
 
-.table__options_dropdown ul li {
-  margin-block: 0.8rem;
+.table__options_dropdown ul li a {
+  display: block;
 }
+
+
 
 .col {
   justify-self: flex-end;
 }
 
+.column-price span{
+  font-size: .9rem;
+  font-weight: bold;
+}
+
+.btn--danger {
+  background-color: tomato;
+  color: white;
+}

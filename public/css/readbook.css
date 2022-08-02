@@ -1,18 +1,14 @@
 #container {
-  min-height: 140vh;
-  width: 50vw;
+  min-height: 120vh;
   margin: auto;
 }
 
 #app {
-  display: flex;
-  flex-direction: column;
-  min-height: 140vh;
+  height: 120vh;
+  grid-template-columns: 0.2fr 1fr;
 }
 #toolbar {
-  display: flex;
-  align-items: center;
-  background-color: rgb(0, 0, 0);
+  background-color: var(--primary-300);
   color: #fff;
   padding: 0.5em;
 }
@@ -24,7 +20,9 @@
   border: 1px solid currentColor;
   border-radius: 3px;
   padding: 0.25em 0.5em;
+  margin-top: 1rem;
 }
+
 #toolbar button:hover,
 #toolbar button:focus,
 #page-mode input:hover,
@@ -32,8 +30,6 @@
   color: lightGreen;
 }
 #page-mode {
-  display: flex;
-  align-items: center;
   padding: 0.25em 0.5em;
 }
 
@@ -45,9 +41,6 @@
 #viewport {
   width: 50%;
   margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
 }
 #viewport > div {
   text-align: center;
@@ -56,4 +49,34 @@
 #viewport canvas {
   width: 100%;
   box-shadow: 0 2px 5px gray;
+}
+
+#bookmark-wrapper {
+  width: 80%;
+  margin: 2rem auto;
+}
+
+#bookmark-list-select,
+#bookmark-list-select:focus {
+  appearance: none;
+  outline: none;
+  border: none;
+}
+
+#bookmark-list-select {
+  color: black;
+  border-radius: 3px;
+  padding: 0.25em 0.5em;
+  margin: 1rem;
+}
+
+.delete-bookmark:hover {
+  color: tomato !important;
+  cursor: pointer;
+}
+
+#pager {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
 }

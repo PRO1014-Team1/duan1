@@ -31,7 +31,6 @@ if (isset($_POST['submit'])) {
     $total = 0;
     $overall_status = [];
     foreach ($cart as $item) {
-
       $product = get_product($item['id']);
       $type = get_type_data($product['product_id'])[0];
       $type_id = $item['type_id'] ?? null;

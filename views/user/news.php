@@ -2,11 +2,11 @@
 $article_id = $_GET['id'] ?? null;
 function get_article($article_id)
 {
-    $path = "./views/articles/{$article_id}.html";
+    $path = "./views/articles/{$article_id}.php";
     if (file_exists($path)) {
         return file_get_contents($path);
     } else {
-        $path = "./views/articles/main.html";
+        $path = "./views/articles/main.php";
         return file_get_contents($path);
     }
 }

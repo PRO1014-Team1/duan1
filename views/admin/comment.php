@@ -39,7 +39,7 @@ if ($delete_selected = $_POST['delete_selected'] ?? false) {
                 <?php foreach ($display_items as $product) { ?>
                     <tr>
                         <td><?= $product['name'] ?></td>
-                        <td><?= get_comment_count("product_id = " . $product['product_id']) ?></td>
+                        <!-- <td><?= get_comment_count("product_id = " . $product['product_id']) ?></td> -->
                         <td><?= get_comment_time($product['product_id'], 'DESC') ?></td>
                         <td><?= get_comment_time($product['product_id'], 'ASC') ?></td>
                         <td></td>

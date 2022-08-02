@@ -51,10 +51,47 @@ function add_view($product_id)
     }
 }
 
+function get_product_by_time($start = false, $end = false)
+{
+    if (!$end) {
+        $end = date('Y-m-t');
+    }
+    if (!$start) {
+        return get_product();
+    } else {
+        $sql = "SELECT * FROM `product` WHERE import_date BETWEEN ? AND ?";
+        $result = pdo_query($sql, [$start, $end]);
+    }
+    return $result;
+}
+
+function get_product_range($order_by = "week")
+{
+    $prev_order = 0;
+    $cur_order = 0;
+    switch ($order_by) {
+        case 'week':
+            $prev_order = get_product_by_time(date('Y-m-d', strtotime('-1 week')), date('Y-m-d', strtotime('-1 day')));
+            $cur_order = get_product_by_time(date('Y-m-d', strtotime('-1 day')), date('Y-m-d'));
+            break;
+        case 'month':
+            $cur_order = get_product_by_time(date('Y-m-01'));
+            $prev_order = get_product_by_time(date('Y-m-01', strtotime('-1 month')), date('Y-m-t', strtotime('-1 month')));
+            break;
+        case 'year':
+            $cur_order = get_product_by_time(date('Y-01-01'), date('Y-12-31'));
+            $prev_order = get_product_by_time(date('Y-01-01', strtotime('-1 year')), date('Y-12-31', strtotime('-1 year')));
+            break;
+        case 'all':
+            $cur_order = get_product_by_time();
+            $prev_order = get_product_by_time();
+            break;
+    }
+    return [$prev_order, $cur_order];
+}
+
 function get_view($product_id)
 {
     $sql = "SELECT COUNT(*) AS `view` FROM `view` WHERE `product_id` = ?";
     return pdo_query_once($sql, [$product_id])["view"];
 }
-
-?>

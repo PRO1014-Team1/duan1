@@ -7,6 +7,7 @@
 }
 
 #nav-toggle:checked + header .nav {
+  width: 100vw;
   margin-left: 0rem;
   transform-origin: right center;
 }
@@ -43,7 +44,6 @@
   }
 }
 
-
 @keyframes defaultWidth {
   0% {
     transform: scaleX(1) translateX(-10%);
@@ -53,18 +53,22 @@
   }
 }
 
+.divider {
+  width: 100%;
+  border-bottom: 2px solid white;
+}
+
 .sidebar-logo {
-  height: 5.75em;
-  padding: 1rem 0rem 1rem 1rem;
+  text-align: center;
 }
 
 .sidebar-logo img {
-  width: 75%;
+  width: 50%;
   height: auto;
-  padding-top: 1rem;
-  padding-left: 0.5rem;
+  margin: 1rem auto 2rem auto;
   filter: invert(100%);
 }
+
 
 .sidebar-menu li {
   width: 100%;
@@ -115,7 +119,7 @@
   transform-origin: center center;
   transition: all 0.5s ease-in-out;
   z-index: 1;
-} 
+}
 
 .nav-animate {
   width: 90vw;
