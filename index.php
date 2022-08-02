@@ -40,6 +40,9 @@ route("/cart", function(){
 route("/checkout", function(){
     checkout();
 });
+route("/feedback", function(){
+    feedback();
+});
 
 route("/detail", function(){
     detail();

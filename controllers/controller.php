@@ -438,15 +438,14 @@ function dashboard()
 }
 function feedback()
 {
-    require_once 'models/database.php';
-    require_once 'models/order.php';
-    require_once 'models/product.php';
-    require_once 'models/type.php';
-
-    assets('user_header');
-    assets('feedback');
-
+    require_once "models/product.php";
+    require_once "models/type.php";
+    require_once('models/database.php');
+    require_once('models/feedback.php');
 
     set_user_header();
-    view('user/feedback');
+    assets("<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css' integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO' crossorigin='anonymous'>");
+
+   
+    view('/user/feedback');
 }
