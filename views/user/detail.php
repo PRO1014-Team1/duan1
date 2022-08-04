@@ -5,7 +5,7 @@ if ($type_id) {
     $focus_product = pdo_query_once($sql, [$product_id, $type_id]);
 }
 
-if ($cart_id) {
+if (isset($_POST['checkout']) || isset($_POST['add'])) {
     if (!get_username()) {
         alert("Bạn cần phải đăng nhập để sử dụng chức năng này!");
     } else {
@@ -14,20 +14,23 @@ if ($cart_id) {
             $_SESSION['cart'] = [];
         }
         $added_product = $_SESSION['cart'][$cart_id] ?? false;
-        $type_id = $_GET['type_id'] ?? false;
-        //nếu đã có trong giỏ hàng thì + thêm số lượng
+        // nếu đã có trong giỏ hàng thì + thêm số lượng
         if ($added_product) {
-            $_SESSION['cart'][$cart_id]['quantity']++;
+            if ($type_id <= 334) {
+                $_SESSION['cart'][$cart_id]['quantity']++;
+            }
         } else {
             $_SESSION['cart'][$cart_id] = [
-                "id" => $cart_id,
+                "id" => $product_id,
                 "status" => "pending",
                 "quantity" => 1,
-                "type_id" => $_GET['type_id'],
+                "type_id" => $type_id ?? get_type_data($product_id, $type_id)[0],
             ];
         }
         if ($_POST['checkout'] ?? false) {
             redirect("cart");
+        } else {
+            redirect("detail?id=$product_id&type=$type_id");
         }
     }
 }
@@ -57,9 +60,9 @@ if (isset($_POST['comment'])) {
     <main class="product-hero grid mx-auto">
         <div class="product-hero__wrapper">
             <div class="product-hero__image">
-                
+
                 <a href="#">
-                <img src="<?= $product['image'] ?>">
+                    <img src="<?= $product['image'] ?>">
                 </a>
             </div>
         </div>
@@ -97,7 +100,6 @@ if (isset($_POST['comment'])) {
             <p class="product-hero__desc"><?= $product['description'] ?></p>
             <div class="form-wrapper">
                 <form method="POST" class="product-hero__info__button">
-                    <input type="hidden" name="cart-id" value="<?= $product['product_id'] ?>">
                     <button type="submit" name="add" value="true" class="btn btn--primary">
                         <span>Thêm vào giỏ hàng</span>
                     </button>

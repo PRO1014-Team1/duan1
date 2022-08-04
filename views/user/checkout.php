@@ -1,4 +1,6 @@
 <?php
+
+$user = get_user(get_username());
 if (isset($_POST['submit'])) {
 
   // Thông tin đặt hàng order_info
@@ -27,13 +29,12 @@ if (isset($_POST['submit'])) {
 
   // Thông tin từng sản phẩm trong order_detail
   if ($result) {
-    $cart = $_SESSION['cart'];
     $total = 0;
     $overall_status = [];
     foreach ($cart as $item) {
       $product = get_product($item['id']);
-      $type = get_type_data($product['product_id'])[0];
-      $type_id = $item['type_id'] ?? null;
+      $type_id = $item['type_id'];
+      $type = get_type_data($item['id'], $type_id)[0];
       $price = discount($type['price'], $type['sale']); // đã bao gồm phần giảm giá
       $subtotal = $price * $item['quantity'];
       $total += $subtotal;
@@ -68,7 +69,7 @@ if (isset($_POST['submit'])) {
       }
 
       $sql = "UPDATE order_info SET total_price = ?, order_status = ? WHERE order_id = ?";
-      $result = pdo_execute($sql, $total, $order_info['order_status'], $order_info['order_id']);
+      $result = pdo_execute($sql, [$total, $order_info['order_status'], $order_info['order_id']]);
       unset($_SESSION['cart']);
       redirect("/");
     }
@@ -82,24 +83,27 @@ if (isset($_POST['submit'])) {
     <div class="col-md-4 order-md-2">
       <h4 class="d-flex justify-content-between align-items-center mb-3">
         <span class="text-muted">Giỏ hàng của bạn</span>
-        <span class="badge badge-dark badge-pill"><?php echo $cartItemCount; ?></span>
+        <span class="badge badge-dark badge-pill"><?= $cartItemCount; ?></span>
       </h4>
       <ul class="list-group list-group-flush mb-3">
         <?php
         $display_total = 0;
-        foreach ($_SESSION['cart'] as $item) {
+        foreach ($cart as $item) {
           $product = get_product($item['id']);
-          $type = get_type_data($product['product_id'])[0];
-          $display_total += discount($type['price'] * $item['quantity'], $type['sale']);
+          $type_id = $item['type_id'];
+          $type = get_type_data($item['id'], $type_id)[0];
+          $subtotal = discount($type['price'] * $item['quantity'], $type['sale']);
+          $display_total += $subtotal;
         ?>
           <li class="list-group-item d-flex justify-content-between lh-condensed">
             <div>
-              <h6 class="my-0"><?php echo $product['name'] ?></h6>
-              <small class="text-muted">Số lượng: <?php echo $item['quantity'] ?> Giá: <?= asvnd(discount($type['price'], $type['sale'])) ?></small>
-              <small class="text-muted">Giảm: <?= ($type['sale']) * 100 ?>%</small>
-
+              <h6 class="my-0"><?= $product['name'] ?></h6>
+              <small class="text-muted">Số lượng: <?= $item['quantity'] ?> Giá: <?= asvnd(discount($type['price'], $type['sale'])) ?></small>
+              <?php if ($type['sale'] != 0) : ?>
+                <small class="text-muted">Giảm: <?= ($type['sale']) * 100 ?>%</small>
+              <?php endif; ?>
             </div>
-            <span class="text-muted"><?= asvnd(discount($type['price'], $type['sale'])) ?></span>
+            <span class="text-muted"><?= asvnd($subtotal) ?></span>
           </li>
         <?php
         }
@@ -131,32 +135,32 @@ if (isset($_POST['submit'])) {
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="firstName">Tên</label>
-            <input type="text" class="form-control" id="firstName" name="first_name" placeholder="Nhập tên" value="<?php echo (isset($fnameValue) && !empty($fnameValue)) ? $fnameValue : '' ?>">
+            <input type="text" class="form-control" id="firstName" name="first_name" placeholder="Nhập tên" value="<?= (isset($fnameValue) && !empty($fnameValue)) ? $fnameValue : '' ?>">
           </div>
           <div class="col-md-6 mb-3">
             <label for="lastName">Họ</label>
-            <input type="text" class="form-control" id="lastName" name="last_name" placeholder="Nhập họ" value="<?php echo (isset($lnameValue) && !empty($lnameValue)) ? $lnameValue : '' ?>">
+            <input type="text" class="form-control" id="lastName" name="last_name" placeholder="Nhập họ" value="<?= (isset($lnameValue) && !empty($lnameValue)) ? $lnameValue : '' ?>">
           </div>
         </div>
         <div class="mb-3">
           <label for="phone">Số điện thoại</label>
-          <input type="phone" class="form-control" id="phone" name="phone" placeholder="Nhập số điện thoại" value="<?php echo (isset($phoneValue) && !empty($phoneValue)) ? $phoneValue : '' ?>">
+          <input type="phone" class="form-control" value="<?= $user['phone_number'] ?? '' ?>" id="phone" name="phone" placeholder="Nhập số điện thoại">
         </div>
 
         <div class="mb-3">
           <label for="email">Email</label>
-          <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email" value="<?php echo (isset($emailValue) && !empty($emailValue)) ? $emailValue : '' ?>">
+          <input type="email" class="form-control" value="<?= $user['email  '] ?? '' ?>" id="email" name="email" placeholder="Nhập email" value="<?= (isset($emailValue) && !empty($emailValue)) ? $emailValue : '' ?>">
         </div>
 
         <div class="mb-3">
           <label for="address">Địa chỉ</label>
-          <input type="text" class="form-control" id="address" name="address" placeholder="Nhập địa chỉ" value="<?php echo (isset($addressValue) && !empty($addressValue)) ? $addressValue : '' ?>">
+          <input type="text" class="form-control" id="address" name="address" placeholder="Nhập địa chỉ" value="<?= (isset($addressValue) && !empty($addressValue)) ? $addressValue : '' ?>">
         </div>
 
         <!-- note -->
         <div class="mb-3">
           <label for="note">Ghi chú</label>
-          <textarea class="form-control" id="note" name="note" rows="3"><?php echo (isset($noteValue) && !empty($noteValue)) ? $noteValue : '' ?></textarea>
+          <textarea class="form-control" id="note" name="note" rows="3"><?= (isset($noteValue) && !empty($noteValue)) ? $noteValue : '' ?></textarea>
         </div>
         <hr class="mb-4">
         <h4 class="mb-3">Thanh toán</h4>

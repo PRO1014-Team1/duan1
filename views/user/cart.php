@@ -1,18 +1,16 @@
 <?php
 $cart = $_SESSION['cart'] ?? null;
 if (isset($_POST['submit'])) {
-    for ($i = 0, $quantity = $_POST['quantity'], $ids = $_POST['id']; $i < count($ids); $i++) {
-        $_SESSION['cart'][$ids[$i]]['quantity'] = $quantity[$i];
+    // thêm số lượng sản phẩm
+    for ($i = 0; $i < count($cart); $i++) {
+        $id = $_POST['id'][$i];
+        $quantity = $_POST['quantity'][$i];
+        $_SESSION['cart'][$id]['quantity'] = $quantity;
     }
     redirect('checkout');
 }
-if (isset($_GET['action'])) {
-    $id = $_GET['id'];
-    switch ($_GET['action']) {
-        case 'delete';
-            unset($_SESSION['cart'][$id]);
-            break;
-    }
+if (isset($_POST['delete'])) {
+    unset($_SESSION['cart'][$_POST['delete-id']]);
     redirect('cart');
 }
 
@@ -35,43 +33,50 @@ if (isset($_GET['action'])) {
                             <thead class="border--line">
                                 <tr>
                                     <th>Tên sản phẩm</th>
-                                    <th>Tên sản phẩm</th>
                                     <th>Giá</th>
+                                    <th>Loại</th>
                                     <th>Số lượng</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if ($cart) : ?>
+                                <?php if (isset($cart)) : ?>
                                     <?php foreach ($cart as $item) : ?>
                                         <?php
                                         $product = get_product($item['id']);
-                                        $type_id = $cart['type_id'] ?? false;
-                                        $type = $type_id ?
-                                            get_type_data($product['product_id'], $type_id)[0] :
-                                            get_type_data($product['product_id'])[0];
+                                        $type_id = $item['type_id'];
+                                        $type = get_type_data($item['id'], $type_id)[0];
                                         $min = 1;
                                         $max = $type['quantity'] ?? 1;
                                         ?>
                                         <tr class="cart-display">
-                                            <td class="cart-display__form__image">
-                                                <img src="<?= $product['image'] ?>" class="img-fluid">
-                                            </td>
-                                            <td class="cart-display__form__name">
+                                            <td class="cart-display__form__name tooltip" data-image="<?= $product['image'] ?>">
                                                 <?= $product['name'] ?>
+                                                <input type="hidden" name="id[]" value="<?= $item['id'] . $type_id ?>">
                                             </td>
                                             <td class="cart-display__form__total">
                                                 <input type="number" id="item_price" value="<?= discount($type['price'], $type['sale']) ?>" readonly disabled>
-                                                <input type="hidden" name="id[]" value="<?= $item['id'] ?>">
-                                                <span class="block" id="item_subtotal">Tổng: <?= discount($type['price'], $type['sale'])  * $item['quantity'] ?> </span>
+                                                <span class="subtotal" id="item_subtotal">Tổng: <?= discount($type['price'], $type['sale'])  * $item['quantity'] ?> </span>
                                             </td>
-                                            <td class="quantity">
-                                                <input class="quantity__idicator" type="number" name="quantity[]" min="<?= $min ?>" max="<?= $max ?>" step="1" value="<?= $item['quantity'] ?>">
+                                            <td>
+                                                <p><?= get_type_name($type['type_id']) ?></p>
                                             </td>
-                                            <td class="cart-disaply__form__delete">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" onclick="location='?option=cart&action=delete&id=<?= $item['id'] ?>';">
-                                                </svg>
+                                            <?php if ($type_id <= 334) : ?>
+                                                <td class="quantity">
+                                                    <input class="quantity__idicator" type="number" name="quantity[]" min="<?= $min ?>" max="<?= $max ?>" step="1" value="<?= $item['quantity'] ?>">
+                                                </td>
+                                            <?php else : ?>
+                                                <td>
+                                                    <input type="hidden" name="quantity[]" value="1">
+                                                </td>
+                                            <?php endif; ?>
+                                            <td class="cart-display__form__delete">
+                                                <form action="" method="POST">
+                                                    <input type="hidden" name="delete-id" value="<?= $item['id'] . $type_id ?>">
+                                                    <button type="submit" name="delete">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                    </button>
+                                                </form>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

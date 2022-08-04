@@ -73,18 +73,21 @@ function validate_user_info($user_info)
 //Tạo mã order
 function generate_order_id()
 {
-    $code = 'ORD' . date('YmdHis');
+    $code = 'ORD' . date('YmdHis') . rand(10, 99);
     return $code;
 }
 
-function get_user_order($user_id = null)
+function get_user_order($user_id = null, $order_id = null)
 {
 
     $sql = "SELECT * FROM order_info";
     if ($user_id) {
         $sql .= " WHERE `username` = ?";
+        $result = pdo_query($sql, [$user_id]);
+    } else if ($order_id) {
+        $sql .= " WHERE `order_id` = ?";
+        $result = pdo_query($sql, [$order_id]);
     }
-    $result = pdo_query($sql, [$user_id]);
     return $result;
 }
 

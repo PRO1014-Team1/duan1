@@ -1,8 +1,6 @@
 window.addEventListener("load", function () {
-  pdfjsLib.GlobalWorkerOptions.workerSrc =
-    "https://cdn.jsdelivr.net/npm/pdfjs-dist@2.14.305/build/pdf.worker.js";
-  var loadingTask = pdfjsLib.getDocument("/db/book/Voynich-Manuscript.pdf");
   let doc = "/db/book/test.pdf";
+  var loadingTask = pdfjsLib.getDocument(doc);
   let pageMode = 1;
   let cursorIndex = Math.floor(currentPageIndex / pageMode);
   let pdfInstance = null;

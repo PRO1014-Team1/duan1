@@ -67,7 +67,7 @@ if (isset($_POST['add-variant'])) {
     );
     if ($result) {
         echo '<script>alert("Thêm sản phẩm thành công")</script>';
-        redirect('edit-product/id?=' . $data['product_id']);
+        redirect('edit-product?id=' . $data['product_id']);
     }
 }
 

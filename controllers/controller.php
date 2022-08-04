@@ -64,13 +64,12 @@ function detail()
     require_once 'models/comment.php';
     require_once 'models/type.php';
 
-
     $product_id = $_GET['id'] ?? 0;
     $category_id = $_GET['category'] ?? false;
-    $cart_id = $_POST['cart-id'] ?? false;
-    $type_id = $_GET['type_id'] ?? false;
-    $user = get_username();
     $types = get_type_data($product_id);
+    $type_id = $_GET['type_id'] ?? $types[0]['type_id'];
+    $cart_id = $product_id . $type_id;
+    $user = get_username();
     $focus_product = false;
     $product = get_product($product_id);
     $comments = item_filter(get_comment(), "product_id", $product_id);
@@ -114,7 +113,7 @@ function checkout()
     require_once "models/type.php";
     require_once('models/database.php');
     require_once('models/order.php');
-
+    require_once('models/customer.php');
     set_user_header();
     assets("<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css' integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO' crossorigin='anonymous'>");
 
@@ -314,8 +313,11 @@ function library()
 
     assets('user_header');
     assets('library');
-    assets('<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">');
-    assets('<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">');
+    assets('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">');
+    // script assets
+    assets('<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>');
+    assets('<script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>');
+
     assets('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">');
 
     set_user_header();
@@ -328,10 +330,9 @@ function readbook()
     require_once 'models/order.php';
     require_once 'models/product.php';
     require_once 'models/type.php';
-
+    
     assets('user_header');
     assets('readbook');
-    // assets('<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.14.305/build/pdf.min.js"></script>');
     assets('<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js" integrity="sha512-dw+7hmxlGiOvY3mCnzrPT5yoUwN/MRjVgYV7HGXqsiXnZeqsw1H9n9lsnnPu4kL2nx2bnrjFcuWK+P3lshekwQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>');
     assets('<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.sandbox.min.js" integrity="sha512-3RD2dDO1yWFATw637hrRjYqNIeRnx8cWKI0EkFF8Ier8rdDeTJpJHCsl4/DSMdpKerU9LK5xJJgz/E7JtOi1Ow==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>');
     assets('<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.worker.entry.min.js" integrity="sha512-NJEHr6hlBM4MkVxJu+7FBk+pn7r+KD8rh+50DPglV/8T8I9ETqHJH0bO7NRPHaPszzYTxBWQztDfL6iJV6CQTw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>');
@@ -461,6 +462,6 @@ function feedback()
     set_user_header();
     assets("<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css' integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO' crossorigin='anonymous'>");
 
-   
+
     view('/user/feedback');
 }

@@ -1,6 +1,7 @@
 <?php
 $current_page = 1;
-
+$id = $_GET['id'];
+$doc = $_SESSION["readable"][$id];
 if (!isset($_SESSION['bookmark'])) {
     $_SESSION['bookmark'] = array();
 }
@@ -22,6 +23,7 @@ if (isset($_POST['bookmark-list'])) {
     $bookmark_list = $_POST['bookmark-list'];
 }
 echo "<script>let currentPageIndex = {$current_page}; </script>";
+echo "<script>let doc = {$doc} </script>";
 
 ?>
 <div id="container">
@@ -46,9 +48,6 @@ echo "<script>let currentPageIndex = {$current_page}; </script>";
                     <i class="fas fa-times-circle"></i>
                 </button>
             </form>
-            <!-- <div id="page-mode">
-            <label>Page Mode <input type="number" value="1" min="1" /></label>
-        </div> -->
         </div>
         <canvas id="viewport"></canvas>
     </div>

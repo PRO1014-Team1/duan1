@@ -4,15 +4,16 @@
 $selected = $_POST['selected'] ?? null;
 
 if ($delete_one = $_POST['delete_one'] ?? false) {
-    
     delete_product($delete_one);
 }
 if ($delete_selected = $_POST['delete_selected'] ?? false) {
     delete_product($selected);
 }
 
-if($_POST['edit']){
-    redirect('edit-product?id='.$_POST['edit']);
+if ($_POST['edit'] ?? false) {
+    redirect('edit-product?id=' . $_POST['edit']);
+} elseif ($_POST['detail'] ?? false) {
+    redirect('detail?id=' . $_POST['detail']);
 }
 
 

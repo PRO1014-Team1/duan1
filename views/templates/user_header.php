@@ -95,6 +95,7 @@
                                             <img class="thumbnail" src="<?= $product['image'] ?>">
                                             <div class="nav__link__wrapper">
                                                 <span>x <?= $cart_item['quantity'] ?></span>
+                                                <span><?= get_type_name($cart_item['type_id']) ?></span>
                                                 <p><?= $product['name'] ?></p>
                                             </div>
                                         </div>

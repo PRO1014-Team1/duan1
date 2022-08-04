@@ -17,6 +17,20 @@ function get_customer($target = "*", $limit = null, $cond = null, $order = null)
     return $data;
 }
 
+function get_user($username = null)
+{
+
+    $sql = "SELECT * FROM `users`";
+    if ($username) {
+        $sql .= " WHERE `username` = ?";
+        $data = pdo_query_once($sql, [$username]);
+    }
+    else {
+        $data = pdo_query($sql);
+    }
+    return $data;
+}
+
 function get_customer_by_date($start = false, $end = false)
 {
     if (!$end) {
