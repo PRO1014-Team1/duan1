@@ -184,9 +184,10 @@ function edit_product()
     }
     require_once 'models/product.php';
     require_once 'models/category.php';
+    require_once 'models/type.php';
 
-    $edit_id = $_GET['id'] ?? false;
-    $edit_product = item_filter(get_product(), "product_id", $edit_id);
+    $edit_id = $_GET['id'] ?? $edit_id ?? false;
+    $edit_product = end(item_filter(get_product(), "product_id", $edit_id));
     $category = get_all_category();
 
     assets('admin_header');

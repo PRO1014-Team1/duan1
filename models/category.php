@@ -14,7 +14,7 @@ function get_all_category()
 function get_category_count($id)
 {
     $sql = "SELECT COUNT(*) AS count FROM `product` WHERE `category_id` = ?";
-    return pdo_execute($sql, [$id])['count'];
+    return pdo_query_once($sql, [$id])['count'];
 }
 
 function delete_category($id)
