@@ -113,5 +113,6 @@ h2 {
   --bs-breadcrumb-divider: " ";
 }
 
-.breadcrumb-item {
+.fa-download {
+  pointer-events: none;
 }

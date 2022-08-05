@@ -1,6 +1,6 @@
 <?php
 
-$user = pdo_execute('SELECT * FROM users WHERE username = ?', [$_SESSION['username']]);
+$user = get_user(get_username());
 $genders = ['Nam', 'Nữ', 'Khác'];
 
 if (isset($_POST['update'])) {

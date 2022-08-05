@@ -2,7 +2,7 @@
 
 $orders = get_user_order(get_username());
 
-if(!isset($_SESSION['readable'])){
+if (!isset($_SESSION['readable'])) {
     $_SESSION['readable'] = [];
 }
 
@@ -65,7 +65,7 @@ function translate_status($status)
                                                 <?= $order_info[0]['created_date'] ?>
                                             </span>
                                         </li>
-                                        <li class="breadcrumb-item me-2 bg-dark py-2 px-3 text-light">
+                                        <li class="breadcrumb-item me-2 bg-info py-2 px-3 text-light">
                                             <span class="breadcrumb-title">
                                                 <?= translate_status($order['order_status']) ?>
                                                 &nbsp;<i class="ml-2 fa fa-refresh" aria-hidden="true"></i>
@@ -77,9 +77,12 @@ function translate_status($status)
                                         </li>
                                         <li class="breadcrumb-item me-2">
                                             <span class="breadcrumb-title">
-                                                <?php if ($detail['type_id'] >= 335 && $order['order_status'] === "delivered") : ?>
-                                                  <?php $_SESSION['readable'][$product['product_id']] = $type['download']; 
-                                                  ?>
+                                                <?php if ($detail['type_id'] == 335 && $order['order_status'] === "delivered") : ?>
+                                                    <?php $_SESSION['readable'][$product['product_id']] = $type['download'];
+                                                    ?>
+                                                    <a href="readbook?id=<?= $product['product_id'] ?>" class="text-light py-2 px-3 bg-success btn text-uppercase"><button>Đọc sách</button></a>
+                                                    <a href="<?= $type['download']; ?>" class="text-light py-2 px-3 ms-2 bg-primary btn text-uppercase" download><i class="fa fa-download ml-2" aria-hidden="true"></i></a>
+                                                <?php elseif ($detail['type_id'] == 336 && $order['order_status'] === "delivered") : ?>
                                                     <a href="readbook?id=<?= $product['product_id'] ?>" class="text-light py-2 px-3 bg-success btn text-uppercase"><button>Đọc sách</button></a>
                                                 <?php else : ?>
                                                     <a href="<?= 'detail' . '?id=' . $product['product_id'] . '&category' . $product['category_id'] ?>" class="text-decoration-none py-2 px-3 bg-dark btn link-warning text-uppercase"><button>Thông tin sách</button></a>

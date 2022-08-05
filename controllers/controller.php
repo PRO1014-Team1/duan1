@@ -5,12 +5,16 @@ require_once "lib/session.php";
 require_once "lib/template.php";
 require_once "role.php";
 
+require_once "models/product.php";
+require_once "models/type.php";
+require_once "models/database.php";
+require_once "models/comment.php";
+require_once 'models/order.php';
+require_once 'models/category.php';
+require_once 'models/customer.php';
+
 function home()
 {
-    require_once "models/product.php";
-    require_once "models/comment.php";
-    require_once "models/type.php";
-
     $popular_products = item_sort(get_product(), 'view', 1);
     $products = get_product();
     $popular_products_top_4 = item_truncate($popular_products, 4); // lấy 4 sản phẩm có nhiều view nhât
@@ -39,8 +43,6 @@ function home()
 
 function login()
 {
-    require_once "models/database.php";
-
     set_user_header();
     assets('login');
     view('/user/login');
@@ -60,9 +62,7 @@ function path_not_found()
 
 function detail()
 {
-    require_once 'models/product.php';
-    require_once 'models/comment.php';
-    require_once 'models/type.php';
+
 
     $product_id = $_GET['id'] ?? 0;
     $category_id = $_GET['category'] ?? false;
@@ -97,8 +97,6 @@ function detail()
 
 function cart()
 {
-    require_once "models/product.php";
-    require_once "models/type.php";
 
     $cart = $_SESSION['cart'] ?? null;
     set_user_header();
@@ -109,11 +107,7 @@ function cart()
 
 function checkout()
 {
-    require_once "models/product.php";
-    require_once "models/type.php";
-    require_once('models/database.php');
-    require_once('models/order.php');
-    require_once('models/customer.php');
+
     set_user_header();
     assets("<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css' integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO' crossorigin='anonymous'>");
 
@@ -128,7 +122,6 @@ function checkout()
 
 function profile()
 {
-    require_once "models/database.php";
 
     set_user_header();
     assets('profile');
@@ -137,8 +130,6 @@ function profile()
 
 function register()
 {
-    require_once "models/database.php";
-
     set_user_header();
     assets('register');
     view('/user/register');
@@ -151,10 +142,6 @@ function product()
     if (deny_access($_SESSION['role'])) {
         return;
     }
-    require_once 'models/product.php';
-    require_once 'models/type.php';
-    require_once 'models/comment.php';
-    require_once 'models/category.php';
 
     assets('admin_header');
     assets('product');
@@ -168,7 +155,6 @@ function add_product()
     if (deny_access($_SESSION['role'])) {
         return;
     }
-    require_once 'models/category.php';
 
     assets('admin_header');
     assets('add_product');
@@ -181,9 +167,6 @@ function edit_product()
     if (deny_access($_SESSION['role'])) {
         return;
     }
-    require_once 'models/product.php';
-    require_once 'models/category.php';
-    require_once 'models/type.php';
 
     $edit_id = $_GET['id'] ?? $edit_id ?? false;
     $edit_product = end(item_filter(get_product(), "product_id", $edit_id));
@@ -205,8 +188,6 @@ function category()
     if (deny_access($_SESSION['role'])) {
         return;
     }
-    require_once 'models/category.php';
-    require_once 'models/product.php';
 
     assets('admin_header');
     assets('category');
@@ -238,8 +219,6 @@ function edit_category()
     if (deny_access($_SESSION['role'])) {
         return;
     }
-    require_once 'models/category.php';
-    require_once 'models/database.php';
 
     $edit_id = $_GET['id'];
     $edit_category = get_category($edit_id)[0];
@@ -254,8 +233,6 @@ function comment()
     if (deny_access($_SESSION['role'])) {
         return;
     }
-    require_once 'models/comment.php';
-    require_once 'models/product.php';
 
     $product = get_product();
     $selected = $_POST['selected'] ?? null;
@@ -276,7 +253,6 @@ function comment_detail()
     if (deny_access($_SESSION['role'])) {
         return;
     }
-    require_once 'models/comment.php';
 
     $id = $_GET['id'] ?? 0;
     $selected = $_POST['selected'] ?? null;
@@ -296,8 +272,6 @@ function comment_detail()
 
 function news()
 {
-    require_once 'models/database.php';
-
     assets('user_header');
     assets('news');
     set_user_header();
@@ -306,11 +280,6 @@ function news()
 
 function library()
 {
-    require_once 'models/database.php';
-    require_once 'models/order.php';
-    require_once 'models/product.php';
-    require_once 'models/type.php';
-
     assets('user_header');
     assets('library');
     assets('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">');
@@ -326,11 +295,6 @@ function library()
 
 function readbook()
 {
-    require_once 'models/database.php';
-    require_once 'models/order.php';
-    require_once 'models/product.php';
-    require_once 'models/type.php';
-    
     assets('user_header');
     assets('readbook');
     assets('<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js" integrity="sha512-dw+7hmxlGiOvY3mCnzrPT5yoUwN/MRjVgYV7HGXqsiXnZeqsw1H9n9lsnnPu4kL2nx2bnrjFcuWK+P3lshekwQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>');
@@ -350,8 +314,6 @@ function customer()
     if (deny_access($_SESSION['role'])) {
         return;
     }
-    require_once 'models/database.php';
-    require_once 'models/customer.php';
 
     $selected = $_POST['selected'] ?? null;
     $delete_selected = $_POST['delete_selected'] ?? false;
@@ -372,8 +334,6 @@ function edit_customer()
     if (deny_access($_SESSION['role'])) {
         return;
     }
-    require_once 'models/ustomer.php';
-    require_once 'models/database.php';
 
     $user = pdo_execute('SELECT * FROM users WHERE username = ?', [$_GET['username']]);
     $genders = ['Nam', 'Nữ', 'Khác'];
@@ -390,10 +350,6 @@ function statistic()
     if (deny_access($_SESSION['role'])) {
         return;
     }
-    require_once 'models/statistic.php';
-    require_once 'models/product.php';
-    require_once 'models/comment.php';
-    require_once 'models/customer.php';
 
     $product = get_product();
     $comment = get_comment();
@@ -418,8 +374,6 @@ function graph()
     if (deny_access($_SESSION['role'])) {
         return;
     }
-    require_once 'models/database.php';
-    require_once 'models/product.php';
 
     $categories = pdo_query('SELECT `category`.`name`, `category`.`id`, COUNT(`category_id`) AS count FROM `product` JOIN `category` ON `product`.`category_id` = `category`.`id` GROUP BY `category`.`name`, `category`.`id`'); // lấy danh sách loại hàng và số lượng
     $categoryView =  pdo_query('SELECT `category`.`name`,  SUM( `view`) as view FROM `product` JOIN `category` ON `product`.`category_id` = `category`.`id` GROUP BY `category`.`name`'); // lấy danh sách loại hàng và số lượng
@@ -440,12 +394,6 @@ function graph()
 
 function dashboard()
 {
-    require_once 'models/database.php';
-    require_once 'models/order.php';
-    require_once 'models/customer.php';
-    require_once 'models/product.php';
-    require_once 'models/type.php';
-
     assets('admin_header');
     assets('<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.2/chart.min.js"></script>');
     assets('dashboard');
@@ -454,14 +402,7 @@ function dashboard()
 }
 function feedback()
 {
-    require_once "models/product.php";
-    require_once "models/type.php";
-    require_once('models/database.php');
-    require_once('models/feedback.php');
-
     set_user_header();
     assets("<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css' integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO' crossorigin='anonymous'>");
-
-
     view('/user/feedback');
 }

@@ -6,8 +6,8 @@ if (isset($_POST['submit'])) {
   // Thông tin đặt hàng order_info
   $result = false;
   $order_info = set_order_info([
-    'first_name' => $_POST['first_name'],
-    'last_name' => $_POST['last_name'],
+    'first_name' => input_clean($_POST['first_name']),
+    'last_name' => input_clean($_POST['last_name']),
     'email' => $_POST['email'],
     'phone' => $_POST['phone'],
     'address' => $_POST['address'],
@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
   }
 
   // Thông tin từng sản phẩm trong order_detail
-  if ($result) {
+  if ($result ?? false) {
     $total = 0;
     $overall_status = [];
     foreach ($cart as $item) {
@@ -98,7 +98,7 @@ if (isset($_POST['submit'])) {
           <li class="list-group-item d-flex justify-content-between lh-condensed">
             <div>
               <h6 class="my-0"><?= $product['name'] ?></h6>
-              <small class="text-muted">Số lượng: <?= $item['quantity'] ?> Giá: <?= asvnd(discount($type['price'], $type['sale'])) ?></small>
+              <small class="text-muted">Số lượng: <?= $item['quantity'] ?> Giá: <?= asvnd($type['price']) ?></small>
               <?php if ($type['sale'] != 0) : ?>
                 <small class="text-muted">Giảm: <?= ($type['sale']) * 100 ?>%</small>
               <?php endif; ?>
