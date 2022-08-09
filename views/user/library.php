@@ -51,7 +51,6 @@ function translate_status($status)
                             ?>
                             <!-- <small>Số đơn hàng: <span class="ts-3"><?= $order_id ?></span></small>
                                 <small>Ngày đặt:  </small> -->
-
                             <div class="card p-2">
                                 <nav aria-label="breadcrumb" class="breadcrumb-container">
                                     <ul class="breadcrumb w-75 mx-auto text-center">

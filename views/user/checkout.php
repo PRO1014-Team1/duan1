@@ -69,7 +69,7 @@ if (isset($_POST['submit'])) {
       }
 
       $sql = "UPDATE order_info SET total_price = ?, order_status = ? WHERE order_id = ?";
-      $result = pdo_execute($sql, [$total, $order_info['order_status'], $order_info['order_id']]);
+      $result = pdo_execute($sql, $total, $order_info['order_status'], $order_info['order_id']);
       unset($_SESSION['cart']);
       redirect("/");
     }
@@ -98,13 +98,13 @@ if (isset($_POST['submit'])) {
           <li class="list-group-item d-flex justify-content-between lh-condensed">
             <div>
               <h6 class="my-0"><?= $product['name'] ?></h6>
-              <small class="text-muted">Số lượng: <?= $item['quantity'] ?> Giá: <?= asvnd($type['price']) ?></small>
+              <p class="text-muted">Số lượng: <?= $item['quantity'] ?> Giá: <?= asvnd($type['price']) ?></p>
               <?php if ($type['sale'] != 0) : ?>
-                <small class="text-muted">Giảm: <?= ($type['sale']) * 100 ?>%</small>
+                <p class="text-muted">Giảm: <?= ($type['sale']) * 100 ?>%</p>
               <?php endif; ?>
             </div>
             <span class="text-muted"><?= asvnd($subtotal) ?></span>
-          </li>
+          </li> 
         <?php
         }
         ?>
@@ -135,11 +135,11 @@ if (isset($_POST['submit'])) {
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="firstName">Tên</label>
-            <input type="text" class="form-control" id="firstName" name="first_name" placeholder="Nhập tên" value="<?= (isset($fnameValue) && !empty($fnameValue)) ? $fnameValue : '' ?>">
+            <input type="text" class="form-control" id="firstName" name="first_name" placeholder="Nhập tên" value="<?= explode(" ",$user['name'])[0] ?? '' ?>">
           </div>
           <div class="col-md-6 mb-3">
             <label for="lastName">Họ</label>
-            <input type="text" class="form-control" id="lastName" name="last_name" placeholder="Nhập họ" value="<?= (isset($lnameValue) && !empty($lnameValue)) ? $lnameValue : '' ?>">
+            <input type="text" class="form-control" id="lastName" name="last_name" placeholder="Nhập họ" value="<?= explode(" ",$user['name'])[1] ?? '' ?>">
           </div>
         </div>
         <div class="mb-3">

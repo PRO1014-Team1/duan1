@@ -26,6 +26,9 @@
                                     <a href="library" class="nav__link nav__link--main block link-dark text-dark">Thư viện cá nhân</a>
                                 </li>
                                 <li class="nav__item">
+                                    <a href="order_history" class="nav__link nav__link--main block link-dark text-dark">Lịch sử đơn hàng</a>
+                                </li>
+                                <li class="nav__item">
                                     <a href="profile" class="nav__link nav__link--main block link-dark text-dark">Cập nhật tài khoản</a>
                                 </li>
                                 <li class="nav__item t-center">
@@ -95,7 +98,7 @@
                                             <img class="thumbnail" src="<?= $product['image'] ?>">
                                             <div class="nav__link__wrapper">
                                                 <span>x <?= $cart_item['quantity'] ?></span>
-                                                <span><?= get_type_name($cart_item['type_id']) ?></span>
+                                                <span class="inline-block d-inline-block"><?= get_type_name($cart_item['type_id']) ?></span>
                                                 <p><?= $product['name'] ?></p>
                                             </div>
                                         </div>

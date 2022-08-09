@@ -1,7 +1,7 @@
 <?php
 $cart = $_SESSION['cart'] ?? null;
 if (isset($_POST['submit'])) {
-    // thêm số lượng sản phẩm
+    // tăng số lượng sản phẩm
     for ($i = 0; $i < count($cart); $i++) {
         $id = $_POST['id'][$i];
         $quantity = $_POST['quantity'][$i];

@@ -248,3 +248,10 @@ function remove_empty($array)
     }
     return $array;
 }
+
+
+function translate_status($index)
+{
+    $product_status = ['Chờ xử lý', 'Đang xử lý', 'Đang giao hàng', 'Đã giao hàng', 'Đã hủy'];
+    return $product_status[$index];
+}

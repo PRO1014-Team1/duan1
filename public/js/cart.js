@@ -15,11 +15,12 @@ window.onload = function () {
   function clamp(num, min, max) {
     return Math.min(Math.max(num, min), max);
   }
-  
+
   function asvnd(number) {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "đ";
   }
 
+  //thêm điều khiển số lượng sản phẩm
   quantities.innerHTML += quantities.forEach((element) => {
     let spinner = element;
     spinner.innerHTML += `<div class="quantity-nav">
@@ -27,40 +28,51 @@ window.onload = function () {
         <span class="quantity-button quantity-down">&#xf107;</span>
       </div>`;
 
-    let price_each =
-      element.parentElement.parentElement.querySelector("#item_price");
-    let subtotal =
-      element.parentElement.parentElement.querySelector("#item_subtotal");
     let input = spinner.querySelector("input");
     let btnUp = spinner.querySelector(".quantity-up");
     let btnDown = spinner.querySelector(".quantity-down");
-
     let min = parseInt(input.getAttribute("min"));
     let max = parseInt(input.getAttribute("max"));
-    btnUp.addEventListener("click", function () {
+
+    btnUp.addEventListener("click", function (event) {
       let oldValue = parseFloat(input.value);
       let newVal = clamp(++oldValue, min, max);
+      let subtotal =
+        event.target.parentElement.parentElement.parentElement.querySelector(
+          "#item_subtotal"
+        );
+      let price =
+        event.target.parentElement.parentElement.parentElement.querySelector(
+          "#item_price"
+        );
 
       input.value = newVal;
       input.setAttribute("value", newVal);
-      subtotal.innerHTML = "Tổng: " + newVal * price_each.value;
+      subtotal.innerHTML = "Tổng: " + newVal * price.value;
       total.innerHTML = asvnd(get_total());
     });
 
-    btnDown.addEventListener("click", function () {
+    btnDown.addEventListener("click", function (event) {
+      let parent = event.target.parentElement.parentElement.parentElement;
       let oldValue = parseFloat(input.value);
       let newVal = clamp(--oldValue, min, max);
+      let subtotal = parent.querySelector("#item_subtotal");
+      let price = parent.querySelector("#item_price");
 
       input.value = newVal;
       input.setAttribute("value", newVal);
-      subtotal.innerHTML = "Tổng: " + newVal * price_each.value;
+      subtotal.innerHTML = "Tổng: " + newVal * price.value;
       total.innerHTML = asvnd(get_total());
     });
 
     input.addEventListener("change", function (e) {
+      let parent = e.target.parentElement.parentElement;
+      let subtotal = parent.querySelector("#item_subtotal");
+      let price = parent.querySelector("#item_price");
       let newVal = clamp(parseInt(e.target.value), min, max);
+      input.value = newVal;
       input.setAttribute("value", (e.target.value = newVal));
-      subtotal.innerHTML = "Tổng: " + newVal * price_each.value;
+      subtotal.innerHTML = "Tổng: " + newVal * price.value;
       total.innerHTML = asvnd(get_total());
     });
   });

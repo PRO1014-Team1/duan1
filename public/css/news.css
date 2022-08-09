@@ -486,6 +486,8 @@ animation: productFadeIn 0.45s ease-in forwards,
 .prod-showcase__title {
     margin-bottom: 2em;
     text-transform: uppercase;
+    text-align: center;
+    font-size: 2rem;
     font-family: var(--font-main);
 }
 
@@ -501,4 +503,12 @@ animation: productFadeIn 0.45s ease-in forwards,
 
 .cart-action__hidden {
     z-index: 1;
+}
+
+.banner {
+    text-align: center;
+}
+
+.banner img {
+    margin: auto;
 }

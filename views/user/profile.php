@@ -2,25 +2,24 @@
 
 $user = get_user(get_username());
 $genders = ['Nam', 'Nữ', 'Khác'];
-
 if (isset($_POST['update'])) {
-    if (!$_SESSION['errors'] = validate_profile($_POST)) {
-        $data = input_clean($_POST);
-        $data['birthdate'] = date('Y-m-d', strtotime($data['birthdate']));
-        if (isset($_FILES)) {
-            if ($_FILES['avatar']['size']) {
-                $path = './db/user/';
-                require 'upload.php';
-                $_SESSION['avatar'] = $path;
-            }
-        } else {
-            $_SESSION['avatar'] = $user['avatar'];
+    // if (!$_SESSION['errors'] = validate_profile($_POST)) {
+    $data = input_clean($_POST);
+    $data['birthdate'] = date('Y-m-d', strtotime($data['birthdate']));
+    if (isset($_FILES)) {
+        if ($_FILES['avatar']['size']) {
+            $path = './db/user/';
+            require 'upload.php';
+            $_SESSION['avatar'] = $path;
         }
-        pdo_execute(
-            'UPDATE `users` SET `name` = ?, `email` = ?, `birthdate` = ?, `avatar` = ?, `gender` = ? WHERE `username` = ?',
-            [$data['name'],  $data['email'], $data['birthdate'],  $_SESSION['avatar'], $data['gender'], $user['username']]
-        );
+    } else {
+        $_SESSION['avatar'] = $user['avatar'];
     }
+    pdo_execute(
+        'UPDATE `users` SET `name` = ?, `email` = ?, `birthdate` = ?, `avatar` = ?, `gender` = ? WHERE `username` = ?',
+        [$data['name'],  $data['email'], $data['birthdate'],  $_SESSION['avatar'], $data['gender'], $user['username']]
+    );
+    // }
     echo "<script> alert('Cập nhật thành cống!') <script>";
     redirect('profile');
 }
@@ -30,7 +29,6 @@ if (isset($_POST['update'])) {
 
 <div class="container">
     <form action="" method="POST" class="form-update mx-auto" enctype="multipart/form-data">
-        <input type="hidden" name="update" value="true">
         <h2 class="form-update-heading <?= $_SESSION['errors'] ? "error" : "" ?>"><?= $_SESSION['errors'] ? 'Lỗi' : "Cập nhật tài khoản" ?></h2>
         <div class="profile-avatar">
             <img src="<?= $user['avatar'] ?>" alt="">
@@ -78,7 +76,7 @@ if (isset($_POST['update'])) {
         </div>
         <div class="form-control form-submit flex">
             <a href="password-change" class="change-password small">Đổi mật khẩu</a>
-            <button type="submit" class="btn btn--primary border update-btn">Cập Nhật</button>
+            <button type="submit" name="update" class="btn btn--primary border update-btn">Cập Nhật</button>
             <a href="home" class="btn btn--primary-o block redirect-btn">Huỷ Bỏ</a>
         </div>
     </form>

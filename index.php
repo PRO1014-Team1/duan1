@@ -122,6 +122,10 @@ route("/readbook", function(){
     readbook();
 });
 
+route("/order_history", function(){
+    order_history();
+});
+
 
 set_meta();
 run();
