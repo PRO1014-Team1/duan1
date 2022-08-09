@@ -1,29 +1,12 @@
 <?php
 
 $user = get_username();
-$orders = get_user_order($user);
-
-if (!isset($_SESSION['readable'])) {
-    $_SESSION['readable'] = [];
-}
-
-
-function status_colorcode($status)
-{
-    switch ($status) {
-        case 0;
-            return "text-secondary";
-        case 1;
-            return "text-warning";
-        case 2;
-            return "text-info";
-        case 3;
-            return "text-success";
-        case 4;
-            return "text-danger";
-        default;
-            return "text-dark";
-    }
+$order_id = $_GET['order_id'];
+$order_info = get_user_order($user, $order_id);
+$order_detail = get_order_detail($order_id);
+// kiểm tra order_id có hợp lệ và thuộc về user không
+if (empty($order_info)) {
+    redirect('/404');
 }
 
 
@@ -33,7 +16,7 @@ function status_colorcode($status)
         <div class="w-75">
             <div class="media flex-sm-row flex-column-reverse justify-content-between">
                 <div class="col my-auto">
-                    <h1 class="mb-5 fs-2"> Lịch sử thanh toán</h1>
+                    <h1 class="mb-5 fs-2">Đơn hàng: <?= $order_id ?> </h1>
                 </div>
             </div>
             <div class="row">
@@ -41,24 +24,28 @@ function status_colorcode($status)
                     <table class="table-borderless table">
                         <thead class="fw-bold border-bottom border-secondary">
                             <tr>
-                                <th>Mã đơn</th>
-                                <th>Ngày đặt</th>
-                                <th>Tên người nhận</th>
+                                <th>Tên sách</th>
+                                <th>Số lượng</th>
+                                <th>Giá thành</th>
                                 <th>Tổng tiền</th>
-                                <th>Trạng thái</th>
+                                <th>Loại sách</th>
                                 <th>Thông tin</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($orders as $order) : ?>
+                            <?php foreach ($order_detail as $order) : ?>
+                                <?php
+                                $product = get_product($order['product_id']);
+                                $type = get_type_data($order['type_id']);
+                                ?>
                                 <tr>
-                                    <th><?= $order['order_id'] ?></th>
-                                    <td><?= $order['created_date'] ?></td>
-                                    <td><?= $order['first_name'] ?></td>
-                                    <td><?= asvnd($order['total_price']) ?></td>
-                                    <td class="<?= status_colorcode($order['order_status']) ?> fw-bold"><?= translate_status($order['order_status']) ?></td>
+                                    <td><?= $product['name'] ?></td>
+                                    <td><?= $order['quantity'] ?></td>
+                                    <td><?= $order['price'] ?></td>
+                                    <td><?= $order['total'] ?></td>
+                                    <td><?= get_type_name($order['type_id']) ?></td>
                                     <td>
-                                        <a href="order_detail?order_id=<?= $order['order_id'] ?>" class="link-primary opacity-75 text-capitalize text-decoration-none">Chi tiết <i class="fas fa-info-circle"></i></a>
+                                        <a href="detail?id=<?= $order['product_id'] ?>&type_id=<?= $order['type_id'] ?>" class="link-primary opacity-75 text-capitalize text-decoration-none">Chi tiết sách <i class="fas fa-info-circle"></i></a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -68,7 +55,7 @@ function status_colorcode($status)
                         <div class="col">
                             <div class="row justify-content-between">
                                 <div class="col-auto">
-                                    <a href="/" class="btn btn-outline-secondary ">
+                                    <a href="order_history" class="btn btn-outline-secondary ">
                                         <i class="fa fa-chevron-left" aria-hidden="true"></i>
                                         Quay lại
                                     </a>

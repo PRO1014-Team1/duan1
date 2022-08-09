@@ -5,7 +5,7 @@ require_once "lib/global.php";
 require_once "controllers/controller.php";
 
 route("/", function () {
-    home(); 
+    home();
 });
 
 route("/contact", function () {
@@ -20,109 +20,110 @@ route("/404", function () {
     path_not_found();
 });
 
-route("/home", function(){
+route("/home", function () {
     home();
 });
 
-route("/login", function(){
+route("/login", function () {
     login();
 });
 
-route("/logout", function(){
+route("/logout", function () {
     logout();
     home();
 });
 
-route("/cart", function(){
+route("/cart", function () {
     cart();
 });
 
-route("/checkout", function(){
+route("/checkout", function () {
     checkout();
 });
-route("/feedback", function(){
+route("/feedback", function () {
     feedback();
 });
 
-route("/detail", function(){
+route("/detail", function () {
     detail();
 });
 
-route("/profile", function(){
+route("/profile", function () {
     profile();
 });
 
-route("/register", function(){
+route("/register", function () {
     register();
 });
 
-route("/news", function(){
+route("/news", function () {
     news();
+});
+
+route("/order_detail", function () {
+    order_detail();
 });
 
 // Các route cho admin
 
-route("/product", function(){
+route("/product", function () {
     product();
 });
 
-route("/category", function(){
+route("/category", function () {
     category();
 });
 
-route("/add-category", function(){
+route("/add-category", function () {
     add_category();
 });
 
-route("/add-product", function(){
+route("/add-product", function () {
     add_product();
 });
 
-route("/edit-product", function(){
+route("/edit-product", function () {
     edit_product();
 });
 
-route("/edit-category", function(){
+route("/edit-category", function () {
     edit_category();
 });
 
-route("edit-customer", function(){
+route("edit-customer", function () {
     edit_customer();
 });
 
-route("/customer", function(){
+route("/customer", function () {
     customer();
 });
 
-// route("/order", function(){
-//     order();
-// });
 
-route("/comment", function(){
+route("/comment", function () {
     comment();
 });
 
-route("/graph", function(){
+route("/graph", function () {
     graph();
 });
 
-route("/statistic", function(){
+route("/statistic", function () {
     statistic();
 });
 
-route("/dashboard", function(){
+route("/dashboard", function () {
     dashboard();
 });
 
-route("/library", function(){
+route("/library", function () {
     library();
 });
 
-route("/readbook", function(){
+route("/readbook", function () {
     readbook();
 });
 
-route("/order_history", function(){
+route("/order_history", function () {
     order_history();
 });
 

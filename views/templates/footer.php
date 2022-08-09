@@ -57,8 +57,7 @@
 
             </footer>
             <!--end_footer-->
-
-            </div>
-            </body>
-
-            </html>
+<!-- ko xóa mấy thẻ dưới này -->
+        </div>
+    </body>
+</html>

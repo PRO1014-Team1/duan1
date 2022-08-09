@@ -81,12 +81,17 @@ function get_user_order($user_id = null, $order_id = null)
 {
 
     $sql = "SELECT * FROM order_info";
-    if ($user_id) {
+    if ($user_id && $order_id) {
+        $sql .= " WHERE `username` = ? AND `order_id` = ?";
+        $result = pdo_query($sql, [$user_id, $order_id]);
+    } else if ($user_id) {
         $sql .= " WHERE `username` = ?";
         $result = pdo_query($sql, [$user_id]);
     } else if ($order_id) {
         $sql .= " WHERE `order_id` = ?";
         $result = pdo_query($sql, [$order_id]);
+    } else {
+        $result = pdo_query($sql);
     }
     return $result;
 }

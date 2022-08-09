@@ -317,6 +317,18 @@ function order_history()
     view('/user/order_history');
 }
 
+function order_detail()
+{
+    set_user_header();
+    assets('order_detail');
+    assets('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">');
+    // script assets
+    assets('<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>');
+    assets('<script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>');
+    view('/user/order_detail');
+}
+
+
 // controller cho admin end
 
 function customer()
