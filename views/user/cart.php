@@ -1,6 +1,12 @@
 <?php
 $cart = $_SESSION['cart'] ?? null;
 if (isset($_POST['submit'])) {
+
+    if (!isset($cart) || count($cart) == 0) {
+        alert('Không có sản phẩm nào trong giỏ hàng');
+        redirect('cart');
+    }
+
     // tăng số lượng sản phẩm
     for ($i = 0; $i < count($cart); $i++) {
         $id = $_POST['id'][$i];

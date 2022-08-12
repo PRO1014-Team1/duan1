@@ -52,7 +52,7 @@ function status_colorcode($status)
                         <tbody>
                             <?php foreach ($orders as $order) : ?>
                                 <tr>
-                                    <th><?= $order['order_id'] ?></th>
+                                    <td><?= $order['order_id'] ?></td>
                                     <td><?= $order['created_date'] ?></td>
                                     <td><?= $order['first_name'] ?></td>
                                     <td><?= asvnd($order['total_price']) ?></td>

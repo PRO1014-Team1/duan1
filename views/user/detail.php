@@ -46,7 +46,7 @@ if (isset($_POST['comment'])) {
         alert("Bạn phải đăng nhập để bình luận!");
     } else {
         add_comment($user, $product_id, $_POST['content']);
-        redirect('detail?id=' . $product_id . '&category=' . $category_id);
+        redirect('detail?id=' . $product_id . '&category=' . $category_id . '#comment');
     }
 }
 
@@ -160,7 +160,7 @@ if (isset($_POST['comment'])) {
             </ul>
         <?php endif; ?>
     </section>
-    <aside class="other-section grid mx-auto">
+    <aside class="other-section grid mx-auto" id="#comment">
         <div class="col comment-section">
             <div class="title"> Bình luận: <span class="comment-count">(<?= number_shorten($comment_count) ?>)</span> </div>
             <div class="commit-section__content">

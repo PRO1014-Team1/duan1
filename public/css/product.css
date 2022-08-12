@@ -1,6 +1,7 @@
 .container {
   margin-left: 10rem;
   margin-top: 10rem;
+  margin-bottom: 10rem;
 }
 
 #nav-toggle:checked ~ .container {
@@ -104,6 +105,7 @@
   transform: scale(1);
 }
 
+
 .pagination__link {
   margin: 0 0.5rem;
 }
@@ -122,21 +124,22 @@
   margin: 0 1rem;
 }
 
+.non-btn-tools {
+  width: 50vw;
+  margin: auto;
+}
+
 .row {
   position: relative;
     margin-top: 5rem;
     margin-bottom: 1.5rem;
-    width: 90vw;
+    width: 80vw;
 }
 .row,
 .table-tools__container {
   display: flex;
   align-items: center;
 }
-
-/* .table-form {
-  margin: 5rem 0;
-} */
 
 .delete-one {
   color: var(--primary-500);
@@ -169,6 +172,8 @@
   background-color: var(--primary-100);
 }
 
+
+
 .table__options_dropdown ul {
   row-gap: .5rem;
   flex-direction: column;
@@ -180,9 +185,10 @@
 
 
 
-.col {
+ .col {
   justify-self: flex-end;
 }
+
 
 .column-price span{
   font-size: .9rem;

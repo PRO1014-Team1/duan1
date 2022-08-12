@@ -178,17 +178,6 @@ if (strcmp($category_filter, "all")) {
                                         </i>
                                     </div>
                                 </div>
-                                <!-- <ul class="prod-item__tag-list">
-                                    <?php if (isset($type_data)) : ?>
-                                        <?php if ($discount) : ?>
-                                            <li class="prod-item__tag prod-item__discount-percentage">x%</li>
-                                        <?php endif; ?>
-                                    <?php endif; ?>
-
-                                    <li class="prod-item__tag prod-item__discount-percentage">
-                                        <i class="fas fa-eye"></i>
-                                    </li>
-                                </ul> -->
                                 <div class="prod-item__desc">
                                     <div class="text-wrapper">
                                         <h3 class="prod-item__name truncate"><?= $prod["name"] ?></h3>

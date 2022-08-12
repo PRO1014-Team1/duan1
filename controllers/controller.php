@@ -111,9 +111,15 @@ function checkout()
     set_user_header();
     assets("<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css' integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO' crossorigin='anonymous'>");
 
-    $cart = $_SESSION['cart'];
+    $cart = $_SESSION['cart'] ?? null;
+    if (!isset($cart)) {
+        alert('Không có sản phẩm nào trong giỏ hàng');
+        redirect('cart');
+    }
+
     $cartItemCount = count($cart);
     $total = 0;
+
     view('/user/checkout', [
         'cart' => $cart,
         'cartItemCount' => $cartItemCount,
@@ -416,9 +422,12 @@ function graph()
 
 function dashboard()
 {
+    if (deny_access($_SESSION['role'])) {
+        return;
+    }
     assets('admin_header');
-    assets('<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.2/chart.min.js"></script>');
     assets('dashboard');
+    assets('<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.2/chart.min.js"></script>');
     set_admin_header();
     view('/admin/dashboard');
 }
@@ -427,4 +436,35 @@ function feedback()
     set_user_header();
     assets("<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css' integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO' crossorigin='anonymous'>");
     view('/user/feedback');
+}
+
+function order()
+{
+    if (deny_access($_SESSION['role'])) {
+        return;
+    }
+
+    $orders = get_user_order();
+    $orders = item_sort($orders, 'created_date', 'DESC');
+
+    assets('admin_header');
+    assets('product');
+    assets('order');
+    set_admin_header();
+
+    view('/admin/order', ['orders' => $orders]);
+}
+
+function order_detail_admin()
+{
+    if (deny_access($_SESSION['role'])) {
+        return;
+    }
+    
+    $orders = get_order_detail($_GET['id']);
+
+    assets('admin_header');
+    assets('product');
+    set_admin_header();
+    view('/admin/order-detail-admin', ['orders' => $orders]);
 }

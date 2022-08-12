@@ -180,3 +180,6 @@
   justify-self: flex-end;
 }
 
+.btn--danger {
+  background-color: #f44336;
+}

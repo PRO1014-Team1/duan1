@@ -14,9 +14,10 @@
   margin: 5rem auto !important;
 }
 
-.card {
+.card-body {
   outline: 2px solid palevioletred;
   outline-offset: 35px;
+  margin: 0 5rem;
 }
 
 .card-container {

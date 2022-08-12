@@ -41,8 +41,8 @@ if (empty($order_info)) {
                                 <tr>
                                     <td><?= $product['name'] ?></td>
                                     <td><?= $order['quantity'] ?></td>
-                                    <td><?= $order['price'] ?></td>
-                                    <td><?= $order['total'] ?></td>
+                                    <td><?= asvnd($order['price']) ?></td>
+                                    <td><?= asvnd($order['total']) ?></td>
                                     <td><?= get_type_name($order['type_id']) ?></td>
                                     <td>
                                         <a href="detail?id=<?= $order['product_id'] ?>&type_id=<?= $order['type_id'] ?>" class="link-primary opacity-75 text-capitalize text-decoration-none">Chi tiết sách <i class="fas fa-info-circle"></i></a>

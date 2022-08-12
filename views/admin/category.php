@@ -46,7 +46,7 @@ if ($delete_selected = $_POST['delete_selected'] ?? false) {
                                     <li>
                                         <form action="" method="post" class="delete-one">
                                             <input type="hidden" name="delete_one" value="<?= $category['id'] ?>">
-                                            <button type="submit" href="#" class="btn btn--danger select" onClick="javascript:return confirm('Bạn có muốn xóa sản phẩm này?')">Xóa</a>
+                                            <button type="submit" href="#" class="btn btn--danger select" onClick="javascript:return confirm('Hành động này sẽ xóa danh mục và các sản phẩm có trong danh mục đó. Bạn có muốn tiếp tục?')">Xóa</a>
                                         </form>
                                     </li>
                                 </ul>

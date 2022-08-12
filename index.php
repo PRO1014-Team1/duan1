@@ -127,6 +127,15 @@ route("/order_history", function () {
     order_history();
 });
 
+route("/order", function () {
+    order();
+}
+);
+
+route("/order-detail-admin", function () {
+    order_detail_admin();
+}
+);
 
 set_meta();
 run();

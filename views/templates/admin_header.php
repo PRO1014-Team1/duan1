@@ -41,7 +41,10 @@
                     </a>
                 </li>
                 <li class="sidebar__item">
-                    <a href="statistic" class="sidebar__card" id="statistic" data-active='false'>Thống Kê</a>
+                    <a href="order" class="sidebar__card" id="order" data-active='false'>
+                        <i class="fas fa-file-invoice">&nbsp;</i>
+                        <span>Đơn Hàng</span>
+                    </a>
                 </li>
             </ul>
         </div>

@@ -13,7 +13,7 @@ if (isset($_POST['edit'])) {
     if ($_FILES['product-image']['name'] !== '') {
         if ($_FILES['product-image']['size']) {
             $path = 'db/product/';
-            require 'upload.php';
+            require 'lib/upload.php';
             $data['image'] = $path;
         }
     } else {

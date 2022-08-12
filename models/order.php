@@ -207,3 +207,19 @@ function get_product_from_order($order_id = null)
     $result = pdo_query($sql, [$order_id]);
     return $result;
 }
+
+function order_update($order_id, $data)
+{
+    $sql = "UPDATE order_info SET ";
+    $i = 0;
+    foreach ($data as $key => $value) {
+        if ($i > 0) {
+            $sql .= ",";
+        }
+        $sql .= "$key = ?";
+        $i++;
+    }
+    $sql .= " WHERE order_id = ?";
+    $result = pdo_execute($sql, ...array_merge(array_values($data), [$order_id]));
+    return $result;
+}

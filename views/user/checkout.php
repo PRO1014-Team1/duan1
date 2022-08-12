@@ -1,5 +1,6 @@
 <?php
 
+
 $user = get_user(get_username());
 if (isset($_POST['submit'])) {
 
@@ -104,7 +105,7 @@ if (isset($_POST['submit'])) {
               <?php endif; ?>
             </div>
             <span class="text-muted"><?= asvnd($subtotal) ?></span>
-          </li> 
+          </li>
         <?php
         }
         ?>
@@ -135,11 +136,11 @@ if (isset($_POST['submit'])) {
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="firstName">Tên</label>
-            <input type="text" class="form-control" id="firstName" name="first_name" placeholder="Nhập tên" value="<?= explode(" ",$user['name'])[0] ?? '' ?>">
+            <input type="text" class="form-control" id="firstName" name="first_name" placeholder="Nhập tên" value="<?= explode(" ", $user['name'])[0] ?? '' ?>">
           </div>
           <div class="col-md-6 mb-3">
             <label for="lastName">Họ</label>
-            <input type="text" class="form-control" id="lastName" name="last_name" placeholder="Nhập họ" value="<?= explode(" ",$user['name'])[1] ?? '' ?>">
+            <input type="text" class="form-control" id="lastName" name="last_name" placeholder="Nhập họ" value="<?= explode(" ", $user['name'])[1] ?? '' ?>">
           </div>
         </div>
         <div class="mb-3">

@@ -253,5 +253,11 @@ function remove_empty($array)
 function translate_status($index)
 {
     $product_status = ['Chờ xử lý', 'Đang xử lý', 'Đang giao hàng', 'Đã giao hàng', 'Đã hủy'];
-    return $product_status[$index];
+
+    // if $index can't be converted to int, find the string in array and return the index
+    if (ctype_digit($index)) {
+        return $product_status[$index];
+    } else {
+        return array_search($index, $product_status);
+    }
 }
