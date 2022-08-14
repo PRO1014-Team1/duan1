@@ -64,10 +64,23 @@ route("/order_detail", function () {
     order_detail();
 });
 
+route("/library", function () {
+    library();
+});
+
+route("/readbook", function () {
+    readbook();
+});
+
+
 // Các route cho admin
 
 route("/product", function () {
     product();
+});
+
+route("/product-detail", function () {
+    product_detail();
 });
 
 route("/category", function () {
@@ -115,13 +128,6 @@ route("/dashboard", function () {
     dashboard();
 });
 
-route("/library", function () {
-    library();
-});
-
-route("/readbook", function () {
-    readbook();
-});
 
 route("/order_history", function () {
     order_history();

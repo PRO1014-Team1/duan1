@@ -41,7 +41,7 @@ if (isset($_POST['add-variant'])) {
     $data['product_id'] = $edit_id;
 
     if ($_FILES['type_download']) {
-        $path = 'db/';
+        $path = 'db/book/';
         require 'lib/upload.php';
         $data['type_download'] = $path;
         $data['file_size'] = $_FILES['type_download']['size'];
@@ -49,8 +49,6 @@ if (isset($_POST['add-variant'])) {
         $data['type_download'] = $edit_product['type_download'];
         $data['file_size'] = 0;
     }
-    echo '<br/><br/><br/><br/>';
-    var_dump($data);
 
     $result = pdo_execute(
         'INSERT INTO `type_detail` (`product_id`, `type_id`, `download`, `price`, `quantity`, `sale`, `dimensions`, `pages`, `status` ,`file_size`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
@@ -66,10 +64,11 @@ if (isset($_POST['add-variant'])) {
         $data['file_size']
     );
     if ($result) {
-        echo '<script>alert("Thêm sản phẩm thành công")</script>';
+        alert("Thêm sản phẩm thành công");
         redirect('edit-product?id=' . $data['product_id']);
     }
 }
+reset($edit_product);
 
 ?>
 <div class="container">

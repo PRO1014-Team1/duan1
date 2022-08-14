@@ -13,7 +13,7 @@ if ($delete_selected = $_POST['delete_selected'] ?? false) {
 if ($_POST['edit'] ?? false) {
     redirect('edit-product?id=' . $_POST['edit']);
 } elseif ($_POST['detail'] ?? false) {
-    redirect('detail?id=' . $_POST['detail']);
+    redirect('product-detail?id=' . $_POST['detail']);
 }
 
 

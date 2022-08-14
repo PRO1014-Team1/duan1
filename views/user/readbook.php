@@ -1,29 +1,26 @@
 <?php
-$current_page = 1;
-$id = $_GET['id'];
-$doc = $_SESSION["readable"][$id];
 if (!isset($_SESSION['bookmark'])) {
-    $_SESSION['bookmark'] = array();
+    $_SESSION['bookmark'] = explode(",", $library['bookmark']) ?? array();
+
 }
 if (isset($_POST['remove-bookmark'])) {
     $remove_key = array_search($_POST['remove-bookmark'], $_SESSION['bookmark']);
-    var_dump($_SESSION['bookmark']);
     unset($_SESSION['bookmark'][$remove_key]);
-    echo "<br>";
-    var_dump($_SESSION['bookmark']);
+    update_library($user['library_id'], $id, $_SESSION['bookmark']);
 }
 
 if (isset($_POST['add'])) {
     $current_page = $_POST['current-page'];
     array_push($_SESSION['bookmark'],  $current_page ?? 1);
     $_SESSION['bookmark'] = array_unique($_SESSION['bookmark']);
+    update_library($user['library_id'], $id, $_SESSION['bookmark']);
 }
 if (isset($_POST['bookmark-list'])) {
     $current_page = $_POST['bookmark-list'];
     $bookmark_list = $_POST['bookmark-list'];
 }
-echo "<script>let currentPageIndex = {$current_page}; </script>";
-echo "<script>let doc = {$doc} </script>";
+
+echo "<script>let currentPageIndex = {$current_page}; const doc = '{$doc}';</script>";
 
 ?>
 <div id="container">

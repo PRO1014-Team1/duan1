@@ -1,0 +1,17 @@
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: var(--font-main);
+  margin-bottom: 1rem;
+}
+
+.title-block {
+  margin: 0 auto -5rem auto;
+  width: 50vw;
+}
+
+.type-edit input {
+  display: inline;
+  width: 100%;
+}
+

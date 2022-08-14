@@ -30,7 +30,7 @@ if (in_array($file_ext, $allowed)) {
             // file should be smaller than 200mb
             if ($file_size <= 20000000) {
                 $file_name_new = ($_POST["product_name"] ?? "") . '.' . $file_ext;
-                $path .= 'book/' .  $file_name_new;
+                $path .= $file_name_new;
                 if (move_uploaded_file($file_tmp, $path)) {
                     echo '<script>alert("Upload thành công")</script>';
                 } else {

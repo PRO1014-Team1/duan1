@@ -1,10 +1,9 @@
 <?php
 
 $orders = get_user_order(get_username());
+$user = get_user(get_username());
+$library = get_library($user['library_id']);
 
-if (!isset($_SESSION['readable'])) {
-    $_SESSION['readable'] = [];
-}
 ?>
 <div id="container">
     <div class="container-fluid my-5 p-5 d-flex justify-content-center">
@@ -27,75 +26,55 @@ if (!isset($_SESSION['readable'])) {
             </div>
             <div class="row">
                 <div class="col">
-                    <?php foreach ($orders as $order) : ?>
+                    <?php foreach ($library as $item) : ?>
                         <?php
-                        $order_id = $order['order_id'];
-                        $order_info = get_user_order(null, $order_id);
-                        $order_detail = get_order_detail($order_id);
+                        $product = get_product($item['product_id']);
+                        $variant = get_type_data($item['product_id'], $item['type_id'])[0];
                         ?>
-                        <?php foreach ($order_detail as $detail) : ?>
-                            <?php
-                            $product = get_product($detail['product_id']);
-                            $type_id = $detail['type_id'] != 0 ? $detail['type_id'] : get_type_data($product['product_id'])[0]['type_id'];
-                            $type = get_type_data($product['product_id'], $type_id)[0];
-                            ?>
-                            <div class="card p-2">
-                                <div class="card-body">
-                                    <div class="media">
-                                        <div class="media-body my-auto text-right">
-                                            <div class="row  my-auto flex-column flex-md-row">
-                                                <div class="col my-auto">
-                                                    <img class="img-fluid" src="<?= $product['image'] ?>" width="135" height="135" />
-                                                </div>
-                                                <div class="col my-auto">
-                                                    <p class="fs-5 text-dark"><?= $product['name'] ?></p>
-                                                </div>
-                                                <?php if ($detail['quantity']) : ?>
-                                                    <div class="col my-auto fs-5 text-dark">
-                                                        <p>Số lượng : <?= $detail['quantity'] ?></p>
-                                                    </div>
-                                                <?php endif; ?>
-                                                <div class="col my-auto">
-                                                    <p class="fs-5 text-dark"><?= asvnd($detail['price']) ?></p>
-                                                </div>
+                        <div class="card p-2">
+                            <div class="card-body">
+                                <div class="media">
+                                    <div class="media-body my-auto text-right">
+                                        <div class="row  my-auto flex-column flex-md-row">
+                                            <div class="col my-auto">
+                                                <img class="img-fluid w-50" src="<?= $product['image'] ?>" width="100" height="135" />
+                                            </div>
+                                            <div class="col my-auto">
+                                                <p class="fs-5 text-dark"><?= $product['name'] ?></p>
+                                            </div>
+                                            <div class="col my-auto fs-5 text-dark">
+                                                <p>Kích cỡ file : <?= $variant['file_size'] ?></p>
+                                            </div>
+                                            <div class="col my-auto">
+                                                <p class="fs-5 text-dark"><?= asvnd($variant['price']) ?></p>
                                             </div>
                                         </div>
                                     </div>
-                                    <hr class="my-3">
-                                    <div class="row">
-
-                                    </div>
                                 </div>
-                                <nav aria-label="breadcrumb" class="breadcrumb-container">
-                                    <ul class="breadcrumb w-75 mx-auto text-center">
-                                        <li class="breadcrumb-item me-2 bg-info py-2 px-3 text-light">
-                                            <span class="breadcrumb-title">
-                                                <?= translate_status($order['order_status']) ?>
-                                                &nbsp;<i class="ml-2 fa fa-refresh" aria-hidden="true"></i>
-                                            </span>
-                                        </li>
-                                        <li class="breadcrumb-item me-2 bg-dark py-2 px-3 text-light">
-                                            <span class="breadcrumb-title">
-                                                <?= get_type_name($type_id) ?></span>
-                                        </li>
-                                        <li class="breadcrumb-item me-2">
-                                            <span class="breadcrumb-title">
-                                                <?php if ($detail['type_id'] == 335 && $order['order_status'] === "delivered") : ?>
-                                                    <?php $_SESSION['readable'][$product['product_id']] = $type['download'];
-                                                    ?>
-                                                    <a href="readbook?id=<?= $product['product_id'] ?>" class="text-light py-2 px-3 bg-success btn text-uppercase"><button>Đọc sách</button></a>
-                                                    <a href="<?= $type['download']; ?>" class="text-light py-2 px-3 ms-2 bg-primary btn text-uppercase" download><i class="fa fa-download ml-2" aria-hidden="true"></i></a>
-                                                <?php elseif ($detail['type_id'] == 336 && $order['order_status'] === "delivered") : ?>
-                                                    <a href="readbook?id=<?= $product['product_id'] ?>" class="text-light py-2 px-3 bg-success btn text-uppercase"><button>Đọc sách</button></a>
-                                                <?php else : ?>
-                                                    <a href="<?= 'detail' . '?id=' . $product['product_id'] . '&category' . $product['category_id'] ?>" class="text-decoration-none py-2 px-3 bg-dark btn link-warning text-uppercase"><button>Thông tin sách</button></a>
-                                                <?php endif; ?>
-                                            </span>
-                                        </li>
-                                    </ul>
-                                </nav>
+                                <hr class="my-3">
+                                <div class="row">
+
+                                </div>
                             </div>
-                        <?php endforeach; ?>
+                            <nav aria-label="breadcrumb" class="breadcrumb-container">
+                                <ul class="breadcrumb w-75 mx-auto text-center">
+                                    <li class="breadcrumb-item me-2 bg-info py-2 px-3 text-light">
+                                        <span class="breadcrumb-title">
+                                            <a href="<?= 'detail' . '?id=' . $item['product_id'] . '&category' . $product['category_id'] . '&type_id=' . $item['type_id'] ?>" class="text-decoration-none link-dark text-uppercase"><button>Thông tin sách</button></a>
+                                        </span>
+                                    </li>
+                                    <li class="breadcrumb-item me-2 bg-dark py-2 px-3 text-light">
+                                        <span class="breadcrumb-title">
+                                            <?= get_type_name($item['type_id']) ?></span>
+                                    </li>
+                                    <li class="breadcrumb-item me-2">
+                                        <span class="breadcrumb-title">
+                                            <a href="readbook?id=<?= $item['product_id'] ?>&type=<?= $item['type_id'] ?>" class="text-light py-2 px-3 bg-success btn text-uppercase"><button>Đọc sách</button></a>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
                     <?php endforeach; ?>
                     <div class="row m-4">
                         <div class="col">

@@ -10,10 +10,11 @@ if(isset($_POST['register'])) {
         $data['role'] = false;
         $data['identity'] = $_SESSION['identity'];
         $data['avatar'] = '';
-        $user = pdo_execute('INSERT INTO users (name, username, email, birthdate, password, role, identity, avatar) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', 
-        [$data['name'], $data['username'], $data['email'], $data['birthdate'], $data['password'],  $data['role'], $data['identity'], $data['avatar']]);
+        $data['library_id'] = uniqid("LIB");
+        $user = pdo_execute('INSERT INTO users (name, username, email, birthdate, password, role, identity, avatar, library_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', 
+        [$data['name'], $data['username'], $data['email'], $data['birthdate'], $data['password'],  $data['role'], $data['identity'], $data['avatar'], $data['library_id']]);
         
-        echo '<script>alert("Đăng ký thành công!");</script>';
+        alert("Đăng ký thành công!");
         redirect('login');
     }
 }

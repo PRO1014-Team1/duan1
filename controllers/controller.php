@@ -12,6 +12,7 @@ require_once "models/comment.php";
 require_once 'models/order.php';
 require_once 'models/category.php';
 require_once 'models/customer.php';
+require_once 'models/library.php';
 
 function home()
 {
@@ -155,6 +156,32 @@ function product()
     view('/admin/product');
 }
 
+function product_detail()
+{
+    if (deny_access($_SESSION['role'])) {
+        return;
+    }
+
+
+    $product_id = $_GET['id'] ?? 0;
+    $product = get_product($product_id);
+    $types = get_type_data($product_id);
+    $type_names = get_type_name();
+    $category = get_category($product['category_id']);
+    $selected = $_POST['selected'] ?? null;
+
+    assets('admin_header');
+    assets('product-detail');
+    assets('product');
+    set_admin_header();
+    view('/admin/product-detail', [
+        'product' => $product,
+        'types' => $types,
+        'type_names' => $type_names,
+        'category' => $category,
+        'selected' => $selected,
+    ]);
+}
 
 function add_product()
 {
@@ -175,7 +202,7 @@ function edit_product()
     }
 
     $edit_id = $_GET['id'] ?? $edit_id ?? false;
-    $edit_product = end(item_filter(get_product(), "product_id", $edit_id));
+    $edit_product = item_filter(get_product(), "product_id", $edit_id)[0];
     $category = get_all_category();
 
     assets('admin_header');
@@ -300,6 +327,18 @@ function library()
 
 function readbook()
 {
+    $current_page = 1;
+    $id = $_GET['id'];
+    $user = get_user(get_username());
+    $type_id = $_GET['type'];
+    $variant = get_type_data($id, $type_id)[0];
+    $doc = $variant['download'];
+    $library = get_library($user['library_id'], $id);
+
+    if (get_library($user['library_id'], $id) == false) {
+        alert('Sách không tồn tại');
+        redirect('library');
+    }
     assets('user_header');
     assets('readbook');
     assets('<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js" integrity="sha512-dw+7hmxlGiOvY3mCnzrPT5yoUwN/MRjVgYV7HGXqsiXnZeqsw1H9n9lsnnPu4kL2nx2bnrjFcuWK+P3lshekwQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>');
@@ -309,7 +348,14 @@ function readbook()
     assets('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf_viewer.min.css" integrity="sha512-USGasHs0SUBcT/vnWD0C6wMIvMGRf4lvvSKNbKvShfGdgT2pxHWNvClLLZwPqygPOiQ4HEIM51R/8bguqWyNvQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />');
     assets('<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf_viewer.min.js" integrity="sha512-x+RmXhJTdSyOC9nVUvKVwtTsfTFtsbWPNeTuI3OlA7kLvyxG39BiWaT5VU5xENbHq25k3KFPdGR5OcO2/LTxOg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>');
     set_user_header();
-    view('/user/readbook');
+    view('/user/readbook', [
+        'doc' => $doc,
+        'library' => $library,
+        'variant' => $variant,
+        'current_page' => $current_page,
+        'id' => $id,
+        'type_id' => $type_id
+    ]);
 }
 
 
@@ -460,7 +506,7 @@ function order_detail_admin()
     if (deny_access($_SESSION['role'])) {
         return;
     }
-    
+
     $orders = get_order_detail($_GET['id']);
 
     assets('admin_header');

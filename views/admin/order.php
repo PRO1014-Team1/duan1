@@ -13,6 +13,25 @@ if (isset($_POST['action']) && $_POST['action'] == 'edit') {
     $order['order_status'] = $status;
     $order['updated_date'] = date('Y-m-d H:i:s');
     order_update($id, $order);
+
+    if ($_POST['status'] == 3) {
+        $order_detail = get_order_detail($id);
+        foreach ($order_detail as $detail) {
+            $product = get_product($detail['product_id']);
+            $library_detail = get_library($library['library_id'], $product['product_id']);
+            if(!$library_detail) {
+                set_library($library['library_id'], $product['product_id']);
+            }
+            // if ($library_detail) {
+            //     $bookmarks = explode(",", $library_detail['bookmarks']);
+            //     $bookmarks[] = $detail['product_id'];
+            //     $bookmarks = array_unique($bookmarks);
+            //     update_library($library['library_id'], $product['product_id'], $bookmarks);
+            // } else {
+            //     set_library($library['library_id'], $product['product_id']);
+            // }
+        }
+    }
     redirect("order");
 }
 
@@ -44,7 +63,7 @@ function status_colorcode($status)
         <form method="post" class="ta-center status-form">
             <input type="hidden" name="id" value="<?= $order['order_id'] ?>">
             <div class="form-group">
-                <p><?= $order['order_id'] ?></p>
+                <p>SKU: <?= $order['order_id'] ?></p>
                 <label class="block status-label" for="status">Trạng thái đơn hàng :</label>
                 <select class="form-control" id="status" name="status">
                     <option value="0" <?= $order['order_status'] == 0 ? "selected" : "" ?>>Chờ xử lý</option>
@@ -75,6 +94,7 @@ function status_colorcode($status)
                             <th>Ngày đặt</th>
                             <th>Ngày cập nhật</th>
                             <th>Tên người nhận</th>
+                            <th>Tên người dùng</th>
                             <th>Tổng tiền</th>
                             <th>Trạng thái</th>
                             <th class="ta-center"></th>
@@ -87,6 +107,7 @@ function status_colorcode($status)
                                 <td><?= $order['created_date'] ?></td>
                                 <td><?= $order['updated_date'] ?></td>
                                 <td><?= $order['first_name'] ?></td>
+                                <td><?= $order['username'] ?></td>
                                 <td><?= asvnd($order['total_price']) ?></td>
                                 <td class="<?= status_colorcode($order['order_status']) ?> fw-bold"><?= translate_status($order['order_status']) ?></td>
                                 <td class="ta-center extras">
