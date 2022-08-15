@@ -64,9 +64,9 @@ if (isset($_POST['submit'])) {
     //update total_price và order_status trong order_info
     if ($result) {
       if (in_array('out_of_stock', $overall_status)) {
-        $order_info['order_status'] = 'unavailable'; // 1 trong số sản phẩm không còn hàng
+        $order_info['order_status'] = 4; // 1 trong số sản phẩm không còn hàng
       } else if (in_array('pending', $overall_status)) {
-        $order_info['order_status'] = 'pending'; // 1 trong số sản phẩm đang chờ xử lý
+        $order_info['order_status'] = 0; // 1 trong số sản phẩm đang chờ xử lý
       }
 
       $sql = "UPDATE order_info SET total_price = ?, order_status = ? WHERE order_id = ?";

@@ -1,4 +1,5 @@
 <?php
+$cart_id = $product_id . $type_id;
 
 if ($type_id) {
     $sql = "SELECT * FROM type_detail WHERE `product_id` = ? AND `type_id` = ?";
@@ -24,6 +25,7 @@ if (isset($_POST['checkout']) || isset($_POST['add'])) {
                 "id" => $product_id,
                 "status" => "pending",
                 "quantity" => 1,
+                "product_id" => $product_id,
                 "type_id" => $type_id ?? get_type_data($product_id, $type_id)[0],
             ];
         }
@@ -201,7 +203,7 @@ if (isset($_POST['comment'])) {
                 <div class="top-9-prod__list col-3-3 grid">
                     <?php foreach ($top_9_prod as $product) { ?>
                         <div class="top-9-prod__item">
-                            <a href="detail&id=<?= $product["product_id"] ?>&category=<?= $product["category_id"] ?>" class="hover-mask" data-content="<?= $product["name"] ?>">
+                            <a href="detail?id=<?= $product["product_id"] ?>&category=<?= $product["category_id"] ?>" class="hover-mask" data-content="<?= $product["name"] ?>">
                                 <img class="img-fluid top-9-prod__img" src="<?= $product["image"] ?>" alt="<?= $product["name"] ?>" />
                             </a>
                         </div>

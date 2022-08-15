@@ -1,8 +1,11 @@
 <?php
-function get_library($library_id, $product_id = null)
+function get_library($library_id, $product_id = null, $type_id = null)
 {
     $sql = "SELECT * FROM library WHERE library_id = ?";
-    if ($product_id) {
+    if ($product_id && $type_id) {
+        $sql .= " AND product_id = ? AND type_id = ?";
+        $result = pdo_query($sql, [$library_id, $product_id, $type_id]);
+    } elseif ($product_id) {
         $sql .= " AND product_id = ?";
         $result = pdo_query($sql, [$library_id, $product_id]);
     } else {
@@ -12,10 +15,10 @@ function get_library($library_id, $product_id = null)
 }
 
 
-function set_library($library_id, $product_id)
+function set_library($library_id, $product_id, $type_id)
 {
-    $sql = "INSERT INTO library (library_id, product_id) VALUES (?, ?)";
-    return pdo_query($sql, [$library_id, $product_id]);
+    $sql = "INSERT INTO library (library_id, product_id, `type_id`) VALUES (?, ?, ?)";
+    return pdo_query($sql, [$library_id, $product_id, $type_id]);
 }
 
 function update_library($library_id, $product_id, $bookmarks = [])

@@ -2,7 +2,6 @@
 
 [$pageno, $total_pages, $orders] = pagination($_POST['pageno'] ?? 1, $_POST['search'] ?? "", $orders);
 $selected = $_POST['selected'] ?? null;
-
 if ($_POST['detail'] ?? false) {
     redirect("order_detail?id={$_POST['detail']}");
 }
@@ -16,20 +15,14 @@ if (isset($_POST['action']) && $_POST['action'] == 'edit') {
 
     if ($_POST['status'] == 3) {
         $order_detail = get_order_detail($id);
+        $order_info = get_user_order(null, $id)[0];
+        $user = get_user($order_info['username']);
         foreach ($order_detail as $detail) {
             $product = get_product($detail['product_id']);
-            $library_detail = get_library($library['library_id'], $product['product_id']);
-            if(!$library_detail) {
-                set_library($library['library_id'], $product['product_id']);
+            $library_detail = get_library($user['library_id'], $product['product_id'], $detail  ['type_id']);
+            if (empty($library_detail)) {
+                set_library($user['library_id'], $product['product_id'], $detail['type_id']);
             }
-            // if ($library_detail) {
-            //     $bookmarks = explode(",", $library_detail['bookmarks']);
-            //     $bookmarks[] = $detail['product_id'];
-            //     $bookmarks = array_unique($bookmarks);
-            //     update_library($library['library_id'], $product['product_id'], $bookmarks);
-            // } else {
-            //     set_library($library['library_id'], $product['product_id']);
-            // }
         }
     }
     redirect("order");

@@ -57,7 +57,7 @@ if (isset($_POST['add-variant'])) {
         $data['type_download'],
         $data['type_price'],
         $data['quantity'],
-        $data['type_sale'],
+        floatval($data['type_sale'] / 100),
         $data['type_dimensions'],
         $data['pages'],
         status_convert($data['status']),

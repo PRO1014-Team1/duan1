@@ -34,7 +34,7 @@ if ($_POST['edit-submit'] ?? false) {
         $data['file_size'] ?? $_FILES['download']['size'],
         $data['dimensions'],
         $data['pages'],
-        $data['sale'],
+        floatval($data['sale']) / 100, // convert từ string sang float
         $data['status'],
         $data['type_id'],
         $data['product_id']
@@ -78,8 +78,8 @@ $edit_id = $_POST['edit-type'] ?? null;
                         <tr class="type-display">
                             <td><?= get_type_name($type['type_id']) ?></td>
                             <td><?= $type['price'] ?></td>
-                            <td><?= $type['sale'] ?></td>
-                            <td><?= $type['file_size'] ?></td>
+                            <td><?= $type['sale'] * 100 ?>%</td>
+                            <td><?= file_size_format($type['file_size'])  ?></td>
                             <td><?= $type['dimensions'] ?></td>
                             <td><?= $type['quantity'] ?></td>
                             <td><?= $type['pages'] ?></td>
@@ -99,7 +99,7 @@ $edit_id = $_POST['edit-type'] ?? null;
                                 <input type="text" name="price" value="<?= $type['price'] ?>">
                             </td>
                             <td>
-                                <input type="text" name="sale" value="<?= $type['sale'] ?>">
+                                <input type="text" name="sale" value="<?= $type['sale'] * 100 ?>">
                             </td>
                             <td>
                                 <input type="text" name="file_size" value="<?= $type['file_size'] ?>">

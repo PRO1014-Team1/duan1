@@ -7,6 +7,9 @@ if ($delete_one = $_POST['delete_one'] ?? false) {
     delete_product($delete_one);
 }
 if ($delete_selected = $_POST['delete_selected'] ?? false) {
+    if (!is_array($selected)) {
+        $selected = [$selected];
+    }
     delete_product($selected);
 }
 
@@ -44,7 +47,7 @@ if ($_POST['edit'] ?? false) {
                     ?>
                     <tr>
                         <td><?= $product['product_id'] ?></td>
-                        <td><img src="<?= $product['image'] ?>" alt="<?= $product['name'] ?>" width="50" class="product-img"></td>
+                        <td><img src="<?= $product['image'] ?>" width="50" class="product-img"></td>
                         <td><?= $product['name'] ?></td>
                         <td>
                             <?php foreach ($type as $type_data) : ?>

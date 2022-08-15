@@ -3,7 +3,6 @@
 $orders = get_user_order(get_username());
 $user = get_user(get_username());
 $library = get_library($user['library_id']);
-
 ?>
 <div id="container">
     <div class="container-fluid my-5 p-5 d-flex justify-content-center">
@@ -43,7 +42,7 @@ $library = get_library($user['library_id']);
                                                 <p class="fs-5 text-dark"><?= $product['name'] ?></p>
                                             </div>
                                             <div class="col my-auto fs-5 text-dark">
-                                                <p>Kích cỡ file : <?= $variant['file_size'] ?></p>
+                                                <p>Kích cỡ: <?= file_size_format($variant['file_size']) ?></p>
                                             </div>
                                             <div class="col my-auto">
                                                 <p class="fs-5 text-dark"><?= asvnd($variant['price']) ?></p>
@@ -68,10 +67,40 @@ $library = get_library($user['library_id']);
                                             <?= get_type_name($item['type_id']) ?></span>
                                     </li>
                                     <li class="breadcrumb-item me-2">
-                                        <span class="breadcrumb-title">
-                                            <a href="readbook?id=<?= $item['product_id'] ?>&type=<?= $item['type_id'] ?>" class="text-light py-2 px-3 bg-success btn text-uppercase"><button>Đọc sách</button></a>
-                                        </span>
+                                        <?php if ($item['type_id'] == 335) : ?>
+                                            <!-- ebook -->
+                                            <span class="breadcrumb-title">
+                                                <a href="readbook?id=<?= $item['product_id'] ?>&type=<?= $item['type_id'] ?>" class="text-light py-2 px-3 bg-success btn text-uppercase"><button>Đọc sách</button></a>
+                                            </span>
+                                        <?php else : ?>
+                                            <!-- audio -->
+                                            <span class="breadcrumb-title">
+                                                <button class="text-dark py-2 px-3 bg-warning btn text-bold text-capitalize listen">Nghe sách</button>
+                                            </span>
+                                        <?php endif ?>
                                     </li>
+                                    <?php if ($item['type_id'] == 336) : ?>
+                                        <li class="breadcrumb-item me-2">
+                                            <div class="audio-wrapper hidden">
+                                                <div class="audio-controls">
+                                                    <audio class="audio" src="<?= $variant['download'] ?>" preload=”metadata” loop type="audio/mp3"></audio>
+                                                    <div class="media-tool-container">
+                                                        <button class="utils-button"><i class="audio-toggle-btn btn-icon fas fa-play"></i></button>
+                                                        <span id="current-time" class="time">0:00</span>
+                                                        <input type="range" id="seek-slider" max="100" value="0">
+                                                        <span id="duration" class="time">0:00</span>
+                                                        <button class="media-tool volume-toggle-btn">
+                                                            <i class="fas fa-headphones"></i>
+                                                        </button>
+                                                        <input data-minimize="true" type="hidden" class="transition-quick" class="volume-slider" id="volume-slider" max="100" value="75">
+                                                        <button class="media-tool mute">
+                                                            <i class="mute-toggle-btn fas fa-volume-high btn-icon-secondary"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    <?php endif ?>
                                 </ul>
                             </nav>
                         </div>

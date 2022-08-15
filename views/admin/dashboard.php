@@ -138,26 +138,35 @@
                 <div class="chart">
                     <canvas id="variant-chart"></canvas>
                 </div>
-                <div class="card-info theme--dark">
-                    <div class="card-info__wrapper flex">
-                        <!-- top selling category -->
-                        <div class="card-info__item">
-                            <h6 class="card-info__title">Danh mục ưa chuộng:</h6>
-                        </div>
-                        <p class="card-text">
-                        </p>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
     <div class="bottom-cards">
         <div class="bottom-cards__wrapper grid">
             <div class="card">
-                <h5 class="card-title">Sản phẩm bán chạy</h5>
-                <div class="chart">
-                    <canvas id="product-chart" height="80"></canvas>
-                </div>
+                <h5 class="card-title">Đơn hàng mới</h5>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Mã đơn hàng</th>
+                            <th>Ngày đặt hàng</th>
+                            <th>Tổng tiền</th>
+                            <th>Trạng thái</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($orders_cur_order as $order) : ?>
+                            <tr>
+                                <td><?= $order['order_id'] ?></td>
+                                <td><?= $order['created_date'] ?></td>
+                                <td><?= asvnd($order['total_price']) ?></td>
+                                <td><?= translate_status($order['order_status']) ?></td>
+                                <td><a href="order" class="btn btn--primary">Xác nhận</a></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

@@ -125,3 +125,35 @@
   font-weight: bold;
   padding-left: 1rem;
 }
+
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin: 1rem auto;
+  text-align: center;
+  font-family: var(--font-secondary);
+}
+
+/* create table with stripes */
+.table-striped tbody tr:nth-child(odd) {
+  background-color: var(--line);
+}
+
+.table thead th {
+  color: white;
+  background-color: var(--primary);
+
+  font-size: 0.8rem;
+  font-family: var(--font-main);
+  font-weight: bold;
+}
+
+.table tbody {
+}
+
+.table th,
+.table td:not(.extras) {
+  padding: 1.25em;
+}

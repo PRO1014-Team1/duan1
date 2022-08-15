@@ -1,63 +1,54 @@
-            <footer id="footer" class="theme--dark">
-                <div class="footer">
-                    <div class="footer__media flex">
-                        <div class="footer__media__item">
-                            <a href="#">
-                                <img src="./public/img/fa_twitter.svg" alt="">
-                            </a>
-                        </div>
-                        <div class="footer__media__item">
-                            <a href="#">
-                                <img src="./public/img/fa_fb.svg" alt="">
-                            </a>
-                        </div>
-                        <div class="footer__media__item">
-                            <a href="#">
-                                <img src="./public/img/fa_insta.svg" alt="">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="footer__nav flex ts-2">
-                        <div class="footer__nav__item">
-                            <a href="#" class="link-light">
-                                <img src="./public/img/sa_home.svg" alt="">
-                                <span class="text-light">trang chủ</span>
-                            </a>
+            <footer class="footer-distributed">
+                <div class="footer-left">
+                    <img src="./public/img/logo.png" class="img-fluid footer-logo" alt="Nitwitty Logo" />
+                    <p class="footer-links">
+                        <a href="home" class="link-1">Trang chủ</a>
 
-                        </div>
-                        <div class="footer__nav__item">
-                            <a href="#" class="link-light">
-                                <img src="./public/img/sa_email.svg" alt="">
-                                <span class="text-light">liên hệ</span>
-                            </a>
+                        <a href="news">Tin tức</a>
 
-                        </div>
-                        <div class="footer__nav__item">
-                            <a href="#" class="link-light">
-                                <img src="./public/img/sa_support.svg" alt="">
-                                <span class="text-light">hỗ trợ</span>
-                            </a>
+                        <a href="library">Thư viện</a>
+                    </p>
 
-                        </div>
-                    </div>
-                    <div class="footer__divider"></div>
-                    <!-- copyright -->
-                    <div class="footer__copyright t-center ts-2 txt--light">
-                        <p> © 2022 LAMHCPH19354 </p>
-                    </div>
-                    <div class="btt-corner">
-                        <img src="./public/img/triangle.svg" alt="">
-                    </div>
-                    <div class="back-to-top">
-                        <a href="#" class="link-light">
-                            <i class="fas fa-chevron-circle-up text-dark"></i>
-                        </a>
-                    </div>
+                    <p class="footer-company-name">Nhóm 1 © 2022</p>
                 </div>
 
+                <div class="footer-center">
+
+                    <div>
+                        <i class="fa fa-map-marker"></i>
+                        <p><span>Phố Trịnh Văn Bô</span> Xuân Phương, Hà Nội</p>
+                    </div>
+
+                    <div>
+                        <i class="fa fa-phone"></i>
+                        <p>+84 012 345 6789</p>
+                    </div>
+
+                    <div>
+                        <i class="fa fa-envelope"></i>
+                        <p><a href="mailto:support@company.com">abcde@gmail.com</a></p>
+                    </div>
+
+                </div>
+
+                <div class="footer-right">
+
+                    <p class="footer-company-about">
+                        <span>Công ty</span>
+                        Khách hàng sẽ rất hạnh phúc, người phụ trách việc tán thành nhà phát triển.
+                    </p>
+
+                    <div class="footer-icons">
+
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                        <a href="#"><i class="fa fa-github"></i></a>
+
+                    </div>
+                </div>
             </footer>
-            <!--end_footer-->
-<!-- ko xóa mấy thẻ dưới này -->
-        </div>
-    </body>
-</html>
+            </div>
+            </body>
+
+            </html>

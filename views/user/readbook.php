@@ -1,7 +1,19 @@
 <?php
+$current_page = 1;
+$id = $_GET['id'];
+$user = get_user(get_username());
+$type_id = $_GET['type'];
+$variant = get_type_data($id, $type_id)[0];
+$doc = $variant['download'];
+$library = get_library($user['library_id'], $id);
+
+if (get_library($user['library_id'], $id) == false) {
+    alert('Sách không tồn tại');
+    redirect('library');
+}
+
 if (!isset($_SESSION['bookmark'])) {
     $_SESSION['bookmark'] = explode(",", $library['bookmark']) ?? array();
-
 }
 if (isset($_POST['remove-bookmark'])) {
     $remove_key = array_search($_POST['remove-bookmark'], $_SESSION['bookmark']);

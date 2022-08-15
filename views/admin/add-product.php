@@ -1,5 +1,4 @@
 <?php
-require './dao/category.php';
 
 $category = get_all_category();
 
@@ -18,10 +17,15 @@ if (isset($_POST['add-product'])) {
 
         // update product
         pdo_execute(
-            'INSERT INTO `product` (`name`, `price`, `image`, `import_date`, `category_id`, `description`) VALUES (?, ?, ?, ?, ?, ?)',
-            [$data['product_name'], $data['price'], $data['image'], $data['import_date'], $data['category_id'], $data['description']]
+            'INSERT INTO `product` (`name`,`image`, `import_date`, `category_id`, `description`) VALUES (?, ?, ?, ?, ?)',
+            $data['product_name'],
+            $data['image'],
+            $data['import_date'],
+            $data['category_id'],
+            $data['description']
         );
 
+        alert('Thêm sản phẩm thành công');
         redirect('product');
     }
 }
@@ -52,16 +56,6 @@ if (isset($_POST['add-product'])) {
             </div>
         </div>
         <div class="form-section grid row">
-            <div class="form-group grid col col-2-2">
-                <div class="form-control disabled">
-                    <label for="view">Số lượt xem</label>
-                    <input type="number" id="view" name="view" class="form-input <?= isset($_SESSION['errors']['view']) ? "error" : "" ?>" placeholder="<?= $_SESSION['errors']['view'] ?? "" ?>">
-                </div>
-                <div class="form-control">
-                    <label for="price">Đơn giá</label>
-                    <input type="number" id="price" name="price" step="0.01" class="form-input <?= isset($_SESSION['errors']['price']) ? "error" : "" ?>" placeholder="<?= $_SESSION['errors']['price'] ?? "" ?>" required>
-                </div>
-            </div>
             <div class="form-group">
                 <div class="form-control">
                     <label for="category_id">Danh Mục</label>

@@ -13,9 +13,11 @@ if ($cart = $_POST['cart-id'] ?? false) {
             $_SESSION['cart'][$cart]['quantity']++;
         } else {
             $_SESSION['cart'][$cart] = [
-                "id" => $_POST['cart-id'],
+                "id" => $_POST['cart-id'] . $_POST['cart-type'],
                 "status" => "pending",
                 "quantity" => 1,
+                "type_id" => $_POST['cart-type'],
+                "product_id" => $_POST['cart-id'],
             ];
         }
         redirect("home");
@@ -164,6 +166,7 @@ if (strcmp($category_filter, "all")) {
                                     <div class="widget">
                                         <form method="POST" class="cart-submit">
                                             <input type="hidden" name="cart-id" value="<?= $prod['product_id'] ?>">
+                                            <input type="hidden" name="cart-type" value="<?= $type_data['type_id'] ?>">
                                             <button class="cart-action"><i class="fas fa-shopping-cart prod-item__cart prod-item__icon"></i></button>
                                             <button class="cart-action__confirm hidden"></button>
                                         </form>

@@ -5,12 +5,10 @@ require_once "database.php";
 function get_product($product_id = null)
 {
     $sql = "SELECT `product`.*, COUNT(`view`.`username`) AS `view` FROM `product` LEFT JOIN `view` ON `product`.`product_id` = `view`.`product_id` GROUP BY `product`.`name`";
-    if($product_id != null)
-    {
+    if ($product_id != null) {
         $sql .= " HAVING `product`.`product_id` = $product_id";
         $data = pdo_query_once($sql);
-    }
-    else {
+    } else {
         $data = pdo_query($sql);
     }
     return $data;
@@ -32,8 +30,7 @@ function delete_product($product_id)
         }
     } else {
         $sql = "DELETE FROM `product` WHERE `product_id` = ?";
-        pdo_execute($sql, [$product_id]);
-        redirect('product');
+        pdo_execute($sql, $product_id);
     }
 }
 

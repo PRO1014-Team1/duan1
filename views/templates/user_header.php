@@ -3,7 +3,7 @@
     <nav class="nav">
         <div class="mx-auto grid nav__container w-100">
             <a href="home" class="nav__logo">
-                <img src="./public/img/logo.png" class="img-fluid block" alt="Xshop Logo" />
+                <img src="./public/img/logo.png" class="img-fluid" alt="Nitwitty Logo" />
                 <span class="slogan-top">The World's</span>
                 <span class="slogan-bottom">best mediocre bookstore.</span>
             </a>
@@ -57,13 +57,13 @@
                                 </li>
                             </ul>
                         </div>
-                        <!-- menu mặc định -->
                     <?php else : ?>
+                        <!-- menu mặc định cho khách -->
                         <div class="nav__dropdown fadeIn ts-2 hidden" id="dd-2">
                             <ul class="nav__list">
-                                <li class="nav__item">
-                                    <a href="#" class="nav__link nav__link--main block">Quên mật khẩu</a>
-                                </li>
+                                <div class="nav__menu__user__avatar">
+                                    <img src="<?= $_SESSION['avatar'] ?>" class="img-fluid user-avatar" alt="User Avatar" />
+                                </div>
                                 <li class="nav__item">
                                     <a href="register" class="nav__link nav__link--main block">Đăng ký tài khoản</a>
                                 </li>
@@ -80,7 +80,7 @@
                     $cart_total = count($_SESSION['cart'] ?? []);
                     ?>
                     <!-- giấu icon giỏ hàng nếu không phải là user -->
-                    <?php if (get_role() == 0) : ?>
+                    <?php if (get_role() != 1) : ?>
                         <button data-collapse-toggle="mobile-menu" type="button" class="nav__btn btn" aria-controls="mobile-menu" aria-expanded="false">
                             <i class="fas fa-shopping-cart nav__btn__icon text-dark"><span class="amount"><?= $cart_total ?></span></i>
                         </button>
@@ -90,8 +90,8 @@
                             <?php if ($cart_total) : ?>
                                 <?php foreach ($_SESSION['cart'] as $cart_item) : ?>
                                     <?php
-                                    $product = get_product($cart_item['id']);
-                                    $type = get_type_data($product['product_id']);
+                                    $product = get_product($cart_item['product_id']);
+                                    $type = get_type_data($cart_item['product_id']);
                                     ?>
                                     <li class="nav__item">
                                         <div class="nav__link nav__link--main flex">

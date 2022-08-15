@@ -2,11 +2,8 @@
 
 $user = get_username();
 $orders = get_user_order($user);
-
-if (!isset($_SESSION['readable'])) {
-    $_SESSION['readable'] = [];
-}
-
+// sort order by date
+$orders = item_sort($orders, 'created_date', 'DESC');
 
 function status_colorcode($status)
 {
