@@ -4,7 +4,8 @@ A bookshop ecommerce site for paperback and E-Books.
 
 ## Description
 
-This an ecommerce project made by [@Maladroy](https://github.com/Maladroy) and [@Vu2910](https://github.com/Vu2910), with some help from [@Nadirol](https://github.com/Nadirol)
+This an ecommerce project made by [@Maladroy](https://github.com/Maladroy) and [@Vu2910](https://github.com/Vu2910), with some help from [@Nadirol](https://github.com/Nadirol).
+
 This is a fully-featured ecommerce site with user authentication, administration, ordering system, and support for audiobooks and E-books (PDF and EPUB).
 
 ## Getting Started
