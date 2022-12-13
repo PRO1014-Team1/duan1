@@ -92,7 +92,7 @@ if (isset($_POST['submit'])) {
         foreach ($cart as $item) {
           $product = get_product($item['id']);
           $type_id = $item['type_id'];
-          $type = get_type_data($item['id'], $type_id)[0];
+          $type = get_type_data($item['id'], $type_id);
           $subtotal = discount($type['price'] * $item['quantity'], $type['sale']);
           $display_total += $subtotal;
         ?>
@@ -158,7 +158,6 @@ if (isset($_POST['submit'])) {
           <input type="text" class="form-control" id="address" name="address" placeholder="Nhập địa chỉ" value="<?= (isset($addressValue) && !empty($addressValue)) ? $addressValue : '' ?>">
         </div>
 
-        <!-- note -->
         <div class="mb-3">
           <label for="note">Ghi chú</label>
           <textarea class="form-control" id="note" name="note" rows="3"><?= (isset($noteValue) && !empty($noteValue)) ? $noteValue : '' ?></textarea>

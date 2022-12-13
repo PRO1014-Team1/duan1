@@ -25,8 +25,8 @@ function delete_category($id)
             delete_product($category_id);
         }
     } else {
-        $sql = "DELETE FROM `product` WHERE `id` = ?";
-        pdo_execute($sql, [$id]);
+        $sql = "DELETE FROM `product` WHERE `product_id` = ?";
+        pdo_execute($sql, $id);
         redirect('product');
     }
 }

@@ -15,19 +15,13 @@ if (isset($_POST['submit'])) {
         }
     }
 
-    // // tăng số lượng sản phẩm
-    // for ($i = 0; $i < count($cart); $i++) {
-    //     $id = $_POST['id'][$i];
-    //     $quantity = $_POST['quantity'][$i];
-    //     $_SESSION['cart'][$id]['quantity'] = $quantity;
-    // }
     redirect('checkout');
 }
+
 if (isset($_POST['delete'])) {
     unset($_SESSION['cart'][$_POST['delete-id']]);
     redirect('cart');
 }
-
 
 ?>
 <div class="container">
@@ -86,7 +80,7 @@ if (isset($_POST['delete'])) {
                                             <?php endif; ?>
                                             <td class="cart-display__form__delete">
                                                 <form action="" method="POST">
-                                                    <input type="hidden" name="delete-id" value="<?= $item['id'] . $type_id ?>">
+                                                    <input  type="hidden" name="delete-id" value="<?= $item['id'] . $type_id ?>">
                                                     <button type=" submit" name="delete">
                                                         <i class="fas fa-trash-alt"></i>
                                                     </button>
