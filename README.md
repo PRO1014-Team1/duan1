@@ -34,6 +34,6 @@ Contributors names and contact info
 
 * 0.5
     * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
+    * See [commit change](https://github.com/PRO1014-Team1/duan1/commits/master)
 * 0.1
     * Initial Release
