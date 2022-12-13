@@ -18,10 +18,10 @@ This is a fully-featured ecommerce site with user authentication, administration
 ### Executing program
 
 * Download SQL Database file in `Dependencies`.
-* Run MySQL in XAMPP and import the SQL file.
+* Start MySQL in XAMPP and import the SQL file.
 * Use your favorite text editor and start a local server to connect to the database and serve `index.php`
 
-For VSCode users I recommend using the PHP Server extension. 
+For VSCode users I recommend using the `PHP Server` extension. 
 
 ## Authors
 
