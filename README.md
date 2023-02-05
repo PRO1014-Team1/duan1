@@ -1,12 +1,17 @@
-# Project Title
+# Nitwitty
 
-A bookshop ecommerce site for paperback and E-Books.
+A bookshop ecommerce site for physical and non-physical books.
 
 ## Description
 
-This an ecommerce project made by [@Maladroy](https://github.com/Maladroy) and [@Vu2910](https://github.com/Vu2910), with some help from [@Nadirol](https://github.com/Nadirol).
+This is a fully-featured ecommerce site based on the famous Amazon Bookstore
 
-This is a fully-featured ecommerce site with user authentication, administration, ordering system, and support for audiobooks and E-books (PDF and EPUB).
+### Features:
+   * User authentication and authorization
+   * Data Analytics Dashboard with various data tracked
+   * Cart and ordering system
+   * Transaction status
+   * Personal library with playable audiobooks and custom PDF reader
 
 ## Getting Started
 
@@ -19,14 +24,14 @@ This is a fully-featured ecommerce site with user authentication, administration
 
 * Download SQL Database file in `Dependencies`.
 * Start MySQL in XAMPP and import the SQL file.
-* Use your favorite text editor and start a local server to connect to the database and serve `index.php`
+* Start a local server and serve `index.php`
 
 For VSCode users I recommend using the `PHP Server` extension. 
 
 ## Authors
-
-Contributors names and contact info
 [@Maladroy](https://github.com/Maladroy)
+
+## Contributors
 [@Vu2910](https://github.com/Vu2910)
 [@Nadirol](https://github.com/Nadirol)
 
@@ -37,3 +42,6 @@ Contributors names and contact info
     * See [commit change](https://github.com/PRO1014-Team1/duan1/commits/master)
 * 0.1
     * Initial Release
+
+## Acknowledgements
+[Amazon Bookstore](www.amazon.com/books)
