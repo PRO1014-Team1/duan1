@@ -6,12 +6,16 @@ A bookshop ecommerce site for physical and non-physical books.
 
 This is a fully-featured ecommerce site based on the famous Amazon Bookstore
 
+### Demo:
+[Nitwitty.ga](http://nitwitty.ga)
+
 ### Features:
    * User authentication and authorization
-   * Data Analytics Dashboard with various data tracked
+   * Data Analytics Dashboard with various tracking statistics
    * Cart and ordering system
    * Transaction status
    * Personal library with playable audiobooks and custom PDF reader
+   * And many more!
 
 ## Getting Started
 
